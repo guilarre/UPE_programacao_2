@@ -5,11 +5,12 @@ import java.time.format.DateTimeFormatter;
 public class Testes {
 
 	public static void main(String[] args) {
-		DateTimeFormatter formatter = new DateTimeFormatter.ofPattern("dd/MM/yyyy");
-		LocalDate aniversario = new LocalDate("2003-03-20");
+		String formatterString = "dd/MM/yyyy";
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern(formatterString);
+		LocalDate aniversario = LocalDate.parse("20/07/1996", formatter);
 		int anoNascimento = aniversario.getYear();
 		int idade = LocalDate.now().getYear() - anoNascimento;
-		
+		System.out.println(formatterString);
 	}
 
 }

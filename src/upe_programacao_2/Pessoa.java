@@ -1,5 +1,7 @@
 package upe_programacao_2;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 public abstract class Pessoa {
 	private String nome;
@@ -8,13 +10,14 @@ public abstract class Pessoa {
 	private String email;
 	private String preferenciaComunicacao;
 	private String endereco;
+	private String formatterString = "dd/MM/yyyy";
+	private DateTimeFormatter formatter = DateTimeFormatter.ofPattern(formatterString);
 	private LocalDate aniversario;
-	private int idade;
 	private String genero;
 	
-	// Construtor parametrizado (força subclasse a implementar esse construtor)
+	// Construtor parametrizado (força subclasses a implementarem esse construtor)
 	public Pessoa(String nome, String cpf, String telefone, String email, String preferenciaComunicacao,
-			String endereco, LocalDate aniversario, String genero) {
+			String endereco, String aniversario, String genero) {
 		this.nome = nome;
 		if (validarCpf(cpf) == false) {
 			throw new IllegalArgumentException("ERRO: CPF inválido!");
@@ -30,10 +33,11 @@ public abstract class Pessoa {
 		this.email = email;
 		this.preferenciaComunicacao = preferenciaComunicacao;
 		this.endereco = endereco;
-		this.aniversario = aniversario;
-		//Calculando idade a partir de aniversario
-		int anoNascimento = aniversario.getYear();
-		this.idade = LocalDate.now().getYear() - anoNascimento;
+		try {
+			this.aniversario = LocalDate.parse(aniversario, formatter);
+		} catch (DateTimeParseException e) {
+			throw new IllegalArgumentException("ERRO: Aniversário inválido! Usar o formato: 31/12/2020");
+		}
 		this.genero = genero;
 	}
 	
@@ -74,17 +78,17 @@ public abstract class Pessoa {
 	public void setEndereco(String endereco) {
 		this.endereco = endereco;
 	}
+	public String getFormatter() {
+		return formatterString;
+	}
+	public void setFormatter(String formatterString) {
+		this.formatter = DateTimeFormatter.ofPattern(formatterString);
+	}
 	public LocalDate getAniversario() {
 		return aniversario;
 	}
 	public void setAniversario(LocalDate aniversario) {
 		this.aniversario = aniversario;
-	}
-	public int getIdade() {
-		return idade;
-	}
-	public void setIdade(int idade) {
-		this.idade = idade;
 	}
 	public String getGenero() {
 		return genero;
@@ -117,7 +121,7 @@ public abstract class Pessoa {
 		return false;
 	}
 	
-	//Validador de email
+	// Validador de email
 	public boolean validarEmail(String email) {
 		// Verifica se é nulo/vazio
 		if (email == null || email.isEmpty()) {
@@ -127,4 +131,14 @@ public abstract class Pessoa {
 		return email.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$");
 	}
 	
+	// Calculadora de idade
+	public int calcularIdade(LocalDate aniversario) {
+		int anoNascimento = aniversario.getYear();
+		return LocalDate.now().getYear() - anoNascimento;
+	}
+	
+	// getIdade
+	public int getIdade() {
+		return calcularIdade(this.aniversario);
+	}
 }
