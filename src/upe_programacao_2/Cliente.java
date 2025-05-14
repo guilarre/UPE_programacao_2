@@ -28,12 +28,14 @@ public class Cliente extends Pessoa {
 	public int getIdCliente() {
 		return idCliente;
 	}
+	
 	// Chama toString() de cada objeto Compra
 	public String getHistoricoCompras() {
 		for (Compra compra : historicoCompras) {
 			return compra.toString();
 		}
 	}
+	
 	// Função para adicionar compra em historicoCompras
 	public void addHistoricoCompras(Compra compra) {
 		historicoCompras.add(compra);
