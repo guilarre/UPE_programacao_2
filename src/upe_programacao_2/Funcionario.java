@@ -47,9 +47,9 @@ public class Funcionario extends Pessoa {
 	}
 	
 	// Chama toString() de cada objeto Compra
-	public String getHistoricoVendas() {
+	public void getHistoricoVendas() {
 		for (Compra compra : historicoVendas) {
-			return compra.toString();
+			System.out.println(compra.toString());
 		}
 	}
 	
@@ -61,5 +61,32 @@ public class Funcionario extends Pessoa {
 	// Função para adicionar cargo em mapaCargos
 	public void putCargo(int idCargo, String cargo) {
 		mapaCargos.put(idCargo, cargo);
+		System.out.println(String.format("Id '%d', Cargo '%s' adicionado com sucesso", idCargo, mapaCargos.get(idCargo)));
 	}
+	
+	// Função para remover cargo de mapaCargos
+	public void removeCargo(int idCargo) {
+		if (mapaCargos.containsKey(idCargo)) {
+			mapaCargos.remove(idCargo);
+			System.out.println("Cargo removido com sucesso!");
+		} else {
+			System.out.println("ERRO! idCargo não existe!");
+		}
+	}
+	
+	// Função para ler cargo de mapaCargos
+	public void getCargo(int idCargo) {
+		if (mapaCargos.containsKey(idCargo)) {
+			System.out.println(mapaCargos.get(idCargo));
+		} else {
+			System.out.println("ERRO! idCargo não existe!");
+		}
+	}
+	
+	// Função para modificar cargo de mapaCargos
+	public void modifyCargo(int idCargo, String cargo) {
+		mapaCargos.put(idCargo, cargo);
+		System.out.println(String.format("Id '%d' modificado para Cargo: '%s' com sucesso", idCargo, mapaCargos.get(idCargo)));
+	}
+	
 }
