@@ -24,7 +24,7 @@ public abstract class Pessoa {
 		}
 		this.cpf = cpf;
 		if (validarTelefone(telefone) == false) {
-			throw new IllegalArgumentException("ERRO: Telefone inválido!");
+			throw new IllegalArgumentException("ERRO: Telefone inválido! Escreva o DDD e o número.");
 		}
 		this.telefone = telefone;
 		if (validarEmail(email) == false) {
@@ -114,8 +114,8 @@ public abstract class Pessoa {
 		// Retira tudo que não é dígito
 		telefone = telefone.replaceAll("[^0-9]", "");
 		
-		// Checa se telefone contém 8 ou 9 dígitos
-		if (telefone.length() == 8 || telefone.length() == 9) {
+		// Checa se telefone contém 10 ou 11 dígitos
+		if (telefone.length() == 10 || telefone.length() == 11) {
 			return true;
 		}
 		return false;
