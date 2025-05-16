@@ -18,6 +18,7 @@ public class Funcionario extends Pessoa {
 	}
 	
 	// Getters/setters
+	// TO DO: getMapaCargos()
 	public int getIdFuncionario() {
 		return idFuncionario;
 	}
@@ -39,17 +40,23 @@ public class Funcionario extends Pessoa {
 		mapaCargos.put(idCargo, cargo);
 		System.out.println(String.format("Id '%d', Cargo '%s' adicionado com sucesso", idCargo, mapaCargos.get(idCargo)));
 	}
-	public static void getCargo(int idCargo) {
+	public static String getMapaCargos() {
+		for (int i : mapaCargos.keySet()) {
+			return String.format("Id '%d', Cargo '%s'", i, mapaCargos.get(i));
+		}
+		return "ERRO! Ainda não existem cargos registrados.";
+	}
+	public static String getCargo(int idCargo) {
 		if (mapaCargos.containsKey(idCargo)) {
-			System.out.println(String.format("Id '%d', Cargo '%s'", idCargo, mapaCargos.get(idCargo)));
+			return mapaCargos.get(idCargo);
 		} else {
-			System.out.println(String.format("ERRO! Id '%d' não existe!", idCargo));
+			throw new IllegalArgumentException(String.format("ERRO! Id '%d' não existe!", idCargo));
 		}
 	}
 	public static void modifyCargo(int idCargo, String cargo) {
 		if (mapaCargos.containsKey(idCargo)) {
 			mapaCargos.put(idCargo, cargo);
-			System.out.println(String.format("Id '%d' modificado para Cargo: '%s' com sucesso", idCargo, mapaCargos.get(idCargo)));			
+			System.out.println(String.format("Id '%d' modificado para Cargo: '%s' com sucesso", idCargo, mapaCargos.get(idCargo)));
 		} else {
 			System.out.println(String.format("ERRO! Id '%d' não existe!", idCargo));
 		}
@@ -61,5 +68,25 @@ public class Funcionario extends Pessoa {
 		} else {
 			System.out.println(String.format("ERRO! Id '%d' não existe!", idCargo));
 		}
+	}
+	
+	// toString()
+	@Override
+	public String toString() {
+		return String.format("""
+Funcionário id: '%d'
+
+Nome: %s
+CPF: %s
+Telefone: %s
+Email: %s
+Preferência de comunicação: %s
+Endereço: %s
+Aniversário: %s
+Idade: %d
+Gênero: %s
+Cargo: '%s'
+Salário: 'R$ %.2f'
+""", this.getIdFuncionario(), this.getNome(), this.getCpf(), this.getTelefone(), this.getEmail(), this.getPreferenciaComunicacao(), this.getEndereco(), this.getAniversario(), this.getIdade(), this.getGenero(), Funcionario.getCargo(this.getIdCargo()), this.getSalario());
 	}
 }

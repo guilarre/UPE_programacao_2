@@ -84,8 +84,8 @@ public abstract class Pessoa {
 	public void setFormatter(String formatterString) {
 		this.formatter = DateTimeFormatter.ofPattern(formatterString);
 	}
-	public LocalDate getAniversario() {
-		return aniversario;
+	public String getAniversario() {
+		return aniversario.format(formatter);
 	}
 	public void setAniversario(LocalDate aniversario) {
 		this.aniversario = aniversario;
@@ -101,7 +101,6 @@ public abstract class Pessoa {
 	public boolean validarCpf(String cpf) {
 		// Retira tudo que não é dígito
 		cpf = cpf.replaceAll("[^0-9]", "");
-		
 		// Checa se é nulo/vazio, diferente de 11 ou se é uma sequência de números repetidos
 		if (cpf == null || cpf.isEmpty() || cpf.length() != 11 || cpf.matches("(.)\\1{10,}")) {
             return false;

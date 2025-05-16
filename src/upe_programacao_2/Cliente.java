@@ -15,4 +15,21 @@ public class Cliente extends Pessoa {
 		return idCliente;
 	}
 	
+	// toString()
+	@Override
+	public String toString() {
+		return String.format("""
+Cliente id: '%d'
+
+Nome: %s
+CPF: %s
+Telefone: %s
+Email: %s
+Preferência de comunicação: %s
+Endereço: %s
+Aniversário: %s
+Idade: %d
+Gênero: %s
+""", this.getIdCliente(), this.getNome(), this.getCpf(), this.getTelefone(), this.getEmail(), this.getPreferenciaComunicacao(), this.getEndereco(), this.getAniversario(), this.getIdade(), this.getGenero());
+	}
 }
