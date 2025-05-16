@@ -13,8 +13,6 @@ public class Compra {
 	//Id cliente
 	private static final AtomicInteger count = new AtomicInteger(0);
 	private final int idCompra;
-	
-	
 	private int idCliente;
 	private int idFuncionario;
 	private LocalDateTime dataHora;
@@ -77,48 +75,63 @@ public class Compra {
 	}
 	public void putStatus(int idStatus, String status) {
 		mapaStatus.put(idStatus, status);
-		System.out.println(String.format("Id '%d', Status '%s' adicionado com sucesso!", idStatus, mapaPagamentos.get(idStatus)));
-	}
-	//Delete
-	public void removePagamentos(int idPagamento) {
-		if (mapaPagamentos.containsKey(idPagamento)){
-			mapaPagamentos.remove(idPagamento);
-		} else { 
-			System.out.println("ERRO! idPagamento não existe!");
-		}
+		System.out.println(String.format("Id '%d', Status '%s' adicionado com sucesso!", idStatus, mapaStatus.get(idStatus)));
 	}
 	
-	public void removeStatus(int idStatus) {
-		if (mapaStatus.containsKey(idStatus)){
-			mapaStatus.remove(idStatus);
-		} else { 
-			System.out.println("ERRO! idStatus não existe!");
-		}
-	}
 	//Read
 	public void getPagamento (int idPagamento) {
 		if (mapaPagamentos.containsKey(idPagamento)){
 			System.out.println(mapaPagamentos.get(idPagamento));
 		} else { 
-			System.out.println("ERRO! idPagamento não existe!");
+			System.out.println("ERRO! Id '%d' não existe!");
 		}
 	}
 	
 	public void getStatus (int idStatus) {
-		if (mapaPagamentos.containsKey(idStatus)){
-			System.out.println(mapaPagamentos.get(idStatus));
+		if (mapaStatus.containsKey(idStatus)){
+			System.out.println(mapaStatus.get(idStatus));
 		} else { 
-			System.out.println("ERRO! idStatus não existe!");
+			System.out.println("ERRO! Id '%d' não existe!");
 		}
 	}
 	//Update
 	public void modifyPagamentos(int idPagamento, String pagamento) {
-		mapaPagamentos.put(idPagamento, pagamento);
+		if (mapaPagamentos.containsKey(idPagamento)){
+			mapaPagamentos.put(idPagamento, pagamento);
+			System.out.println(String.format("Id '%d' modificado para pagamento: '%s' com sucesso!", idPagamento, pagamento));
+		} else { 
+			System.out.println("ERRO! Id '%d' não existe!");
+		}
+		
 	}
 	
 	public void modifyStatus(int idStatus, String status) {
-		mapaStatus.put(idStatus, status);
+		if (mapaStatus.containsKey(idStatus)){
+			mapaStatus.put(idStatus, status);
+			System.out.println(String.format("Id '%d' modificado para status: '%s' com sucesso!", idStatus, status));
+		} else { 
+			System.out.println("ERRO! Id '%d' não existe!");
+		}
 	}
+	
+	//Delete
+		public void removePagamentos(int idPagamento) {
+			if (mapaPagamentos.containsKey(idPagamento)){
+				mapaPagamentos.remove(idPagamento);
+				System.out.println(String.format("Id '%d', Pagamento '%s' removido com sucesso!", idPagamento, mapaPagamentos.get(idPagamento)));
+			} else { 
+				System.out.println("ERRO! Id '%d' não existe!");
+			}
+		}
+		
+		public void removeStatus(int idStatus) {
+			if (mapaStatus.containsKey(idStatus)){
+				mapaStatus.remove(idStatus);
+				System.out.println(String.format("Id '%d', Status '%s' removido com sucesso!", idStatus, mapaStatus.get(idStatus)));
+			} else { 
+				System.out.println("ERRO! Id '%d' não existe!");
+			}
+		}
 	
 	public void getListaProdutos(Produto produto) {
 		for (Produto produto : listaProdutos) {
@@ -126,7 +139,7 @@ public class Compra {
 		}
 	}
 	
-
+	
 	
 	
 }
