@@ -26,11 +26,43 @@ public class Historico {
 		}
 	}
 	// Getter para compras de um cliente específico
+	// TO DO: quando tiver como registrar cliente/funcionário em arquivo,
+	// pesquisar nome do cliente/funcionário que possui o idCliente/idFuncionario
+	// funcionário para mostrar no return em vez do idCliente.
 	public static String getHistoricoCliente(int idCliente) {
-		
+		StringBuilder historicoCliente = new StringBuilder();
+		for (Compra compra : historico) {
+			if (compra.getIdCliente() == idCliente) {
+				historicoCliente.append(compra.toString() + "\n\n");
+			}
+			if (historicoCliente.isEmpty()) {
+				return String.format("O cliente de id '%d' ainda não possui compras registradas.", idCliente);
+			}
+		}
+		return String.format("""
+Compras do cliente de id '%d':
+
+%s
+""", idCliente, historicoCliente);
 	}
 	// Getter para vendas de um funcionário específico
-	
+	// TO DO: Opção para mostrar apenas as do mês especificado
+	public static String getHistoricoFuncionario(int idFuncionario) {
+		StringBuilder historicoFuncionario = new StringBuilder();
+		for (Compra compra : historico) {
+			if (compra.getIdFuncionario() == idFuncionario) {
+				historicoFuncionario.append(compra.toString() + "\n\n");
+			}
+			if (historicoFuncionario.isEmpty()) {
+				return String.format("O funcionário de id '%d' ainda não possui vendas registradas.", idFuncionario);
+			}
+		}
+		return String.format("""
+Vendas do funcionário de id '%d':
+
+%s
+""", idFuncionario, historicoFuncionario);
+	}
 	// TO DO: testar esse setter!
 	// Na main, seria criado um objeto Compra modificado (usando os setters de Compra),
 	// que depois seria passado para setCompraHistorico
