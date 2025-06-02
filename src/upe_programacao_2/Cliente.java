@@ -19,7 +19,7 @@ public class Cliente extends Pessoa {
 	@Override
 	public String toString() {
 		return String.format("""
-Cliente id: '%d'
+Id do cliente: '%d'
 
 Nome: %s
 CPF: %s

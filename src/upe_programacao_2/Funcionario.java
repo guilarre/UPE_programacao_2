@@ -74,7 +74,8 @@ public class Funcionario extends Pessoa {
 	@Override
 	public String toString() {
 		return String.format("""
-Funcionário id: '%d'
+				
+Id do funcionário: '%d'
 
 Nome: %s
 CPF: %s
@@ -87,6 +88,7 @@ Idade: %d
 Gênero: %s
 Cargo: '%s'
 Salário: 'R$ %.2f'
+
 """, this.getIdFuncionario(), this.getNome(), this.getCpf(), this.getTelefone(), this.getEmail(), this.getPreferenciaComunicacao(), this.getEndereco(), this.getAniversario(), this.getIdade(), this.getGenero(), Funcionario.getCargo(this.getIdCargo()), this.getSalario());
 	}
 }
