@@ -31,6 +31,16 @@ public class Testes {
 //			e.printStackTrace();
 //		}
 		
+<<<<<<< HEAD
+		JsonReader.carregarClientes();
+		for (Cliente cliente : Cliente.getListaClientes()) {
+			System.out.println(cliente);
+		}
+		Cliente cliente6 = new Cliente("asdasdsada", "12332112311", "81996212351", "guilhermelarre@gmail.com", "email", "R. Pereira Simões", "20/07/1996", "masculino");
+		JsonWriter.salvarClientes(Cliente.getListaClientes());
+
+=======
+>>>>>>> 8dddbc59b25a8b2a1a9b945ce749e0ce176dbf5f
 		
 	}
 }

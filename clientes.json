@@ -1,4 +1,72 @@
 [
+<<<<<<< HEAD
+  {
+    "idCliente": 1,
+    "nome": "Gui",
+    "cpf": "07853383495",
+    "telefone": "81996212351",
+    "email": "guilhermelarre@gmail.com",
+    "preferenciaComunicacao": "email",
+    "endereco": "R. Pereira Simões",
+    "aniversario": "20/07/1996",
+    "genero": "masculino"
+  },
+  {
+    "idCliente": 2,
+    "nome": "Gui",
+    "cpf": "07853383495",
+    "telefone": "81996212351",
+    "email": "guilhermelarre@gmail.com",
+    "preferenciaComunicacao": "email",
+    "endereco": "R. Pereira Simões",
+    "aniversario": "20/07/1996",
+    "genero": "masculino"
+  },
+  {
+    "idCliente": 3,
+    "nome": "abc",
+    "cpf": "07853383495",
+    "telefone": "81996212351",
+    "email": "guilhermelarre@gmail.com",
+    "preferenciaComunicacao": "email",
+    "endereco": "R. Pereira Simões",
+    "aniversario": "20/07/1996",
+    "genero": "masculino"
+  },
+  {
+    "idCliente": 4,
+    "nome": "def",
+    "cpf": "07853383495",
+    "telefone": "81996212351",
+    "email": "guilhermelarre@gmail.com",
+    "preferenciaComunicacao": "email",
+    "endereco": "R. Pereira Simões",
+    "aniversario": "20/07/1996",
+    "genero": "masculino"
+  },
+  {
+    "idCliente": 5,
+    "nome": "asdasdsada",
+    "cpf": "12332112311",
+    "telefone": "81996212351",
+    "email": "guilhermelarre@gmail.com",
+    "preferenciaComunicacao": "email",
+    "endereco": "R. Pereira Simões",
+    "aniversario": "20/07/1996",
+    "genero": "masculino"
+  },
+  {
+    "idCliente": 6,
+    "nome": "asdasdsada",
+    "cpf": "12332112311",
+    "telefone": "81996212351",
+    "email": "guilhermelarre@gmail.com",
+    "preferenciaComunicacao": "email",
+    "endereco": "R. Pereira Simões",
+    "aniversario": "20/07/1996",
+    "genero": "masculino"
+  }
+=======
 	{
 	  "idCliente": 1,
 	  "nome": "Gui",
@@ -43,4 +111,5 @@
 	  "aniversario": "20/07/1996",
 	  "genero": "masculino"
 	}
+>>>>>>> 8dddbc59b25a8b2a1a9b945ce749e0ce176dbf5f
 ]

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Funcionario extends Pessoa {
-	private static final AtomicInteger count = new AtomicInteger(0); // Contador para autoincrementar idFuncionario
+	private static AtomicInteger count = new AtomicInteger(0); // Contador para autoincrementar idFuncionario
 	private final int idFuncionario;
 	private static HashMap<Integer, String> mapaCargos = new HashMap<Integer, String>();
 	private int idCargo;
@@ -42,6 +42,10 @@ public class Funcionario extends Pessoa {
 	}
 	public static void addListaFuncionarios(Funcionario funcionario) {
 		listaFuncionarios.add(funcionario);
+<<<<<<< HEAD
+		count = new AtomicInteger(listaFuncionarios.size());
+=======
+>>>>>>> 8dddbc59b25a8b2a1a9b945ce749e0ce176dbf5f
 	}
 	
 	// CRUD para mapaCargos

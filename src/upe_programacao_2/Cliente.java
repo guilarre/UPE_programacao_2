@@ -3,7 +3,8 @@ import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Cliente extends Pessoa {
-	private static final AtomicInteger count = new AtomicInteger(0); // Contador para autoincrementar idCliente
+	private static ArrayList<Cliente> listaClientes = new ArrayList<Cliente>();
+	private static AtomicInteger count = new AtomicInteger(0); // Contador para autoincrementar idCliente
 	private final int idCliente;
 	private static ArrayList<Cliente> listaClientes = new ArrayList<Cliente>();
 	
@@ -22,6 +23,10 @@ public class Cliente extends Pessoa {
 	}
 	public static void addListaClientes(Cliente cliente) {
 		listaClientes.add(cliente);
+<<<<<<< HEAD
+		count = new AtomicInteger(listaClientes.size());
+=======
+>>>>>>> 8dddbc59b25a8b2a1a9b945ce749e0ce176dbf5f
 	}
 	
 	// toString()
