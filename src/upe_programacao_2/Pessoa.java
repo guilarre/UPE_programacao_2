@@ -10,8 +10,6 @@ public abstract class Pessoa {
 	private String email;
 	private String preferenciaComunicacao;
 	private String endereco;
-	private String formatterString = "dd/MM/yyyy";
-	private DateTimeFormatter formatter = DateTimeFormatter.ofPattern(formatterString);
 	private LocalDate aniversario;
 	private String genero;
 	
@@ -34,6 +32,8 @@ public abstract class Pessoa {
 		this.preferenciaComunicacao = preferenciaComunicacao;
 		this.endereco = endereco;
 		try {
+			String formatterString = "dd/MM/yyyy";
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern(formatterString);
 			this.aniversario = LocalDate.parse(aniversario, formatter);
 		} catch (DateTimeParseException e) {
 			throw new IllegalArgumentException("ERRO: Aniversário inválido! Usar o formato: 31/12/2020");
@@ -78,13 +78,9 @@ public abstract class Pessoa {
 	public void setEndereco(String endereco) {
 		this.endereco = endereco;
 	}
-	public String getFormatter() {
-		return formatterString;
-	}
-	public void setFormatter(String formatterString) {
-		this.formatter = DateTimeFormatter.ofPattern(formatterString);
-	}
 	public String getAniversario() {
+		String formatterString = "dd/MM/yyyy";
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern(formatterString);
 		return aniversario.format(formatter);
 	}
 	public void setAniversario(LocalDate aniversario) {

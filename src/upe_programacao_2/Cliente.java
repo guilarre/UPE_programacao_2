@@ -8,6 +8,7 @@ public class Cliente extends Pessoa {
 	public Cliente(String nome, String cpf, String telefone, String email, String preferenciaComunicacao, String endereco, String aniversario, String genero) {
 		super(nome, cpf, telefone, email, preferenciaComunicacao, endereco, aniversario, genero);
 		this.idCliente = count.incrementAndGet();
+		JsonWriter.salvarCliente(this);
 	}
 	
 	// Getters/setters
@@ -32,4 +33,22 @@ Idade: %d
 Gênero: %s
 """, this.getIdCliente(), this.getNome(), this.getCpf(), this.getTelefone(), this.getEmail(), this.getPreferenciaComunicacao(), this.getEndereco(), this.getAniversario(), this.getIdade(), this.getGenero());
 	}
+	
+//	public String toJson() {
+//		return String.format("""
+//{
+//	"idCliente": "%d"
+//	"nome": "%s"
+//
+//Nome: %s
+//CPF: %s
+//Telefone: %s
+//Email: %s
+//Preferência de comunicação: %s
+//Endereço: %s
+//Aniversário: %s
+//Idade: %d
+//Gênero: %s
+//""", this.getIdCliente(), this.getNome(), this.getCpf(), this.getTelefone(), this.getEmail(), this.getPreferenciaComunicacao(), this.getEndereco(), this.getAniversario(), this.getIdade(), this.getGenero());
+//	}
 }

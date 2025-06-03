@@ -3,8 +3,9 @@ package upe_programacao_2;
 public class Testes {
 
 	public static void main(String[] args) {
-		StringBuilder nomes = new StringBuilder();
-		nomes.append("Carlos\n").append("Maria\n").append("José\n").append("Renata");
-		System.out.println(nomes.toString());
+		Cliente cliente = new Cliente("Gui", "07853383495", "81996212351", "guilhermelarre@gmail.com", "email", "R. Pereira Simões", "20/07/1996", "masculino");
+		Cliente cliente1 = new Cliente("abc", "07853383495", "81996212351", "guilhermelarre@gmail.com", "email", "R. Pereira Simões", "20/07/1996", "masculino");
+		Cliente cliente2 = new Cliente("def", "07853383495", "81996212351", "guilhermelarre@gmail.com", "email", "R. Pereira Simões", "20/07/1996", "masculino");
+		
 	}
 }
