@@ -44,17 +44,6 @@ public class JsonReader {
 //			e.printStackTrace();
 //		}
 //	}
-
-	public static void carregarHistorico() {
-		try (FileReader fr = new FileReader("historico.json")) {
-			Compra[] historico = gson.fromJson(fr, Compra[].class);
-			for (Compra compra : historico) {
-				Historico.addToHistorico(compra);
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
 	
 	// TO DO: Lógica para carregar estoque
 //	public static void carregarClientes() {
