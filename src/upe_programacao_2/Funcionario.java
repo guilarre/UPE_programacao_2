@@ -42,10 +42,7 @@ public class Funcionario extends Pessoa {
 	}
 	public static void addListaFuncionarios(Funcionario funcionario) {
 		listaFuncionarios.add(funcionario);
-<<<<<<< HEAD
 		count = new AtomicInteger(listaFuncionarios.size());
-=======
->>>>>>> 8dddbc59b25a8b2a1a9b945ce749e0ce176dbf5f
 	}
 	
 	// CRUD para mapaCargos

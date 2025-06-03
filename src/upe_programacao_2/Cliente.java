@@ -23,10 +23,7 @@ public class Cliente extends Pessoa {
 	}
 	public static void addListaClientes(Cliente cliente) {
 		listaClientes.add(cliente);
-<<<<<<< HEAD
 		count = new AtomicInteger(listaClientes.size());
-=======
->>>>>>> 8dddbc59b25a8b2a1a9b945ce749e0ce176dbf5f
 	}
 	
 	// toString()

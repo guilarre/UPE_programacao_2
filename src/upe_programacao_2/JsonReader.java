@@ -33,7 +33,6 @@ public class JsonReader {
 		}
 	}
 	
-<<<<<<< HEAD
 	// Erro pq ainda não integrou Compra
 //	public static void carregarHistorico() {
 //		try (FileReader fr = new FileReader("historico.json")) {
@@ -45,7 +44,7 @@ public class JsonReader {
 //			e.printStackTrace();
 //		}
 //	}
-=======
+
 	public static void carregarHistorico() {
 		try (FileReader fr = new FileReader("historico.json")) {
 			Compra[] historico = gson.fromJson(fr, Compra[].class);
@@ -56,7 +55,6 @@ public class JsonReader {
 			e.printStackTrace();
 		}
 	}
->>>>>>> 8dddbc59b25a8b2a1a9b945ce749e0ce176dbf5f
 	
 	// TO DO: Lógica para carregar estoque
 //	public static void carregarClientes() {
