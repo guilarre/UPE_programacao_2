@@ -1,41 +1,46 @@
-{
-  "idCliente": 1,
-  "nome": "Gui",
-  "cpf": "07853383495",
-  "telefone": "81996212351",
-  "email": "guilhermelarre@gmail.com",
-  "preferenciaComunicacao": "email",
-  "endereco": "R. Pereira Simões",
-  "aniversario": "20/07/1996",
-  "genero": "masculino"
-}{
-  "idCliente": 1,
-  "nome": "Gui",
-  "cpf": "07853383495",
-  "telefone": "81996212351",
-  "email": "guilhermelarre@gmail.com",
-  "preferenciaComunicacao": "email",
-  "endereco": "R. Pereira Simões",
-  "aniversario": "20/07/1996",
-  "genero": "masculino"
-}{
-  "idCliente": 2,
-  "nome": "abc",
-  "cpf": "07853383495",
-  "telefone": "81996212351",
-  "email": "guilhermelarre@gmail.com",
-  "preferenciaComunicacao": "email",
-  "endereco": "R. Pereira Simões",
-  "aniversario": "20/07/1996",
-  "genero": "masculino"
-}{
-  "idCliente": 3,
-  "nome": "def",
-  "cpf": "07853383495",
-  "telefone": "81996212351",
-  "email": "guilhermelarre@gmail.com",
-  "preferenciaComunicacao": "email",
-  "endereco": "R. Pereira Simões",
-  "aniversario": "20/07/1996",
-  "genero": "masculino"
-}
+[
+	{
+	  "idCliente": 1,
+	  "nome": "Gui",
+	  "cpf": "07853383495",
+	  "telefone": "81996212351",
+	  "email": "guilhermelarre@gmail.com",
+	  "preferenciaComunicacao": "email",
+	  "endereco": "R. Pereira Simões",
+	  "aniversario": "20/07/1996",
+	  "genero": "masculino"
+	},
+	{
+	  "idCliente": 1,
+	  "nome": "Gui",
+	  "cpf": "07853383495",
+	  "telefone": "81996212351",
+	  "email": "guilhermelarre@gmail.com",
+	  "preferenciaComunicacao": "email",
+	  "endereco": "R. Pereira Simões",
+	  "aniversario": "20/07/1996",
+	  "genero": "masculino"
+	},
+	{
+	  "idCliente": 2,
+	  "nome": "abc",
+	  "cpf": "07853383495",
+	  "telefone": "81996212351",
+	  "email": "guilhermelarre@gmail.com",
+	  "preferenciaComunicacao": "email",
+	  "endereco": "R. Pereira Simões",
+	  "aniversario": "20/07/1996",
+	  "genero": "masculino"
+	},
+	{
+	  "idCliente": 3,
+	  "nome": "def",
+	  "cpf": "07853383495",
+	  "telefone": "81996212351",
+	  "email": "guilhermelarre@gmail.com",
+	  "preferenciaComunicacao": "email",
+	  "endereco": "R. Pereira Simões",
+	  "aniversario": "20/07/1996",
+	  "genero": "masculino"
+	}
+]

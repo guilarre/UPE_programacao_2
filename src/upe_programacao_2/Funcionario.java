@@ -1,6 +1,7 @@
 package upe_programacao_2;
 
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Funcionario extends Pessoa {
@@ -9,12 +10,14 @@ public class Funcionario extends Pessoa {
 	private static HashMap<Integer, String> mapaCargos = new HashMap<Integer, String>();
 	private int idCargo;
 	private float salario;
+	private static ArrayList<Funcionario> listaFuncionarios = new ArrayList<Funcionario>();
 	
 	public Funcionario(String nome, String cpf, String telefone, String email, String preferenciaComunicacao, String endereco, String aniversario, String genero, int idCargo, float salario) {
 		super(nome, cpf, telefone, email, preferenciaComunicacao, endereco, aniversario, genero);
-		this.idFuncionario = count.incrementAndGet();
+		idFuncionario = count.incrementAndGet();
 		this.idCargo = idCargo;
 		this.salario = salario;
+		listaFuncionarios.add(this);
 	}
 	
 	// Getters/setters
@@ -33,6 +36,12 @@ public class Funcionario extends Pessoa {
 	}
 	public void setSalario(float salario) {
 		this.salario = salario;
+	}
+	public static ArrayList<Funcionario> getListaFuncionarios() {
+		return listaFuncionarios;
+	}
+	public static void addListaFuncionarios(Funcionario funcionario) {
+		listaFuncionarios.add(funcionario);
 	}
 	
 	// CRUD para mapaCargos

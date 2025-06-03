@@ -11,8 +11,11 @@ public class Historico {
 		historico.add(compra);
 		System.out.println("Compra adicionada ao histórico com sucesso!");
 	}
+	public static ArrayList<Compra> getHistorico() {
+		return historico;
+	}
 	// Getter do histórico geral (chama toString() de cada objeto Compra)
-	public static String getHistorico() {
+	public static String mostrarHistorico() {
 		for (int i = 0; i < historico.size(); i++) {
 			return String.format("Índice: %d\nCompra:\n%s\n\n", i, historico.get(i).toString());
 		}
