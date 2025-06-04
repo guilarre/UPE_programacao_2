@@ -5,15 +5,15 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class Produto {
 
-	public static final AtomicInteger count = new AtomicInteger(0);
-	public int idProduto;
-	public String sku;
-	public String nome;
-	public String descricao;
-	public float valor;
-	public int idCategoria;
-	public static HashMap<Integer, String> mapaCategorias;
-	public int qtdEstoque;
+	private static final AtomicInteger count = new AtomicInteger(0);
+	private int idProduto;
+	private String sku;
+	private String nome;
+	private String descricao;
+	private float valor;
+	private int idCategoria;
+	private static HashMap<Integer, String> mapaCategorias;
+	private int qtdEstoque;
 	
 	
 	public Produto(int idProduto, String sku, String nome, String descricao, float valor, int idCategoria, int qtdEstoque) {
@@ -27,10 +27,21 @@ public class Produto {
 	}
 
 //getters and setters
+
+	public int getIdProduto() {
+		return idProduto;
+	}
+
+
+	public void setIdProduto(int idProduto) {
+		this.idProduto = idProduto;
+	}
+
+
 	public String getSku() {
 		return sku;
 	}
-	
+
 	public void setSku(String sku) {
 		this.sku = sku;
 	}
@@ -63,6 +74,15 @@ public class Produto {
 	}
 
 
+	public int getIdCategoria() {
+		return idCategoria;
+	}
+
+	public void setIdCategoria(int idCategoria) {
+		this.idCategoria = idCategoria;
+	}
+
+
 	public int getQtdEstoque() {
 		return qtdEstoque;
 	}
@@ -72,13 +92,13 @@ public class Produto {
 	}
 
 	//Create
-	public void putCategoria (int idCategoria, String categoria) {
+	public static void putCategoria (int idCategoria, String categoria) {
 		mapaCategorias.put(idCategoria, categoria);
 		System.out.println(String.format("Id '%d', Categoria '%s' adicionado com sucesso!", idCategoria, mapaCategorias.get(idCategoria)));
 	}
 	
 	//Read
-	public void getCategoria (int idCategoria) {
+	public static void getCategoria (int idCategoria) {
 		if (mapaCategorias.containsKey(idCategoria)){
 			System.out.println(mapaCategorias.get(idCategoria));
 		} else { 
@@ -87,7 +107,7 @@ public class Produto {
 	}
 	
 	//Update
-	public void modifCategorias(int idCategoria, String categoria) {
+	public static void modifyCategoria (int idCategoria, String categoria) {
 		if (mapaCategorias.containsKey(idCategoria)){
 			mapaCategorias.put(idCategoria, categoria);
 			System.out.println(String.format("Id '%d' modificado para Categoria: '%s' com sucesso!", idCategoria, categoria));
@@ -97,13 +117,30 @@ public class Produto {
 	}
 	
 	//Delete
-			public void removePagamentos(int idCategoria) {
-				if (mapaCategorias.containsKey(idCategoria)){
-					mapaCategorias.remove(idCategoria);
-					System.out.println(String.format("Id '%d', Categoria '%s' removido com sucesso!", idCategoria, mapaCategorias.get(idCategoria)));
-				} else { 
-					System.out.println("ERRO! Id '%d' não existe!");
-				}
+		public static void removeCategoria (int idCategoria) {
+			if (mapaCategorias.containsKey(idCategoria)){
+				mapaCategorias.remove(idCategoria);
+				System.out.println(String.format("Id '%d', Categoria '%s' removido com sucesso!", idCategoria, mapaCategorias.get(idCategoria)));
+			} else { 
+				System.out.println("ERRO! Id '%d' não existe!");
 			}
+		}
+
+
+	@Override
+	public String toString() {
+		return String.format("""
+
+Id do produto: '%d';
+
+SKU: %d; 
+Nome: %s;
+Descrição: %s;
+Valor: R$ %.2f;
+Id da categoria: '%d';
+Quantidade em estoque: %d.
+
+""", this.getIdProduto(), this.getSku(), this.getNome(), this.getValor(), Produto.getCategoria(this.getIdCategoria()), getQtdEstoque());
+	}
 
 }

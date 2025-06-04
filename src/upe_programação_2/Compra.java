@@ -1,6 +1,7 @@
 package upe_programação_2;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -13,8 +14,10 @@ public class Compra {
 	//Id cliente
 	private static final AtomicInteger count = new AtomicInteger(0);
 	private final int idCompra;
-	private int idCliente;
+	private int idCliente; //fazer 'link' com a classe Cliente
 	private int idFuncionario;
+	private String formatterString = "dd/MM/yyyy  HH:mm";
+	private DateTimeFormatter formatter = DateTimeFormatter.ofPattern(formatterString);
 	private LocalDateTime dataHora;
 	private ArrayList<CompraProduto> listaProdutos;
 	private float subtotal;
@@ -26,7 +29,7 @@ public class Compra {
 	private static HashMap<Integer, String> mapaStatus;
 	
 	public Compra(int idCliente, int idCompra, int idFuncionario, float subtotal, float desconto, float total, int idPagamento, int idStatus) {
-		this.idCliente = idCliente;
+		this.idCliente = Cliente.getIdCliente(); //Pegará o id da classe cliente
 		this.idCompra = count.incrementAndGet();
 		this.idFuncionario = idFuncionario;
 		this.dataHora = LocalDateTime.now();
@@ -39,11 +42,56 @@ public class Compra {
 		
 	//getters and setters
 	
+	public int getIdCliente() {
+		return idCliente;
+	}
+
+	public void setIdCliente(int idCliente) {
+		this.idCliente = idCliente;
+	}
+
+
+	public int getIdFuncionario() {
+		return idFuncionario;
+	}
+
+	public void setIdFuncionario(int idFuncionario) {
+		this.idFuncionario = idFuncionario;
+	}
+
+	public String getDataHora() {
+		String formatterString = "dd/MM/yyyy";
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern(formatterString);
+		return dataHora.format(formatter);
+		}
+
+	public void setDataHora(LocalDateTime dataHora) {
+		this.dataHora = dataHora;
+	}
+
+
+	public int getIdPagamento() {
+		return idPagamento;
+	}
+
+	public void setIdPagamento(int idPagamento) {
+		this.idPagamento = idPagamento;
+	}
+
+
+	public int getIdStatus() {
+		return idStatus;
+	}
+
+	public void setIdStatus(int idStatus) {
+		this.idStatus = idStatus;
+	}
+
+
 	public float getSubtotal() {
 		return subtotal;
 	}
-	
-	
+
 	public void setSubtotal(float subtotal) {
 		this.subtotal = subtotal;
 	}
@@ -69,17 +117,17 @@ public class Compra {
 	}
 	
 	//Create
-	public void putPagamentos(int idPagamento, String pagamento) {
+	public static void putPagamentos(int idPagamento, String pagamento) {
 		mapaPagamentos.put(idPagamento, pagamento);
 		System.out.println(String.format("Id '%d', Pagamento '%s' adicionado com sucesso!", idPagamento, mapaPagamentos.get(idPagamento)));
 	}
-	public void putStatus(int idStatus, String status) {
+	public static void putStatus(int idStatus, String status) {
 		mapaStatus.put(idStatus, status);
 		System.out.println(String.format("Id '%d', Status '%s' adicionado com sucesso!", idStatus, mapaStatus.get(idStatus)));
 	}
 	
 	//Read
-	public void getPagamento (int idPagamento) {
+	public static void getPagamento (int idPagamento) {
 		if (mapaPagamentos.containsKey(idPagamento)){
 			System.out.println(mapaPagamentos.get(idPagamento));
 		} else { 
@@ -87,7 +135,7 @@ public class Compra {
 		}
 	}
 	
-	public void getStatus (int idStatus) {
+	public static void getStatus (int idStatus) {
 		if (mapaStatus.containsKey(idStatus)){
 			System.out.println(mapaStatus.get(idStatus));
 		} else { 
@@ -95,7 +143,7 @@ public class Compra {
 		}
 	}
 	//Update
-	public void modifyPagamentos(int idPagamento, String pagamento) {
+	public static void modifyPagamentos(int idPagamento, String pagamento) {
 		if (mapaPagamentos.containsKey(idPagamento)){
 			mapaPagamentos.put(idPagamento, pagamento);
 			System.out.println(String.format("Id '%d' modificado para pagamento: '%s' com sucesso!", idPagamento, pagamento));
@@ -105,7 +153,7 @@ public class Compra {
 		
 	}
 	
-	public void modifyStatus(int idStatus, String status) {
+	public static void modifyStatus(int idStatus, String status) {
 		if (mapaStatus.containsKey(idStatus)){
 			mapaStatus.put(idStatus, status);
 			System.out.println(String.format("Id '%d' modificado para status: '%s' com sucesso!", idStatus, status));
@@ -115,7 +163,7 @@ public class Compra {
 	}
 	
 	//Delete
-		public void removePagamentos(int idPagamento) {
+		public static void removePagamentos(int idPagamento) {
 			if (mapaPagamentos.containsKey(idPagamento)){
 				mapaPagamentos.remove(idPagamento);
 				System.out.println(String.format("Id '%d', Pagamento '%s' removido com sucesso!", idPagamento, mapaPagamentos.get(idPagamento)));
@@ -124,7 +172,7 @@ public class Compra {
 			}
 		}
 		
-		public void removeStatus(int idStatus) {
+		public static void removeStatus(int idStatus) {
 			if (mapaStatus.containsKey(idStatus)){
 				mapaStatus.remove(idStatus);
 				System.out.println(String.format("Id '%d', Status '%s' removido com sucesso!", idStatus, mapaStatus.get(idStatus)));
@@ -139,7 +187,65 @@ public class Compra {
 		}
 	}
 	
+	@Override 
+	public String toString() {
+		return String.format("""
+
+Id da compra: '%d';
+
+Id do cliente: '%d';
+Id do Funcinário: '%d';
+Data e hora da compra: `%s`;
+Subtotal: '%d';
+Desconto: '%d';
+Total:'%d';
+Id do Pagamento: '%d';
+Id do Status: '%d';
+
+""", this.getIdCliente(), this.getIdFuncionario(), this.getDataHora(), this.getSubtotal(), this.getDesconto(), this.getTotal(), Compra.getPagamento(this.getIdPagamento()), Compra.getStatus(this.getIdStatus()));
+	}
 	
 	
+	public class CompraProduto {
+		private int IdProduto;
+		private int qtdComprada;
+		private int desconto;
+		private float total;
+		
+		public CompraProduto (int IdProduto, int qtdComprada, int desconto, float total) {
+			this.IdProduto = Produto.getIdProduto();
+			this.qtdComprada = qtdComprada;
+			this.desconto = desconto;
+			this.total = total;
+		}
+		
+		//Getters and Setters
+		public int getQtdComprada() {
+			return qtdComprada;
+		}
+
+		public void setQtdComprada(int qtdComprada) {
+			this.qtdComprada = qtdComprada;
+		}
+
+		public int getDesconto() {
+			return desconto;
+		}
+
+		public void setDesconto(int desconto) {
+			this.desconto = desconto;
+		}
+
+		public float getTotal() {
+			return total;
+		}
+
+		public void setTotal(float total) {
+			this.total = total;
+		}
+		
+		//Finalizar esta classe
+		
+	}
 	
 }
