@@ -14,12 +14,14 @@ public class Historico {
 	public static ArrayList<Compra> getHistorico() {
 		return historico;
 	}
+	
 	// Getter do histórico geral (chama toString() de cada objeto Compra)
-	public static String mostrarHistorico() {
+	public static String exibirHistoricoCompleto() {
 		for (int i = 0; i < historico.size(); i++) {
 			return String.format("Índice: %d\nCompra:\n%s\n\n", i, historico.get(i).toString());
 		}
 	}
+	
 	// Getter de uma compra específica do histórico
 	public static String getCompraByIndex(int idx) {
 		try {
@@ -28,11 +30,15 @@ public class Historico {
 			return String.format("ERRO! Índice '%d' não existe", idx);
 		}
 	}
+	
 	// Getter para compras de um cliente específico
-	// TO DO: quando tiver como registrar cliente/funcionário em arquivo,
-	// pesquisar nome do cliente/funcionário que possui o idCliente/idFuncionario
-	// funcionário para mostrar no return em vez do idCliente.
+	// TO DO: quando tiver json dos clientes e funcionarios,
+	// extrair NOME do cliente/funcionário para mostrar no return em vez do idCliente???
 	public static String getHistoricoCliente(int idCliente) {
+		// Verificar primeiro se idCliente existe
+		if (Cliente.getListaClientes().contains(idCliente) == false) {
+			return String.format("ERRO! A id '%d' não foi registrada ainda", idCliente);
+		}
 		StringBuilder historicoCliente = new StringBuilder();
 		for (Compra compra : historico) {
 			if (compra.getIdCliente() == idCliente) {
@@ -48,9 +54,14 @@ Compras do cliente de id '%d':
 %s
 """, idCliente, historicoCliente);
 	}
+	
 	// Getter para vendas de um funcionário específico
 	// TO DO: Opção para mostrar apenas as do mês especificado
 	public static String getHistoricoFuncionario(int idFuncionario) {
+		// Verificar primeiro se idCliente existe
+		if (Funcionario.getListaFuncionarios().contains(idFuncionario) == false) {
+			return String.format("ERRO! A id '%d' não foi registrada ainda", idFuncionario);
+		}
 		StringBuilder historicoFuncionario = new StringBuilder();
 		for (Compra compra : historico) {
 			if (compra.getIdFuncionario() == idFuncionario) {
@@ -66,6 +77,7 @@ Vendas do funcionário de id '%d':
 %s
 """, idFuncionario, historicoFuncionario);
 	}
+	
 	// TO DO: testar esse setter!
 	// Na main, seria criado um objeto Compra modificado (usando os setters de Compra),
 	// que depois seria passado para setCompraHistorico
@@ -73,7 +85,7 @@ Vendas do funcionário de id '%d':
 	// deve haver uma validação de usuário logado nos respectivos métodos).
 	public static void setCompraHistorico(int idx, Compra compra) {
 		try {
-			// Pegar compra a ser deletada para mostrar ao usuário (também já checa se existe ou não)
+			// Pegar compra a ser modificada para mostrar ao usuário (também já checa se existe ou não)
 			String compraADeletar = Historico.getCompraByIndex(idx);
 			// Confirmar operação
 			Scanner sc = new Scanner(System.in);
@@ -95,6 +107,7 @@ Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser r
 			System.out.println(String.format("ERRO! Índice '%d' não existe", idx));
 		}
 	}
+	
 	public static void removeCompraHistorico(int idx) {
 		try {
 			// Pegar compra a ser deletada para mostrar ao usuário (também já checa se existe ou não)

@@ -4,9 +4,9 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class Cliente extends Pessoa {
 	private static ArrayList<Cliente> listaClientes = new ArrayList<Cliente>();
-	private static AtomicInteger count = new AtomicInteger(0); // Contador para autoincrementar idCliente
+	// Contador para autoincrementar idCliente
+	private static AtomicInteger count = new AtomicInteger(0);
 	private final int idCliente;
-	private static ArrayList<Cliente> listaClientes = new ArrayList<Cliente>();
 	
 	public Cliente(String nome, String cpf, String telefone, String email, String preferenciaComunicacao, String endereco, String aniversario, String genero) {
 		super(nome, cpf, telefone, email, preferenciaComunicacao, endereco, aniversario, genero);

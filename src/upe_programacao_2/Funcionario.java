@@ -5,12 +5,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Funcionario extends Pessoa {
-	private static AtomicInteger count = new AtomicInteger(0); // Contador para autoincrementar idFuncionario
+	private static ArrayList<Funcionario> listaFuncionarios = new ArrayList<Funcionario>();
+	// Contador para autoincrementar idFuncionario
+	private static AtomicInteger count = new AtomicInteger(0);
 	private final int idFuncionario;
 	private static HashMap<Integer, String> mapaCargos = new HashMap<Integer, String>();
 	private int idCargo;
 	private float salario;
-	private static ArrayList<Funcionario> listaFuncionarios = new ArrayList<Funcionario>();
 	
 	public Funcionario(String nome, String cpf, String telefone, String email, String preferenciaComunicacao, String endereco, String aniversario, String genero, int idCargo, float salario) {
 		super(nome, cpf, telefone, email, preferenciaComunicacao, endereco, aniversario, genero);
@@ -56,7 +57,7 @@ public class Funcionario extends Pessoa {
 		}
 		return "ERRO! Ainda não existem cargos registrados.";
 	}
-	public static String getCargo(int idCargo) {
+	public static String getCargoById(int idCargo) {
 		if (mapaCargos.containsKey(idCargo)) {
 			return mapaCargos.get(idCargo);
 		} else {
@@ -99,6 +100,6 @@ Gênero: %s
 Cargo: '%s'
 Salário: 'R$ %.2f'
 
-""", this.getIdFuncionario(), this.getNome(), this.getCpf(), this.getTelefone(), this.getEmail(), this.getPreferenciaComunicacao(), this.getEndereco(), this.getAniversario(), this.getIdade(), this.getGenero(), Funcionario.getCargo(this.getIdCargo()), this.getSalario());
+""", this.getIdFuncionario(), this.getNome(), this.getCpf(), this.getTelefone(), this.getEmail(), this.getPreferenciaComunicacao(), this.getEndereco(), this.getAniversario(), this.getIdade(), this.getGenero(), Funcionario.getCargoById(this.getIdCargo()), this.getSalario());
 	}
 }
