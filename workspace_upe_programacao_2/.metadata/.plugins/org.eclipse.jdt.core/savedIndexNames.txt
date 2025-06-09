@@ -1,0 +1,5 @@
+INDEX VERSION 1.134+C:\Users\guilh\Downloads\eclipse projeto 2 NOVO\workspace_upe_programacao_2\.metadata\.plugins\org.eclipse.jdt.core
+3541116994.index
+581839507.index
+1865797976.index
+2209936103.index

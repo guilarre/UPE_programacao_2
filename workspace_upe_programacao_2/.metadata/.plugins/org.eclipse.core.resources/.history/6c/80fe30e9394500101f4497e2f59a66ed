@@ -1,0 +1,5 @@
+package upe_programacao_2;
+
+public abstract class Pessoa {
+
+}
