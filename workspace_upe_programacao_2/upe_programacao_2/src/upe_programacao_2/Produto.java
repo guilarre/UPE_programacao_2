@@ -1,11 +1,12 @@
 package upe_programacao_2;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Produto {
-
-	private static final AtomicInteger count = new AtomicInteger(0);
+	private static ArrayList<Produto> listaProdutos = new ArrayList<Produto>();
+	private static AtomicInteger count = new AtomicInteger(0);
 	private int idProduto;
 	private String sku;
 	private String nomeProduto;
@@ -15,99 +16,94 @@ public class Produto {
 	private static HashMap<Integer, String> mapaCategorias;
 	private int qtdEstoque;
 	
-	
-	public Produto(int idProduto, String sku, String nomeProduto, String descricao, float valor, int idCategoria, int qtdEstoque) {
-		this.idProduto = count.incrementAndGet();
+	public Produto(String sku, String nomeProduto, String descricao, float valor, int idCategoria, int qtdEstoque) {
+		idProduto = count.incrementAndGet();
 		this.sku = sku;
 		this.nomeProduto= nomeProduto;
 		this.descricao = descricao;
 		this.valor = valor;
 		this.idCategoria = idCategoria;
 		this.qtdEstoque = qtdEstoque;
+		listaProdutos.add(this);
 	}
 
-//getters and setters
-
+// Getters/setters
 	public int getIdProduto() {
 		return idProduto;
 	}
-
-
-	public void setIdProduto(int idProduto) {
-		this.idProduto = idProduto;
-	}
-
-
 	public String getSku() {
 		return sku;
 	}
-
 	public void setSku(String sku) {
 		this.sku = sku;
 	}
-
-
 	public String getNomeProduto() {
 		return nomeProduto;
 	}
-
+	public Produto getProdutoById(int idProduto) {
+		for (Produto produto : Produto.getListaProdutos()) {
+			if (produto.getIdProduto() == idProduto) {
+				return produto;
+			}
+		}
+		throw new IllegalArgumentException(String.format("ERRO! Não existem produtos de id '%d'", idProduto));
+	}
 	public void setNome(String nomeProduto) {
 		this.nomeProduto = nomeProduto;
 	}
-
-
 	public String getDescricao() {
 		return descricao;
 	}
-
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-
-
 	public float getValor() {
 		return valor;
 	}
-
 	public void setValor(float valor) {
 		this.valor = valor;
 	}
-
-
 	public int getIdCategoria() {
 		return idCategoria;
 	}
-
 	public void setIdCategoria(int idCategoria) {
 		this.idCategoria = idCategoria;
 	}
-
-
 	public int getQtdEstoque() {
 		return qtdEstoque;
 	}
-	
 	public void setQtdEstoque(int qtdEstoque) {
 		this.qtdEstoque = qtdEstoque;
 	}
 
-	//Create
-	public static void putCategoria (int idCategoria, String categoria) {
+	// Usado por JsonReader
+	public static ArrayList<Produto> getListaProdutos() {
+		return listaProdutos;
+	}
+	public static void addToListaProdutos(Produto produto) {
+		listaProdutos.add(produto);
+		count = new AtomicInteger(listaProdutos.size());
+	}
+	
+	// CRUD para mapaCategorias
+	public static void putCategoria(int idCategoria, String categoria) {
 		mapaCategorias.put(idCategoria, categoria);
 		System.out.println(String.format("Id '%d', Categoria '%s' adicionado com sucesso!", idCategoria, mapaCategorias.get(idCategoria)));
 	}
-	
-	//Read
-	public static void getCategoria (int idCategoria) {
-		if (mapaCategorias.containsKey(idCategoria)){
-			System.out.println(mapaCategorias.get(idCategoria));
-		} else { 
-			System.out.println("ERRO! Id '%d' não existe!");
+	public static String getMapaCategorias() {
+		for (int i : mapaCategorias.keySet()) {
+			return String.format("Id '%d', Categoria '%s'", i, mapaCategorias.get(i)); 
+		}
+		return "ERRO! Ainda não existem categorias registradas.";
+	}
+	public static String getCategoriaById(int idCategoria) {
+		if (mapaCategorias.containsKey(idCategoria)) {
+			return mapaCategorias.get(idCategoria);
+		} else {
+			throw new IllegalArgumentException(String.format("ERRO! Id '%d' não existe!", idCategoria));
 		}
 	}
-	
-	//Update
-	public static void modifyCategoria (int idCategoria, String categoria) {
+	public static void modifyCategoria(int idCategoria, String categoria) {
 		if (mapaCategorias.containsKey(idCategoria)){
 			mapaCategorias.put(idCategoria, categoria);
 			System.out.println(String.format("Id '%d' modificado para Categoria: '%s' com sucesso!", idCategoria, categoria));
@@ -115,18 +111,16 @@ public class Produto {
 			System.out.println("ERRO! Id '%d' não existe!");
 		}	
 	}
-	
-	//Delete
-		public static void removeCategoria (int idCategoria) {
+		public static void removeCategoria(int idCategoria) {
 			if (mapaCategorias.containsKey(idCategoria)){
 				mapaCategorias.remove(idCategoria);
 				System.out.println(String.format("Id '%d', Categoria '%s' removido com sucesso!", idCategoria, mapaCategorias.get(idCategoria)));
 			} else { 
-				System.out.println("ERRO! Id '%d' não existe!");
+				System.out.println(String.format("ERRO! Id '%d' não existe!", idCategoria));
 			}
 		}
 
-
+	// toString()
 	@Override
 	public String toString() {
 		return String.format("""
@@ -140,7 +134,6 @@ Valor: R$ %.2f
 Id da categoria: '%d'
 Quantidade em estoque: %d.
 
-""", this.getIdProduto(), this.getSku(), this.getNomeProduto(), this.getValor(), Produto.getCategoria(this.getIdCategoria()), getQtdEstoque());
+""", this.getIdProduto(), this.getSku(), this.getNomeProduto(), this.getDescricao(), this.getValor(), Produto.getCategoriaById(this.getIdCategoria()), getQtdEstoque());
 	}
-
 }

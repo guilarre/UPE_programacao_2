@@ -5,8 +5,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 public class Compra {
 	// Contador para autoincrementar idCompra
@@ -14,8 +12,6 @@ public class Compra {
 	private final int idCompra;
 	private int idCliente;
 	private int idFuncionario;
-	private String formatterString = "dd/MM/yyyy HH:mm";
-	private DateTimeFormatter formatter = DateTimeFormatter.ofPattern(formatterString);
 	private LocalDateTime dataHora;
 	private ArrayList<CompraProduto> listaProdutos;
 	private float subtotal;
@@ -55,7 +51,7 @@ public class Compra {
 		String formatterString = "dd/MM/yyyy";
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern(formatterString);
 		return dataHora.format(formatter);
-		}
+	}
 	public void setDataHora(LocalDateTime dataHora) {
 		this.dataHora = dataHora;
 	}
@@ -90,54 +86,32 @@ public class Compra {
 		this.total = total;
 	}
 	
-	//Create
+	// CRUD para mapaPagamentos, mapaStatus e listaProdutos
 	public static void putPagamentos(int idPagamento, String pagamento) {
 		mapaPagamentos.put(idPagamento, pagamento);
 		System.out.println(String.format("Id '%d', Pagamento '%s' adicionado com sucesso!", idPagamento, mapaPagamentos.get(idPagamento)));
 	}
-	public static void putStatus(int idStatus, String status) {
-		mapaStatus.put(idStatus, status);
-		System.out.println(String.format("Id '%d', Status '%s' adicionado com sucesso!", idStatus, mapaStatus.get(idStatus)));
+	public static String getMapaPagamentos() {
+		for (int i : mapaPagamentos.keySet()) {
+			return String.format("Id '%d', Forma de pagamento '%s'", i, mapaPagamentos.get(i)); 
+		}
+		return "ERRO! Ainda não existem formas de pagamento registradas.";
 	}
-	
-	//Read
-	public static void getPagamento (int idPagamento) {
+	public static String getPagamentoById(int idPagamento) {
 		if (mapaPagamentos.containsKey(idPagamento)){
-			System.out.println(mapaPagamentos.get(idPagamento));
+			return mapaPagamentos.get(idPagamento);
 		} else { 
-			System.out.println("ERRO! Id '%d' não existe!");
+			throw new IllegalArgumentException(String.format("ERRO! Id '%d' não existe!", idPagamento));
 		}
 	}
-	
-	public static void getStatus (int idStatus) {
-		if (mapaStatus.containsKey(idStatus)){
-			System.out.println(mapaStatus.get(idStatus));
-		} else { 
-			System.out.println("ERRO! Id '%d' não existe!");
-		}
-	}
-
-	//Update
 	public static void modifyPagamentos(int idPagamento, String pagamento) {
 		if (mapaPagamentos.containsKey(idPagamento)){
 			mapaPagamentos.put(idPagamento, pagamento);
-			System.out.println(String.format("Id '%d' modificado para pagamento: '%s' com sucesso!", idPagamento, pagamento));
-		} else { 
-			System.out.println("ERRO! Id '%d' não existe!");
-		}
-		
-	}
-	
-	public static void modifyStatus(int idStatus, String status) {
-		if (mapaStatus.containsKey(idStatus)){
-			mapaStatus.put(idStatus, status);
-			System.out.println(String.format("Id '%d' modificado para status: '%s' com sucesso!", idStatus, status));
+			System.out.println(String.format("Id '%d' modificado para forma de pagamento: '%s' com sucesso!", idPagamento, pagamento));
 		} else { 
 			System.out.println("ERRO! Id '%d' não existe!");
 		}
 	}
-	
-	//Delete
 	public static void removePagamentos(int idPagamento) {
 		if (mapaPagamentos.containsKey(idPagamento)){
 			mapaPagamentos.remove(idPagamento);
@@ -146,21 +120,46 @@ public class Compra {
 			System.out.println("ERRO! Id '%d' não existe!");
 		}
 	}
-		
+	public static void putStatus(int idStatus, String status) {
+		mapaStatus.put(idStatus, status);
+		System.out.println(String.format("Id '%d', Status '%s' adicionado com sucesso!", idStatus, mapaStatus.get(idStatus)));
+	}
+	public static String getMapaStatus() {
+		for (int i : mapaStatus.keySet()) {
+			return String.format("Id '%d', Status de compra '%s'", i, mapaStatus.get(i)); 
+		}
+		return "ERRO! Ainda não existem status de compra registrados.";
+	}
+	public static String getStatusById(int idStatus) {
+		if (mapaStatus.containsKey(idStatus)){
+			return mapaStatus.get(idStatus);
+		} else { 
+			throw new IllegalArgumentException(String.format("ERRO! Id '%d' não existe!", idStatus));
+		}
+	}
+	public static void modifyStatus(int idStatus, String status) {
+		if (mapaStatus.containsKey(idStatus)){
+			mapaStatus.put(idStatus, status);
+			System.out.println(String.format("Id '%d' modificado para status de compra: '%s' com sucesso!", idStatus, status));
+		} else { 
+			System.out.println("ERRO! Id '%d' não existe!");
+		}
+	}
 	public static void removeStatus(int idStatus) {
 		if (mapaStatus.containsKey(idStatus)){
 			mapaStatus.remove(idStatus);
 			System.out.println(String.format("Id '%d', Status '%s' removido com sucesso!", idStatus, mapaStatus.get(idStatus)));
 		} else { 
-			System.out.println("ERRO! Id '%d' não existe!");
+			System.out.println(String.format("ERRO! Id '%d' não existe!", idStatus));
 		}
 	}
 	
-	public void getListaProdutos(Produto produto) {
-		for (Produto produto : listaProdutos) {
-			System.out.println(produto.toString());
+	public void getListaProdutos() {
+		for (CompraProduto compraproduto : listaProdutos) {
+			System.out.println(compraproduto.toString());
 		}
 	}
+	// TO DO: resto do crud de listaprodutos
 	
 	@Override 
 	public String toString() {
@@ -177,61 +176,44 @@ Total: R$ %.2f
 Id do Pagamento: '%d'
 Id do Status: '%d'
 
-""", this.getIdCliente(), this.getIdFuncionario(), this.getDataHora(), this.getSubtotal(), this.getDesconto(), this.getTotal(), Compra.getPagamento(this.getIdPagamento()), Compra.getStatus(this.getIdStatus()));
+""", this.getIdCliente(), this.getIdFuncionario(), this.getDataHora(), this.getSubtotal(), this.getDesconto(), this.getTotal(), Compra.getPagamentoById(this.getIdPagamento()), Compra.getStatusById(this.getIdStatus()));
 	}
 	
 	public class CompraProduto {
-		private int idProduto;
-		private String nomeProduto;
+		private Produto produto;
 		private int qtdComprada;
 		private int desconto;
 		private float total;
 		
-		public CompraProduto (int idProduto, int qtdComprada, int desconto, float total) {
-			this.idProduto = idProduto;
-			this.nomeProduto = Produto.getNomeProduto();
+		public CompraProduto (Produto produto, int qtdComprada, int desconto, float total) {
+			this.produto = produto;
 			this.qtdComprada = qtdComprada;
 			this.desconto = desconto;
 			this.total = total;
 		}
 		
 		//Getters and Setters
-		public int getIdProduto() {
-			return idProduto;
+		public Produto getProduto() {
+			return produto;
 		}
-
-		public void setIdProduto(int idProduto) {
-			idProduto = idProduto;
+		public void setProduto(Produto produto) {
+			this.produto = produto;
 		}
-
-		public String getNomeProduto() {
-			return nomeProduto;
-		}
-
-		public void setNomeProduto(String nomeProduto) {
-			this.nomeProduto = nomeProduto;
-		}
-		
 		public int getQtdComprada() {
 			return qtdComprada;
 		}
-
 		public void setQtdComprada(int qtdComprada) {
 			this.qtdComprada = qtdComprada;
 		}
-		
 		public int getDesconto() {
 			return desconto;
 		}
-
 		public void setDesconto(int desconto) {
 			this.desconto = desconto;
 		}
-
 		public float getTotal() {
 			return total;
 		}
-
 		public void setTotal(float total) {
 			this.total = total;
 		}
@@ -246,7 +228,7 @@ Quantidade: '%d'
 Desconto: '%d'
 Total: R$ %.2f
 
-""", this.getIdProduto(), this.getNomeProduto(), this.getQtdComprada(), this.getDesconto(), this.getTotal());
+""", this.getProduto().getIdProduto(), this.getProduto().getNomeProduto(), this.getQtdComprada(), this.getDesconto(), this.getTotal());
 		}
 	}
 }

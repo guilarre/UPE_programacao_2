@@ -34,7 +34,7 @@ public class Cliente extends Pessoa {
 	public static ArrayList<Cliente> getListaClientes() {
 		return listaClientes;
 	}
-	public static void addListaClientes(Cliente cliente) {
+	public static void addToListaClientes(Cliente cliente) {
 		listaClientes.add(cliente);
 		count = new AtomicInteger(listaClientes.size());
 	}

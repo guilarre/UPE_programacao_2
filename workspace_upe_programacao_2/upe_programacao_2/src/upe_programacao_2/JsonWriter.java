@@ -33,13 +33,13 @@ public class JsonWriter {
 		JsonWriter.salvarEmArquivo(listaFuncionarios, caminhoArquivo);
 	}
 	
-	// Dando erro pq ainda não integrou o estoque
-//	public static void salvarEstoque(Object estoque) {
-//		String caminhoArquivo = "estoque.json";
-//		JsonWriter.salvarEmArquivo(estoque, caminhoArquivo);
-//
-//	public static void salvarHistorico(Object historico) {
-//		String caminhoArquivo = "historico.json";
-//		JsonWriter.salvarEmArquivo(historico, caminhoArquivo);
-//	}
+	public static void salvarEstoque(Object estoque) {
+		String caminhoArquivo = "estoque.json";
+		JsonWriter.salvarEmArquivo(estoque, caminhoArquivo);
+	}
+
+	public static void salvarHistorico(Object historico) {
+		String caminhoArquivo = "historico.json";
+		JsonWriter.salvarEmArquivo(historico, caminhoArquivo);
+	}
 }

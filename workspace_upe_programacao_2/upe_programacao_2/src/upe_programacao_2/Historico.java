@@ -17,9 +17,14 @@ public class Historico {
 	
 	// Getter do histórico geral (chama toString() de cada objeto Compra)
 	public static String exibirHistoricoCompleto() {
-		for (int i = 0; i < historico.size(); i++) {
-			return String.format("Índice: %d\nCompra:\n%s\n\n", i, historico.get(i).toString());
+		if (historico.isEmpty()) {
+			return "O histórico ainda não foi registrado";
 		}
+		StringBuilder historicoCompleto = new StringBuilder();
+		for (int i = 0; i < historico.size(); i++) {
+			historicoCompleto.append(String.format("Índice: %d\nCompra:\n%s\n\n", i, historico.get(i).toString()));
+		}
+		return String.valueOf(historicoCompleto);
 	}
 	
 	// Getter de uma compra específica do histórico
@@ -43,6 +48,7 @@ public class Historico {
 		if (idsDisponiveis.contains(idCliente) == false) {
 			return String.format("ERRO! A id '%d' não foi registrada ainda", idCliente);
 		}
+		// Pegar histórico do cliente
 		StringBuilder historicoCliente = new StringBuilder();
 		for (Compra compra : historico) {
 			if (compra.getIdCliente() == idCliente) {
@@ -62,10 +68,15 @@ Compras do cliente de id '%d':
 	// Getter para vendas de um funcionário específico
 	// TO DO: Opção para mostrar apenas as do mês especificado
 	public static String getHistoricoFuncionario(int idFuncionario) {
-		// Verificar primeiro se idCliente existe
-		if (Funcionario.getListaFuncionarios().contains(idFuncionario) == false) {
-			return String.format("ERRO! A id '%d' não foi registrada ainda", idFuncionario);
+		// Verificar primeiro se idFuncionario existe
+		ArrayList<Integer> idsDisponiveis = new ArrayList<Integer>(); 
+		for (Funcionario funcionario : Funcionario.getListaFuncionarios()) {
+			idsDisponiveis.add(funcionario.getIdFuncionario());
 		}
+		if (idsDisponiveis.contains(idFuncionario) == false) {
+			return String.format("ERRO! A id '%d' não foi registrada ainda", idFuncionario); 
+		}
+		// Pegar histórico do funcionário
 		StringBuilder historicoFuncionario = new StringBuilder();
 		for (Compra compra : historico) {
 			if (compra.getIdFuncionario() == idFuncionario) {
@@ -101,6 +112,7 @@ Compra:
 
 Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser revertida):""", compraADeletar));
 			char confirmacao = sc.next().charAt(0);
+			sc.close();
 			if (Character.toLowerCase(confirmacao) == 's') {
 				historico.set(idx, compra);
 				System.out.println(String.format("Histórico foi modificado com sucesso!\n\nId: '%d'\nCompra modificada:\n%s", idx, Historico.getCompraByIndex(idx)));
@@ -126,6 +138,7 @@ Compra:
 
 Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser revertida):""", compraADeletar));
 			char confirmacao = sc.next().charAt(0);
+			sc.close();
 			if (Character.toLowerCase(confirmacao) == 's') {
 				historico.remove(idx);
 				System.out.println(String.format("Compra foi removida com sucesso!"));

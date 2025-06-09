@@ -1,4 +1,4 @@
-package upe_programação_2;
+package upe_programacao_2;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

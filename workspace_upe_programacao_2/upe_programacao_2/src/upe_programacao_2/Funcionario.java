@@ -49,14 +49,14 @@ public class Funcionario extends Pessoa {
 	}
 	
 	// Usado por JsonReader
-		public static ArrayList<Funcionario> getListaFuncionarios() {
-			return listaFuncionarios;
-		}
-		public static void addListaFuncionarios(Funcionario funcionario) {
-			listaFuncionarios.add(funcionario);
-			count = new AtomicInteger(listaFuncionarios.size());
-		}
-	
+	public static ArrayList<Funcionario> getListaFuncionarios() {
+		return listaFuncionarios;
+	}
+	public static void addToListaFuncionarios(Funcionario funcionario) {
+		listaFuncionarios.add(funcionario);
+		count = new AtomicInteger(listaFuncionarios.size());
+	}
+
 	// CRUD para mapaCargos
 	public static void putCargo(int idCargo, String cargo) {
 		mapaCargos.put(idCargo, cargo);
@@ -85,8 +85,8 @@ public class Funcionario extends Pessoa {
 	}
 	public static void removeCargo(int idCargo) {
 		if (mapaCargos.containsKey(idCargo)) {
-			System.out.println(String.format("Id '%d', Cargo '%s' removido com sucesso!", idCargo, mapaCargos.get(idCargo)));
 			mapaCargos.remove(idCargo);
+			System.out.println(String.format("Id '%d', Cargo '%s' removido com sucesso!", idCargo, mapaCargos.get(idCargo)));
 		} else {
 			System.out.println(String.format("ERRO! Id '%d' não existe!", idCargo));
 		}
