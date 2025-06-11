@@ -1,9 +1,9 @@
 package upe_programacao_2;
 
 public class Menu {
-	// Falta nome da loja
+	// TO DO: colocar números em vez de letras nas opções
 	public static String menuPrincipal = """
-###### Sistema de gerenciamento ___ ######
+###### Sistema de gerenciamento LasCa ######
 
 Selecione a opção desejada:
 
@@ -35,13 +35,50 @@ Selecione a opção desejada:
 	
 	public static String menuEstoque = """
 
+[m] = Exibir todo o estoque
+[c] = Exibir categoria de produtos
 [p] = Pesquisar produto em estoque
-[r] = Registrar produto em estoque
 [g] = Gerenciar estoque
 [s] = Sair e retornar ao menu principal
 
 -> """;
 	
+	public static String menuPesquisaEstoque = """
+
+[i] = Pesquisar por id do produto
+[n] = Pesquisar pelo nome do produto
+
+""";
 	
+	public static String menuGerenciarEstoque = """
+
+[a] = Adicionar produto ao estoque
+[e] = Excluir produto do estoque
+[m] = Modificar produto no estoque
+
+""";
+	
+	public static String menuModificarProduto = """
+
+O que deseja alterar?
+
+[s] = SKU
+[n] = Nome do produto
+[d] = Descrição
+[v] = Valor
+[c] = Categoria
+[q] = Quantidade em estoque
+
+""";
+	
+	public static String menuModificarCategoria = String.format("""
+
+Categorias disponíveis:
+
+%s
+
+""", Produto.getMapaCategorias());
+	
+	// TO DO: MENU PRA REALIZAR VENDA
 	
 }

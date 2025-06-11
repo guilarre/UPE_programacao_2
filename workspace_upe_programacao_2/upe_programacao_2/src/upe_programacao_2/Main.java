@@ -5,9 +5,14 @@ import java.util.Scanner;
 public class Main {
 
 	public static void main(String[] args) {
-		// TO DO: Carregar arquivos em memória
+		// TO DO: Falta verificar se tem todos os CRUD na main
+		// Carregar arquivos em memória
+		JsonReader.carregarClientes();
+		JsonReader.carregarFuncionarios();
+		JsonReader.carregarEstoque();
+		JsonReader.carregarHistorico();
 		
-		
+		// Iniciar menu
 		Scanner sc = new Scanner(System.in);
 		loopMain: while (true) {
 			System.out.println(Menu.menuPrincipal);
@@ -93,10 +98,13 @@ public class Main {
 						System.out.println(Menu.menuEstoque);
 						opcao = sc.nextLine();
 						switch (opcao) {
+							case "m":
+								for (Produto produto : Produto.getListaProdutos()) {
+									System.out.println(produto);
+								}
+								break;
 							case "p":
 								
-								break;
-							case "r":
 								break;
 							case "g":
 								break;
@@ -105,6 +113,7 @@ public class Main {
 						}
 					}
 				case "s":
+					// TO DO: Salvar em json
 					System.out.println("Até logo!");
 					sc.close();
 					break loopMain;
