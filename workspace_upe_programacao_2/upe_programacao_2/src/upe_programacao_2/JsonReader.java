@@ -45,10 +45,10 @@ public class JsonReader {
 	}
 	
 	public static void carregarEstoque() {
-		try (FileReader fr = new FileReader("clientes.json")) {
-			Cliente[] clientes = gson.fromJson(fr, Cliente[].class);
-			for (Cliente cliente : clientes) {
-				Cliente.addListaClientes(cliente);
+		try (FileReader fr = new FileReader("estoque.json")) {
+			Produto[] estoque = gson.fromJson(fr, Produto[].class);
+			for (Produto produto : estoque) {
+				Produto.addToListaProdutos(produto);
 			}
 		} catch (IOException e) {
 			e.printStackTrace();

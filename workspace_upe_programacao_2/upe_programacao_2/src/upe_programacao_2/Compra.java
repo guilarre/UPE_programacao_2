@@ -52,6 +52,11 @@ public class Compra {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern(formatterString);
 		return dataHora.format(formatter);
 	}
+	
+	public LocalDateTime getObjetoDataHora() {
+		return dataHora;
+	}
+	
 	public void setDataHora(LocalDateTime dataHora) {
 		this.dataHora = dataHora;
 	}
@@ -154,11 +159,10 @@ public class Compra {
 		}
 	}
 	
-	public void getListaProdutos() {
-		for (CompraProduto compraproduto : listaProdutos) {
-			System.out.println(compraproduto.toString());
-		}
+	public ArrayList<CompraProduto> getListaProdutos() {
+		return listaProdutos;
 	}
+	
 	// TO DO: resto do crud de listaprodutos
 	
 	@Override 
@@ -168,8 +172,8 @@ public class Compra {
 Id da compra: '%d'
 
 Id do cliente: '%d'
-Id do Funcinário: '%d'
-Data e hora da compra: `%s`
+Id do Funcionário: '%d'
+Data e hora da compra: '%s'
 Subtotal: '%d'
 Desconto: '%d'
 Total: R$ %.2f

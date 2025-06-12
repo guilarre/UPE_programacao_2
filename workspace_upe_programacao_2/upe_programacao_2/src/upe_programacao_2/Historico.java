@@ -1,7 +1,10 @@
 package upe_programacao_2;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import upe_programacao_2.Compra.CompraProduto;
 
 public class Historico {
 	private static ArrayList<Compra> historico = new ArrayList<Compra>();
@@ -148,5 +151,32 @@ Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser r
 		} catch (IndexOutOfBoundsException e) {
 			System.out.println(String.format("ERRO! Índice '%d' não existe", idx));
 		}
+	}
+	
+	//Gerar Relatório
+	public static String gerarRelatorio() {
+		ArrayList<Compra> comprasMes = new ArrayList<Compra>();
+		for (Compra compra : historico) {
+			if (compra.getObjetoDataHora().getMonth() == LocalDate.now().getMonth()) {
+				comprasMes.add(compra);
+			}
+		}
+		
+		int qtdCompradaMes = 0;
+		double totalCompradoMes = 0;
+		for (Compra compra : comprasMes) {
+			for (CompraProduto compraProduto : compra.getListaProdutos()) {
+				qtdCompradaMes += compraProduto.getQtdComprada();
+			}
+			totalCompradoMes += compra.getTotal();
+		}
+		return String.format("""
+
+############ Relatório do mês ############
+
+Foram realizadas %d compras neste mês,
+Totalizando R$ %.2f.
+
+""", qtdCompradaMes, totalCompradoMes);
 	}
 }
