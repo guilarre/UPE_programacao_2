@@ -149,7 +149,13 @@ public class Main {
 								break;
 							// Exibir todas as categorias
 							case 4:
-								System.out.println(Produto.getMapaCategorias());
+								System.out.println(String.format("""
+
+Categorias disponíveis:
+
+%s
+
+""", Produto.getMapaCategorias()));
 							// Gerenciar estoque
 							case 5:
 								loopGerenciarEstoque: while (true) {
@@ -397,6 +403,11 @@ Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser r
 					}
 				// TODO: Menu vendas
 				case 4:
+					
+					break;
+				// TEST: Gerar relatório mensal
+				case 5:
+					Historico.gerarRelatorio();
 					break;
 				// Sair do sistema
 				case 0:

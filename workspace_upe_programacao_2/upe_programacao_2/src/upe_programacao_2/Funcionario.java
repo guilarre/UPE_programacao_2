@@ -3,6 +3,7 @@ package upe_programacao_2;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Scanner;
 
 public class Funcionario extends Pessoa {
 	private static ArrayList<Funcionario> listaFuncionarios = new ArrayList<Funcionario>();
@@ -46,6 +47,61 @@ public class Funcionario extends Pessoa {
 			return "ERRO! Nenhum funcionário foi registrado ainda";
 		}
 		return String.valueOf(funcionarios);
+	}
+	
+	// Getter para selecionar objeto funcionário
+	public static Funcionario getFuncionarioById(int idFuncionario) {
+		for (Funcionario funcionario : Funcionario.getListaFuncionarios()) {
+			if (funcionario.getIdFuncionario() == idFuncionario) {
+				return funcionario;
+			}
+		}
+		// TEST: esse throw new quebra funcionamento da main?
+		throw new IllegalArgumentException(String.format("ERRO! Não existe funcionário de id '%d'", idFuncionario));
+	}
+	public static Funcionario getFuncionarioByNome(String nomeFuncionario) {
+		for (Funcionario funcionario : Funcionario.getListaFuncionarios()) {
+			if (funcionario.getNome() == nomeFuncionario) {
+				return funcionario;
+			}
+		}
+		// TEST: esse throw new quebra funcionamento da main?
+		throw new IllegalArgumentException(String.format("ERRO! Não existe funcionário de nome '%s'", nomeFuncionario));
+	}
+	public static Funcionario getObjetoFuncionario() {
+		// TODO: case default???
+		// Menu para selecionar modo de busca
+		// TEST: espaçamento correto na UI
+		String menuSelecionarFuncionario = """
+
+[1] = Procurar funcionário por seu id
+[2] = Procurar funcionário por seu nome
+
+[0] = Retornar ao menu anterior
+
+""";
+		System.out.println(menuSelecionarFuncionario);
+		Scanner sc = new Scanner(System.in);
+		int opcao = sc.nextInt();
+		switch (opcao) {
+			case 1:
+				System.out.println("Digite o id do funcionário: ");
+				int idFuncionario = sc.nextInt();
+				sc.close();
+				System.out.println(String.format("Funcionário selecionado:\n\n%s", getFuncionarioById(idFuncionario)));
+				return Funcionario.getFuncionarioById(idFuncionario);
+			case 2:
+				System.out.println("Digite o nome do funcionário: ");
+				String nomeFuncionario = sc.nextLine();
+				sc.close();
+				System.out.println(String.format("Funcionário selecionado:\n\n%s", getFuncionarioByNome(nomeFuncionario)));
+				return Funcionario.getFuncionarioByNome(nomeFuncionario);
+			case 0:
+				System.out.println("Operação cancelada!");
+				break;
+		}
+		sc.close();
+		return null; // TODO: na Main, reconhece se é null e cancela operação
 	}
 	
 	// Usado por JsonReader

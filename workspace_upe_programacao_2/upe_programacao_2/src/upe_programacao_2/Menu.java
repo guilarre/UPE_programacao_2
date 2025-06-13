@@ -11,6 +11,7 @@ Selecione a opção desejada:
 [2] = Funcionários
 [3] = Estoque
 [4] = Vendas
+[5] = Gerar relatório mensal
 
 [0] = Sair do sistema
 
@@ -105,14 +106,13 @@ O que deseja alterar?
 
 """;
 	
-	public static String menuModificarCategoria = String.format("""
+	public static String menuVendas = """
 
-Categorias disponíveis:
+[1] = 
+[2] = 
+[3] = 
 
-%s
+[0] = Retornar ao menu principal
 
-""", Produto.getMapaCategorias());
-	
-	// TO DO: MENU PRA REALIZAR VENDA
-	
+""";
 }

@@ -4,7 +4,10 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Scanner;
 import java.util.concurrent.atomic.AtomicInteger;
+
+import upe_programacao_2.Compra.CompraProduto;
 
 public class Compra {
 	// Contador para autoincrementar idCompra
@@ -13,23 +16,29 @@ public class Compra {
 	private int idCliente;
 	private int idFuncionario;
 	private LocalDateTime dataHora;
-	private ArrayList<CompraProduto> listaProdutos;
-	private double subtotal;
-	private double desconto;
-	private double total;
+	private ArrayList<CompraProduto> listaProdutos = null;
+	private double subtotal = 0;
+	private double desconto = 1;
+	private double total = 0;
 	private int idPagamento;
 	private static HashMap<Integer, String> mapaPagamentos;
 	private int idStatus;
 	private static HashMap<Integer, String> mapaStatus;
 	
-	public Compra(int idCliente, int idFuncionario, double subtotal, double desconto, double total, int idPagamento, int idStatus) {
+	// TODO: precisa passar listaProdutos(ArrayList de CompraProduto) ao criar Compra
+	public Compra(int idCliente, int idFuncionario, ArrayList<CompraProduto> listaProdutos, double subtotal, double desconto, int idPagamento, int idStatus) {
 		idCompra = count.incrementAndGet();
 		this.idCliente = idCliente;
 		this.idFuncionario = idFuncionario;
 		this.dataHora = LocalDateTime.now();
-		this.subtotal = subtotal;
-		this.desconto = desconto;
-		this.total = total;
+		this.listaProdutos = listaProdutos;
+		for (CompraProduto compraProduto : listaProdutos) {
+			this.subtotal += compraProduto.getTotal();			
+		}
+		if (desconto != 0) {			
+			this.desconto = Math.abs(desconto - 100)/100;
+		}
+		this.total = subtotal * desconto;
 		this.idPagamento = idPagamento;
 		this.idStatus = idStatus;
 	}
@@ -52,11 +61,9 @@ public class Compra {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern(formatterString);
 		return dataHora.format(formatter);
 	}
-	
 	public LocalDateTime getObjetoDataHora() {
 		return dataHora;
 	}
-	
 	public void setDataHora(LocalDateTime dataHora) {
 		this.dataHora = dataHora;
 	}
@@ -89,6 +96,79 @@ public class Compra {
 	}
 	public void setTotal(double total) {
 		this.total = total;
+	}
+	
+	// Getter para objeto Compra
+	public static ArrayList<CompraProduto> getObjetoCompraProduto() {
+		// TODO: case default???
+		// Menu para selecionar modo de busca
+		// TEST: espaçamento correto na UI
+		// TODO: falta passar o desconto para cada produto e para total da compra
+		ArrayList<CompraProduto> listaProdutos = new ArrayList<CompraProduto>();
+		Produto produtoSelecionado = null;
+		double desconto = 1;
+		int qtdComprada = 0;
+		CompraProduto compraProduto = null;
+		
+		Scanner sc = new Scanner(System.in);
+		loopSelecaoProdutos: while (true) {
+			String menuSelecionarProduto = """
+
+Selecione o(s) produto(s):
+
+[1] = Procurar produto por seu id
+[2] = Procurar produto por seu nome
+[3] = Terminar seleção de produtos
+
+[0] = Retornar ao menu anterior
+
+""";
+			System.out.println(menuSelecionarProduto);
+			int opcao = sc.nextInt();
+			switch (opcao) {
+				case 1:
+					// Selecionando o produto pelo id
+					System.out.println("Digite o id do produto: ");
+					int idProduto = sc.nextInt();
+					produtoSelecionado = Produto.getProdutoById(idProduto);
+					System.out.println(String.format("Produto selecionado:\n\n%s", produtoSelecionado));
+					// Desconto
+					System.out.println("Digite o desconto em porcentagem, se aplicável (e.g. 12.5), se não houver desconto, digite 0: ");
+					desconto = sc.nextDouble();
+					// Qtd comprada
+					System.out.println("Digite a quantidade que será comprada: ");
+					qtdComprada = sc.nextInt();
+					compraProduto = new Compra.CompraProduto(produtoSelecionado, qtdComprada, desconto);
+					listaProdutos.add(compraProduto);
+					break;
+				case 2:
+					// Selecionando o produto pelo nome
+					System.out.println("Digite o nome do produto: ");
+					String nomeProduto = sc.nextLine();
+					produtoSelecionado = Produto.getProdutoByNome(nomeProduto);
+					System.out.println(String.format("Produto selecionado:\n\n%s", produtoSelecionado));
+					// Desconto
+					System.out.println("Digite o desconto em porcentagem, se aplicável (e.g. 12.5), se não houver desconto, digite 0: ");
+					desconto = sc.nextDouble();
+					// Qtd comprada
+					System.out.println("Digite a quantidade que será comprada: ");
+					qtdComprada = sc.nextInt();
+					compraProduto = new Compra.CompraProduto(produtoSelecionado, qtdComprada, desconto);
+					listaProdutos.add(compraProduto);
+					break;
+				case 3:
+					sc.close();
+					return listaProdutos;
+				case 0:
+					System.out.println("Operação cancelada!");
+					break loopSelecaoProdutos;
+			}
+		}
+		sc.close();
+		return null; // TODO: em getObjetoCompra, reconhece se é null e cancela operação
+	}
+	public static Compra getObjetoCompra() {
+		
 	}
 	
 	// CRUD para mapaPagamentos, mapaStatus e listaProdutos
@@ -162,8 +242,15 @@ public class Compra {
 	public ArrayList<CompraProduto> getListaProdutos() {
 		return listaProdutos;
 	}
+	public double getTotalListaProdutos() {
+		double total = 0;
+		for (CompraProduto compraProduto : listaProdutos) {
+			total += compraProduto.getTotal();
+		}
+		return total;
+	}
 	
-	// TODO: resto do crud de listaprodutos
+	// TODO: resto do crud de listaProdutos
 	
 	@Override 
 	public String toString() {
@@ -183,17 +270,19 @@ Id do Status: '%d'
 """, this.getIdCliente(), this.getIdFuncionario(), this.getDataHora(), this.getSubtotal(), this.getDesconto(), this.getTotal(), Compra.getPagamentoById(this.getIdPagamento()), Compra.getStatusById(this.getIdStatus()));
 	}
 	
-	public class CompraProduto {
+	public static class CompraProduto {
 		private Produto produto;
-		private int qtdComprada;
-		private int desconto;
-		private double total;
+		private int qtdComprada = 0;
+		private double desconto = 1;
+		private double total = 0;
 		
-		public CompraProduto (Produto produto, int qtdComprada, int desconto, double total) {
+		public CompraProduto(Produto produto, int qtdComprada, double desconto) {
 			this.produto = produto;
 			this.qtdComprada = qtdComprada;
-			this.desconto = desconto;
-			this.total = total;
+			if (desconto != 0) {			
+				this.desconto = Math.abs(desconto - 100)/100;
+			}
+			this.total = (produto.getValor() * qtdComprada) * desconto;
 		}
 		
 		//Getters and Setters
@@ -209,7 +298,7 @@ Id do Status: '%d'
 		public void setQtdComprada(int qtdComprada) {
 			this.qtdComprada = qtdComprada;
 		}
-		public int getDesconto() {
+		public double getDesconto() {
 			return desconto;
 		}
 		public void setDesconto(int desconto) {
@@ -229,7 +318,7 @@ Id do Status: '%d'
 Id do Produto: '%d'
 Nome do Produto: '%s'
 Quantidade: '%d'
-Desconto: '%d'
+Desconto: '%f'
 Total: R$ %.2f
 
 """, this.getProduto().getIdProduto(), this.getProduto().getNomeProduto(), this.getQtdComprada(), this.getDesconto(), this.getTotal());

@@ -153,7 +153,7 @@ Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser r
 		}
 	}
 	
-	//Gerar Relatório
+	// Gerar relatório
 	public static String gerarRelatorio() {
 		ArrayList<Compra> comprasMes = new ArrayList<Compra>();
 		for (Compra compra : historico) {

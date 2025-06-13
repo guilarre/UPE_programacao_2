@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.Scanner;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import upe_programacao_2.Compra.CompraProduto;
+
 public class Produto {
 	private static ArrayList<Produto> listaProdutos = new ArrayList<Produto>();
 	private static AtomicInteger count = new AtomicInteger(0);
@@ -68,30 +70,23 @@ public class Produto {
 	public void setQtdEstoque(int qtdEstoque) {
 		this.qtdEstoque = qtdEstoque;
 	}
-
-	// listaProdutos
-	public static ArrayList<Produto> getListaProdutos() {
-		return listaProdutos;
-	}
-	public static void addToListaProdutos(Produto produto) {
-		listaProdutos.add(produto);
-		count = new AtomicInteger(listaProdutos.size());
-	}
 	public static Produto getProdutoById(int idProduto) {
 		for (Produto produto : Produto.getListaProdutos()) {
 			if (produto.getIdProduto() == idProduto) {
 				return produto;
 			}
 		}
-		throw new IllegalArgumentException(String.format("ERRO! Não existem produtos de id '%d'", idProduto));
+		// TEST: esse throw new quebra funcionamento da main?
+		throw new IllegalArgumentException(String.format("ERRO! Não existe produto de id '%d'", idProduto));
 	}
-	public static Produto getProdutoByName(String nomeProduto) {
+	public static Produto getProdutoByNome(String nomeProduto) {
 		for (Produto produto : Produto.getListaProdutos()) {
 			if (produto.getNomeProduto() == nomeProduto) {
 				return produto;
 			}
 		}
-		throw new IllegalArgumentException(String.format("ERRO! Não existem produtos com o nome '%s'", nomeProduto));
+		// TEST: esse throw new quebra funcionamento da main?
+		throw new IllegalArgumentException(String.format("ERRO! Não existe produto com o nome '%s'", nomeProduto));
 	}
 	public static void removeProduto(Produto produto) {
 		// Confirmar operação
@@ -111,6 +106,15 @@ Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser r
 		} else {
 			System.out.println("Operação cancelada!");
 		}
+	}
+	
+	// listaProdutos
+	public static ArrayList<Produto> getListaProdutos() {
+		return listaProdutos;
+	}
+	public static void addToListaProdutos(Produto produto) {
+		listaProdutos.add(produto);
+		count = new AtomicInteger(listaProdutos.size());
 	}
 	
 	// CRUD para mapaCategorias
