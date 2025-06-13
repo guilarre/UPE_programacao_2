@@ -5,7 +5,8 @@ import java.util.Scanner;
 public class Main {
 
 	public static void main(String[] args) {
-		// TO DO: Falta verificar se tem todos os CRUD na main
+		// TODO: Falta verificar se tem todos os CRUD na main
+		// TODO: configurar os default para os switch/case
 		// Carregar arquivos em memória
 		JsonReader.carregarClientes();
 		JsonReader.carregarFuncionarios();
@@ -176,10 +177,12 @@ public class Main {
 										case 2:
 											loopModificarProduto: while (true) {
 												Produto produtoAModificar = null;
+												// TODO: testar se throw new erro interrompe programa no caso de id/nome não existir.
 												loopSelecionarProduto: while (true) {
 													System.out.println(Menu.menuSelecionarProduto);
 													opcao = sc.nextInt();
 													switch (opcao) {
+														// TEST: Checar se "break loopSelecionarProduto" no final é suficiente
 														case 1:
 															System.out.println("Digite o id do produto: ");
 															int idProduto = sc.nextInt();
@@ -191,7 +194,7 @@ public class Main {
 															produtoAModificar = Produto.getProdutoByName(nomeProduto);
 															break;
 														case 0:
-															break;
+															break loopModificarProduto;
 													}
 													break loopSelecionarProduto;
 												}
@@ -205,7 +208,7 @@ public class Main {
 															System.out.println("Digite o SKU novo: ");
 															String skuNovo = sc.nextLine();
 															System.out.println(String.format("""
-Você tem certeza que deseja modificar o SKU?
+Você tem certeza que deseja modificar o SKU do produto?
 
 Produto:
 %s
@@ -219,9 +222,10 @@ Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser r
 																produtoAModificar.setSku(skuNovo);
 																System.out.println(String.format("Produto foi modificado com sucesso!"));
 															} else {
+																System.out.println("Operação cancelada!");
 																break loopModificarProduto;
 															}
-															break;
+															break loopModificarProduto;
 														// Nome do produto
 														case 2:
 															String nomeAtual = produtoAModificar.getNomeProduto();
@@ -242,9 +246,10 @@ Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser r
 																produtoAModificar.setNome(nomeNovo);
 																System.out.println(String.format("Produto foi modificado com sucesso!"));
 															} else {
+																System.out.println("Operação cancelada!");
 																break loopModificarProduto;
 															}
-															break;
+															break loopModificarProduto;
 														// Descrição
 														case 3:
 															String descricaoAtual = produtoAModificar.getDescricao();
@@ -265,18 +270,81 @@ Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser r
 																produtoAModificar.setDescricao(descricaoNova);
 																System.out.println(String.format("Produto foi modificado com sucesso!"));
 															} else {
+																System.out.println("Operação cancelada!");
 																break loopModificarProduto;
 															}
-															break;
-														// TODO: Valor
+															break loopModificarProduto;
 														case 4:
-															break;
+															double valorAtual = produtoAModificar.getValor();
+															System.out.println("Digite o valor novo: ");
+															double valorNovo = sc.nextDouble();
+															System.out.println(String.format("""
+Você tem certeza que deseja modificar o valor do produto?
+
+Produto:
+%s
+
+Valor atual: %s
+Valor novo: %s
+
+Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser revertida):""", produtoAModificar, valorAtual, valorNovo));
+															confirmacao = sc.next().charAt(0);
+															if (Character.toLowerCase(confirmacao) == 's') {
+																produtoAModificar.setValor(valorNovo);
+																System.out.println(String.format("Produto foi modificado com sucesso!"));
+															} else {
+																System.out.println("Operação cancelada!");
+																break loopModificarProduto;
+															}
+															break loopModificarProduto;
 														// Categoria
 														case 5:
-															break;
+															int categoriaAtual = produtoAModificar.getIdCategoria();
+															System.out.println("Digite o id da categoria nova: ");
+															int categoriaNova = sc.nextInt();
+															System.out.println(String.format("""
+Você tem certeza que deseja modificar a categoria do produto?
+
+Produto:
+%s
+
+Id da categoria atual: %s
+Id da categoria nova: %s
+
+Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser revertida):""", produtoAModificar, categoriaAtual, categoriaNova));
+															confirmacao = sc.next().charAt(0);
+															if (Character.toLowerCase(confirmacao) == 's') {
+																produtoAModificar.setIdCategoria(categoriaNova);
+																System.out.println(String.format("Produto foi modificado com sucesso!"));
+															} else {
+																System.out.println("Operação cancelada!");
+																break loopModificarProduto;
+															}
+															break loopModificarProduto;
 														// Quantidade em estoque
 														case 6:
-															break;
+															int qtdAtual = produtoAModificar.getQtdEstoque();
+															System.out.println("Digite a quantidade nova: ");
+															int qtdNova = sc.nextInt();
+															System.out.println(String.format("""
+Você tem certeza que deseja modificar a quantidade do produto?
+
+Produto:
+%s
+
+Quantidade atual: %s
+Quantidade nova: %s
+
+Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser revertida):""", produtoAModificar, qtdAtual, qtdNova));
+															confirmacao = sc.next().charAt(0);
+															if (Character.toLowerCase(confirmacao) == 's') {
+																produtoAModificar.setQtdEstoque(qtdNova);
+																System.out.println(String.format("Produto foi modificado com sucesso!"));
+															} else {
+																System.out.println("Operação cancelada!");
+																break loopModificarProduto;
+															}
+															break loopModificarProduto;
 														// Retornar ao menu anterior
 														case 0:
 															break loopModificarProduto;
@@ -287,7 +355,35 @@ Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser r
 											}
 										// Excluir produto do estoque
 										case 3:
-											break;
+											loopRemoverProduto: while (true) {
+												Produto produtoARemover = null;
+												// TODO: testar se throw new erro interrompe programa no caso de id/nome não existir.
+												loopSelecionarProduto: while (true) {
+													System.out.println(Menu.menuRemoverProduto);
+													opcao = sc.nextInt();
+													switch (opcao) {
+														case 1:
+															System.out.println("Digite o id do produto: ");
+															int idProduto = sc.nextInt();
+															produtoARemover = Produto.getProdutoById(idProduto);
+															break;
+														case 2:
+															System.out.println("Digite o nome do produto: ");
+															nomeProduto = sc.nextLine();
+															produtoARemover = Produto.getProdutoByName(nomeProduto);
+															break;
+														case 0:
+															break loopRemoverProduto;
+													}
+													break loopSelecionarProduto;
+												}
+												if (produtoARemover != null) {
+													Produto.removeProduto(produtoARemover);
+												} else {													
+													break loopRemoverProduto;
+												}
+												break loopRemoverProduto;
+											}
 										// Retornar ao menu anterior
 										case 0:
 											break loopGerenciarEstoque;
@@ -299,7 +395,7 @@ Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser r
 								break loopEstoque;
 						}
 					}
-				// Menu vendas
+				// TODO: Menu vendas
 				case 4:
 					break;
 				// Sair do sistema

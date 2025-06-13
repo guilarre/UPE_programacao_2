@@ -78,6 +78,17 @@ Qual produto deseja modificar?
 
 """;
 	
+	public static String menuRemoverProduto = """
+
+Qual produto deseja remover?
+
+[1] = Procurar produto por seu id
+[2] = Procurar produto por seu nome
+
+[0] = Retornar ao menu anterior
+
+""";
+	
 	public static String menuModificarProduto = """
 
 O que deseja alterar?

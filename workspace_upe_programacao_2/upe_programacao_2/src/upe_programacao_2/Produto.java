@@ -2,6 +2,7 @@ package upe_programacao_2;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Scanner;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Produto {
@@ -91,6 +92,25 @@ public class Produto {
 			}
 		}
 		throw new IllegalArgumentException(String.format("ERRO! Não existem produtos com o nome '%s'", nomeProduto));
+	}
+	public static void removeProduto(Produto produto) {
+		// Confirmar operação
+		Scanner sc = new Scanner(System.in);
+		System.out.println(String.format("""
+Você tem certeza que deseja remover o produto a seguir?
+
+Produto:
+%s
+
+Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser revertida):""", produto));
+		char confirmacao = sc.next().charAt(0);
+		sc.close();
+		if (Character.toLowerCase(confirmacao) == 's') {
+			listaProdutos.remove(produto.getIdProduto());
+			System.out.println("Produto foi removido com sucesso!");
+		} else {
+			System.out.println("Operação cancelada!");
+		}
 	}
 	
 	// CRUD para mapaCategorias

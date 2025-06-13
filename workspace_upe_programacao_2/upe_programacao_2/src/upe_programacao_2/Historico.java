@@ -104,7 +104,7 @@ Vendas do funcionário de id '%d':
 	public static void setCompraHistorico(int idx, Compra compra) {
 		try {
 			// Pegar compra a ser modificada para mostrar ao usuário (também já checa se existe ou não)
-			String compraADeletar = Historico.getCompraByIndex(idx);
+			String compraAModificar = Historico.getCompraByIndex(idx);
 			// Confirmar operação
 			Scanner sc = new Scanner(System.in);
 			System.out.println(String.format("""
@@ -113,7 +113,7 @@ Você tem certeza que deseja modificar a compra a seguir?
 Compra:
 %s
 
-Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser revertida):""", compraADeletar));
+Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser revertida):""", compraAModificar));
 			char confirmacao = sc.next().charAt(0);
 			sc.close();
 			if (Character.toLowerCase(confirmacao) == 's') {
