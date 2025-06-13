@@ -14,15 +14,15 @@ public class Compra {
 	private int idFuncionario;
 	private LocalDateTime dataHora;
 	private ArrayList<CompraProduto> listaProdutos;
-	private float subtotal;
-	private float desconto;
-	private float total;
+	private double subtotal;
+	private double desconto;
+	private double total;
 	private int idPagamento;
 	private static HashMap<Integer, String> mapaPagamentos;
 	private int idStatus;
 	private static HashMap<Integer, String> mapaStatus;
 	
-	public Compra(int idCliente, int idFuncionario, float subtotal, float desconto, float total, int idPagamento, int idStatus) {
+	public Compra(int idCliente, int idFuncionario, double subtotal, double desconto, double total, int idPagamento, int idStatus) {
 		idCompra = count.incrementAndGet();
 		this.idCliente = idCliente;
 		this.idFuncionario = idFuncionario;
@@ -72,22 +72,22 @@ public class Compra {
 	public void setIdStatus(int idStatus) {
 		this.idStatus = idStatus;
 	}
-	public float getSubtotal() {
+	public double getSubtotal() {
 		return subtotal;
 	}
-	public void setSubtotal(float subtotal) {
+	public void setSubtotal(double subtotal) {
 		this.subtotal = subtotal;
 	}
-	public float getDesconto() {
+	public double getDesconto() {
 		return desconto;
 	}
-	public void setDesconto(float desconto) {
+	public void setDesconto(double desconto) {
 		this.desconto = desconto;
 	}
-	public float getTotal() {
+	public double getTotal() {
 		return total;
 	}
-	public void setTotal(float total) {
+	public void setTotal(double total) {
 		this.total = total;
 	}
 	
@@ -163,7 +163,7 @@ public class Compra {
 		return listaProdutos;
 	}
 	
-	// TO DO: resto do crud de listaprodutos
+	// TODO: resto do crud de listaprodutos
 	
 	@Override 
 	public String toString() {
@@ -187,9 +187,9 @@ Id do Status: '%d'
 		private Produto produto;
 		private int qtdComprada;
 		private int desconto;
-		private float total;
+		private double total;
 		
-		public CompraProduto (Produto produto, int qtdComprada, int desconto, float total) {
+		public CompraProduto (Produto produto, int qtdComprada, int desconto, double total) {
 			this.produto = produto;
 			this.qtdComprada = qtdComprada;
 			this.desconto = desconto;
@@ -215,10 +215,10 @@ Id do Status: '%d'
 		public void setDesconto(int desconto) {
 			this.desconto = desconto;
 		}
-		public float getTotal() {
+		public double getTotal() {
 			return total;
 		}
-		public void setTotal(float total) {
+		public void setTotal(double total) {
 			this.total = total;
 		}
 

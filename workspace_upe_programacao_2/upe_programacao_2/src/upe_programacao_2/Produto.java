@@ -11,12 +11,12 @@ public class Produto {
 	private String sku;
 	private String nomeProduto;
 	private String descricao;
-	private float valor;
+	private double valor;
 	private int idCategoria;
 	private static HashMap<Integer, String> mapaCategorias;
 	private int qtdEstoque;
 	
-	public Produto(String sku, String nomeProduto, String descricao, float valor, int idCategoria, int qtdEstoque) {
+	public Produto(String sku, String nomeProduto, String descricao, double valor, int idCategoria, int qtdEstoque) {
 		idProduto = count.incrementAndGet();
 		this.sku = sku;
 		this.nomeProduto= nomeProduto;
@@ -40,14 +40,6 @@ public class Produto {
 	public String getNomeProduto() {
 		return nomeProduto;
 	}
-	public Produto getProdutoById(int idProduto) {
-		for (Produto produto : Produto.getListaProdutos()) {
-			if (produto.getIdProduto() == idProduto) {
-				return produto;
-			}
-		}
-		throw new IllegalArgumentException(String.format("ERRO! Não existem produtos de id '%d'", idProduto));
-	}
 	public void setNome(String nomeProduto) {
 		this.nomeProduto = nomeProduto;
 	}
@@ -57,10 +49,10 @@ public class Produto {
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-	public float getValor() {
+	public double getValor() {
 		return valor;
 	}
-	public void setValor(float valor) {
+	public void setValor(double valor) {
 		this.valor = valor;
 	}
 	public int getIdCategoria() {
@@ -76,13 +68,29 @@ public class Produto {
 		this.qtdEstoque = qtdEstoque;
 	}
 
-	// Usado por JsonReader
+	// listaProdutos
 	public static ArrayList<Produto> getListaProdutos() {
 		return listaProdutos;
 	}
 	public static void addToListaProdutos(Produto produto) {
 		listaProdutos.add(produto);
 		count = new AtomicInteger(listaProdutos.size());
+	}
+	public static Produto getProdutoById(int idProduto) {
+		for (Produto produto : Produto.getListaProdutos()) {
+			if (produto.getIdProduto() == idProduto) {
+				return produto;
+			}
+		}
+		throw new IllegalArgumentException(String.format("ERRO! Não existem produtos de id '%d'", idProduto));
+	}
+	public static Produto getProdutoByName(String nomeProduto) {
+		for (Produto produto : Produto.getListaProdutos()) {
+			if (produto.getNomeProduto() == nomeProduto) {
+				return produto;
+			}
+		}
+		throw new IllegalArgumentException(String.format("ERRO! Não existem produtos com o nome '%s'", nomeProduto));
 	}
 	
 	// CRUD para mapaCategorias
@@ -98,7 +106,7 @@ public class Produto {
 	}
 	public static String getCategoriaById(int idCategoria) {
 		if (mapaCategorias.containsKey(idCategoria)) {
-			return mapaCategorias.get(idCategoria);
+			return String.format("Id '%d', categoria '%s'", idCategoria, mapaCategorias.get(idCategoria));
 		} else {
 			throw new IllegalArgumentException(String.format("ERRO! Id '%d' não existe!", idCategoria));
 		}

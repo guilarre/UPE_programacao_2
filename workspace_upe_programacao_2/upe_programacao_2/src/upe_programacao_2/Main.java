@@ -121,10 +121,13 @@ public class Main {
 										case 1:
 											System.out.println("Digite o id do produto: ");
 											int idProduto = sc.nextInt();
-											Produto.getProdutoById(idProduto);
+											System.out.println(Produto.getProdutoById(idProduto));
 											break;
 										// Pesquisar pelo nome do produto
 										case 2:
+											System.out.println("Digite o nome do produto: ");
+											String nomeProduto = sc.nextLine();
+											System.out.println(Produto.getProdutoByName(nomeProduto));
 											break;
 										// Retornar ao menu anterior
 										case 0:
@@ -135,7 +138,7 @@ public class Main {
 							case 2:
 								System.out.println("Digite o id da categoria desejada: ");
 								int idCategoria = sc.nextInt();
-								System.out.println(String.format("Id '%d', categoria '%s'", idCategoria, Produto.getCategoriaById(idCategoria)));
+								System.out.println(Produto.getCategoriaById(idCategoria));
 								break;
 							// Exibir todo o estoque
 							case 3:
@@ -169,38 +172,121 @@ public class Main {
 											Produto produtoNovo = new Produto(sku, nomeProduto, descricao, valor, idCategoria, qtdEstoque);
 											System.out.println(String.format("O produto foi adicionado com sucesso!\n\n%s", produtoNovo.toString()));
 											break;
-										// Excluir produto do estoque
+											// Modificar produto no estoque
 										case 2:
-											break;
-										// Modificar produto no estoque
-										case 3:
 											loopModificarProduto: while (true) {
-												System.out.println(Menu.menuModificarProduto);
-												opcao = sc.nextInt();
-												switch (opcao) {
-													// SKU
-													case 1:
-														break;
-													// Nome do produto
-													case 2:
-														break;
-													// Descrição
-													case 3:
-														break;
-													// Valor
-													case 4:
-														break;
-													// Categoria
-													case 5:
-														break;
-													// Quantidade em estoque
-													case 6:
-														break;
-													// Retornar ao menu anterior
-													case 0:
-														break loopModificarProduto;
+												Produto produtoAModificar = null;
+												loopSelecionarProduto: while (true) {
+													System.out.println(Menu.menuSelecionarProduto);
+													opcao = sc.nextInt();
+													switch (opcao) {
+														case 1:
+															System.out.println("Digite o id do produto: ");
+															int idProduto = sc.nextInt();
+															produtoAModificar = Produto.getProdutoById(idProduto);
+															break;
+														case 2:
+															System.out.println("Digite o nome do produto: ");
+															nomeProduto = sc.nextLine();
+															produtoAModificar = Produto.getProdutoByName(nomeProduto);
+															break;
+														case 0:
+															break;
+													}
+													break loopSelecionarProduto;
+												}
+												if (produtoAModificar != null) {
+													System.out.println(Menu.menuModificarProduto);
+													opcao = sc.nextInt();
+													switch (opcao) {
+														// SKU
+														case 1:
+															String skuAtual = produtoAModificar.getSku();
+															System.out.println("Digite o SKU novo: ");
+															String skuNovo = sc.nextLine();
+															System.out.println(String.format("""
+Você tem certeza que deseja modificar o SKU?
+
+Produto:
+%s
+
+SKU atual: %s
+SKU novo: %s
+
+Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser revertida):""", produtoAModificar, skuAtual, skuNovo));
+															char confirmacao = sc.next().charAt(0);
+															if (Character.toLowerCase(confirmacao) == 's') {
+																produtoAModificar.setSku(skuNovo);
+																System.out.println(String.format("Produto foi modificado com sucesso!"));
+															} else {
+																break loopModificarProduto;
+															}
+															break;
+														// Nome do produto
+														case 2:
+															String nomeAtual = produtoAModificar.getNomeProduto();
+															System.out.println("Digite o nome novo: ");
+															String nomeNovo = sc.nextLine();
+															System.out.println(String.format("""
+Você tem certeza que deseja modificar o nome do produto?
+
+Produto:
+%s
+
+Nome atual: %s
+Nome novo: %s
+
+Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser revertida):""", produtoAModificar, nomeAtual, nomeNovo));
+															confirmacao = sc.next().charAt(0);
+															if (Character.toLowerCase(confirmacao) == 's') {
+																produtoAModificar.setNome(nomeNovo);
+																System.out.println(String.format("Produto foi modificado com sucesso!"));
+															} else {
+																break loopModificarProduto;
+															}
+															break;
+														// Descrição
+														case 3:
+															String descricaoAtual = produtoAModificar.getDescricao();
+															System.out.println("Digite a descrição nova: ");
+															String descricaoNova = sc.nextLine();
+															System.out.println(String.format("""
+Você tem certeza que deseja modificar a descrição do produto?
+
+Produto:
+%s
+
+Descrição atual: %s
+Descrição nova: %s
+
+Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser revertida):""", produtoAModificar, descricaoAtual, descricaoNova));
+															confirmacao = sc.next().charAt(0);
+															if (Character.toLowerCase(confirmacao) == 's') {
+																produtoAModificar.setDescricao(descricaoNova);
+																System.out.println(String.format("Produto foi modificado com sucesso!"));
+															} else {
+																break loopModificarProduto;
+															}
+															break;
+														// TODO: Valor
+														case 4:
+															break;
+														// Categoria
+														case 5:
+															break;
+														// Quantidade em estoque
+														case 6:
+															break;
+														// Retornar ao menu anterior
+														case 0:
+															break loopModificarProduto;
+													}
+												} else {
+													break loopModificarProduto;
 												}
 											}
+										// Excluir produto do estoque
+										case 3:
 											break;
 										// Retornar ao menu anterior
 										case 0:

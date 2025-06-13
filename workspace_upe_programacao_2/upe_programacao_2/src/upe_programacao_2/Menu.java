@@ -60,8 +60,19 @@ Selecione a opção desejada:
 	public static String menuGerenciarEstoque = """
 
 [1] = Adicionar produto novo ao estoque
-[2] = Excluir produto do estoque
-[3] = Modificar produto no estoque
+[2] = Modificar produto no estoque
+[3] = Excluir produto do estoque
+
+[0] = Retornar ao menu anterior
+
+""";
+	
+	public static String menuSelecionarProduto = """
+
+Qual produto deseja modificar?
+
+[1] = Procurar produto por seu id
+[2] = Procurar produto por seu nome
 
 [0] = Retornar ao menu anterior
 

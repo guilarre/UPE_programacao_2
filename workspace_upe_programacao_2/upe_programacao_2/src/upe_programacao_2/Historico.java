@@ -40,7 +40,7 @@ public class Historico {
 	}
 	
 	// Getter para compras de um cliente específico
-	// TO DO: quando tiver json dos clientes e funcionarios,
+	// TODO: quando tiver json dos clientes e funcionarios,
 	// extrair NOME do cliente/funcionário para mostrar no return em vez do idCliente???
 	public static String getHistoricoCliente(int idCliente) {
 		// Verificar primeiro se idCliente existe
@@ -69,7 +69,7 @@ Compras do cliente de id '%d':
 	}
 	
 	// Getter para vendas de um funcionário específico
-	// TO DO: Opção para mostrar apenas as do mês especificado
+	// TODO: Opção para mostrar apenas as do mês especificado
 	public static String getHistoricoFuncionario(int idFuncionario) {
 		// Verificar primeiro se idFuncionario existe
 		ArrayList<Integer> idsDisponiveis = new ArrayList<Integer>(); 
@@ -96,7 +96,7 @@ Vendas do funcionário de id '%d':
 """, idFuncionario, historicoFuncionario);
 	}
 	
-	// TO DO: testar esse setter!
+	// TODO: testar esse setter!
 	// Na main, seria criado um objeto Compra modificado (usando os setters de Compra),
 	// que depois seria passado para setCompraHistorico
 	// VERIFICAR: checar se somente pessoas adm poderão modificar/deletar (se sim,
