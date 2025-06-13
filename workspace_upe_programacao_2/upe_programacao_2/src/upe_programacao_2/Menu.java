@@ -1,7 +1,7 @@
 package upe_programacao_2;
 
 public class Menu {
-	// TO DO: colocar números em vez de letras nas opções
+	// TO DO: falta crud para clientes, funcionários, estoque, e falta opção para gerar relatório de vendas
 	public static String menuPrincipal = """
 ###### Sistema de gerenciamento LasCa ######
 
@@ -11,16 +11,18 @@ Selecione a opção desejada:
 [2] = Funcionários
 [3] = Estoque
 [4] = Vendas
-[5] = Sair
+
+[0] = Sair do sistema
 
 -> """;
 	
 	public static String menuClientes = """
 
-[1] = Exibir clientes
+[1] = Exibir todos os clientes
 [2] = Exibir histórico de compras de um cliente
 [3] = Registrar cliente
-[4] = Sair e retornar ao menu principal
+
+[0] = Retornar ao menu principal
 
 -> """;
 	
@@ -29,7 +31,8 @@ Selecione a opção desejada:
 [1] = Exibir funcionários
 [2] = Exibir histórico de vendas de um funcionário
 [3] = Registrar funcionário
-[4] = Sair e retornar ao menu principal
+
+[0] = Retornar ao menu principal
 
 -> """;
 	
@@ -38,8 +41,10 @@ Selecione a opção desejada:
 [1] = Pesquisar um produto em estoque
 [2] = Exibir uma categoria de produtos
 [3] = Exibir todo o estoque
-[4] = Gerenciar estoque
-[5] = Sair e retornar ao menu principal
+[4] = Exibir todas as categorias
+[5] = Gerenciar estoque
+
+[0] = Retornar ao menu principal
 
 -> """;
 	
@@ -48,13 +53,17 @@ Selecione a opção desejada:
 [1] = Pesquisar por id do produto
 [2] = Pesquisar pelo nome do produto
 
+[0] = Retornar ao menu anterior
+
 """;
 	
 	public static String menuGerenciarEstoque = """
 
-[1] = Adicionar produto ao estoque
+[1] = Adicionar produto novo ao estoque
 [2] = Excluir produto do estoque
 [3] = Modificar produto no estoque
+
+[0] = Retornar ao menu anterior
 
 """;
 	
@@ -68,6 +77,9 @@ O que deseja alterar?
 [4] = Valor
 [5] = Categoria
 [6] = Quantidade em estoque
+
+[0] = Retornar ao menu anterior
+
 
 """;
 	

@@ -11,9 +11,9 @@ public class Funcionario extends Pessoa {
 	private final int idFuncionario;
 	private static HashMap<Integer, String> mapaCargos = new HashMap<Integer, String>();
 	private int idCargo;
-	private float salario;
+	private double salario;
 	
-	public Funcionario(String nome, String cpf, String telefone, String email, String preferenciaComunicacao, String endereco, String aniversario, String genero, int idCargo, float salario) {
+	public Funcionario(String nome, String cpf, String telefone, String email, String preferenciaComunicacao, String endereco, String aniversario, String genero, int idCargo, double salario) {
 		super(nome, cpf, telefone, email, preferenciaComunicacao, endereco, aniversario, genero);
 		idFuncionario = count.incrementAndGet();
 		this.idCargo = idCargo;
@@ -31,10 +31,10 @@ public class Funcionario extends Pessoa {
 	public void setIdCargo(int idCargo) {
 		this.idCargo = idCargo;
 	}
-	public float getSalario() {
+	public double getSalario() {
 		return salario;
 	}
-	public void setSalario(float salario) {
+	public void setSalario(double salario) {
 		this.salario = salario;
 	}
 	public static String getFuncionarios() {
