@@ -5,8 +5,6 @@ import java.util.HashMap;
 import java.util.Scanner;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import upe_programacao_2.Compra.CompraProduto;
-
 public class Produto {
 	private static ArrayList<Produto> listaProdutos = new ArrayList<Produto>();
 	private static AtomicInteger count = new AtomicInteger(0);

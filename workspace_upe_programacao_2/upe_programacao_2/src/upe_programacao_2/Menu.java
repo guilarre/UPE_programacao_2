@@ -108,9 +108,9 @@ O que deseja alterar?
 	
 	public static String menuVendas = """
 
-[1] = 
-[2] = 
-[3] = 
+[1] = Realizar venda
+[2] = Modificar venda realizada
+[3] = Cancelar venda realizada
 
 [0] = Retornar ao menu principal
 

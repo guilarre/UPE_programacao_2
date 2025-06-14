@@ -403,7 +403,23 @@ Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser r
 					}
 				// TODO: Menu vendas
 				case 4:
-					
+					loopMenuVendas: while (true) {
+						System.out.println(Menu.menuVendas);
+						boolean vendaSucesso = false;
+						opcao = sc.nextInt();
+						switch (opcao) {
+							case 1:
+								vendaSucesso = Venda.realizarVenda();
+								if (vendaSucesso) {
+									System.out.println("Venda registrada com sucesso!");
+									break;
+								}
+								System.out.println("ERRO! A venda não foi registrada");
+								break;
+							case 2:
+								
+						}
+					}
 					break;
 				// TEST: Gerar relatório mensal
 				case 5:

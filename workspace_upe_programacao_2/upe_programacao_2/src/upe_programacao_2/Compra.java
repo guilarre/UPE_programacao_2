@@ -7,8 +7,6 @@ import java.util.HashMap;
 import java.util.Scanner;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import upe_programacao_2.Compra.CompraProduto;
-
 public class Compra {
 	// Contador para autoincrementar idCompra
 	private static AtomicInteger count = new AtomicInteger(0);
@@ -26,7 +24,7 @@ public class Compra {
 	private static HashMap<Integer, String> mapaStatus;
 	
 	// TODO: precisa passar listaProdutos(ArrayList de CompraProduto) ao criar Compra
-	public Compra(int idCliente, int idFuncionario, ArrayList<CompraProduto> listaProdutos, double subtotal, double desconto, int idPagamento, int idStatus) {
+	public Compra(int idCliente, int idFuncionario, ArrayList<CompraProduto> listaProdutos, double subtotal, double desconto, int idPagamento) {
 		idCompra = count.incrementAndGet();
 		this.idCliente = idCliente;
 		this.idFuncionario = idFuncionario;
@@ -35,12 +33,12 @@ public class Compra {
 		for (CompraProduto compraProduto : listaProdutos) {
 			this.subtotal += compraProduto.getTotal();			
 		}
-		if (desconto != 0) {			
-			this.desconto = Math.abs(desconto - 100)/100;
+		if (desconto != 0) {
+			// Math.abs para deixar positivo
+			this.desconto = Math.abs(desconto - 100) / 100;
 		}
 		this.total = subtotal * desconto;
 		this.idPagamento = idPagamento;
-		this.idStatus = idStatus;
 	}
 		
 	//getters and setters
@@ -133,7 +131,7 @@ Selecione o(s) produto(s):
 					produtoSelecionado = Produto.getProdutoById(idProduto);
 					System.out.println(String.format("Produto selecionado:\n\n%s", produtoSelecionado));
 					// Desconto
-					System.out.println("Digite o desconto em porcentagem, se aplicável (e.g. 12.5), se não houver desconto, digite 0: ");
+					System.out.println("Digite o desconto DO PRODUTO em porcentagem, se aplicável (e.g. 12.5).\nSe não houver desconto, digite 0: ");
 					desconto = sc.nextDouble();
 					// Qtd comprada
 					System.out.println("Digite a quantidade que será comprada: ");
@@ -148,7 +146,7 @@ Selecione o(s) produto(s):
 					produtoSelecionado = Produto.getProdutoByNome(nomeProduto);
 					System.out.println(String.format("Produto selecionado:\n\n%s", produtoSelecionado));
 					// Desconto
-					System.out.println("Digite o desconto em porcentagem, se aplicável (e.g. 12.5), se não houver desconto, digite 0: ");
+					System.out.println("Digite o desconto DO PRODUTO em porcentagem, se aplicável (e.g. 12.5).\nSe não houver desconto, digite 0: ");
 					desconto = sc.nextDouble();
 					// Qtd comprada
 					System.out.println("Digite a quantidade que será comprada: ");
@@ -167,8 +165,25 @@ Selecione o(s) produto(s):
 		sc.close();
 		return null; // TODO: em getObjetoCompra, reconhece se é null e cancela operação
 	}
-	public static Compra getObjetoCompra() {
-		
+	public static Compra getObjetoCompra(Cliente cliente, Funcionario funcionario) {
+		// Setup
+		ArrayList<CompraProduto> listaProdutos = Compra.getObjetoCompraProduto();
+		double subtotal = 0;
+		//Subtotal
+		for (CompraProduto compraProduto : listaProdutos) {
+			subtotal += compraProduto.getTotal();
+		}
+		Scanner sc = new Scanner(System.in);
+		// Desconto
+		System.out.println("Digite o desconto DA COMPRA em porcentagem, se aplicável (e.g. 12.5).\nSe não houver desconto, digite 0: ");
+		double desconto = sc.nextDouble();
+		// idPagamento (forma de pagamento)
+		System.out.println("Digite o id da forma de pagamento: ");
+		int idPagamento = sc.nextInt();
+		sc.close();
+		// Retornar objeto compra
+		Compra compra = new Compra(cliente.getIdCliente(), funcionario.getIdFuncionario(), listaProdutos, subtotal, desconto, idPagamento);
+		return compra;
 	}
 	
 	// CRUD para mapaPagamentos, mapaStatus e listaProdutos
@@ -264,8 +279,8 @@ Data e hora da compra: '%s'
 Subtotal: '%d'
 Desconto: '%d'
 Total: R$ %.2f
-Id do Pagamento: '%d'
-Id do Status: '%d'
+Forma de pagamento: '%s'
+Status: '%s'
 
 """, this.getIdCliente(), this.getIdFuncionario(), this.getDataHora(), this.getSubtotal(), this.getDesconto(), this.getTotal(), Compra.getPagamentoById(this.getIdPagamento()), Compra.getStatusById(this.getIdStatus()));
 	}
@@ -279,8 +294,9 @@ Id do Status: '%d'
 		public CompraProduto(Produto produto, int qtdComprada, double desconto) {
 			this.produto = produto;
 			this.qtdComprada = qtdComprada;
-			if (desconto != 0) {			
-				this.desconto = Math.abs(desconto - 100)/100;
+			if (desconto != 0) {
+				// Math.abs para deixar positivo
+				this.desconto = Math.abs(desconto - 100) / 100;
 			}
 			this.total = (produto.getValor() * qtdComprada) * desconto;
 		}
