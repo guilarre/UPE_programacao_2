@@ -39,26 +39,8 @@ public class Main {
 							System.out.println(Historico.getHistoricoCliente(idCliente));
 							break;
 						// Registrar cliente
-						// TODO: ajeitar pra usar enum
 						case 3:
-							System.out.println("Digite o nome do cliente: ");
-							String nome = sc.nextLine();
-							System.out.println("Digite o cpf do cliente: ");
-							String cpf = sc.nextLine();
-							System.out.println("Digite o telefone do cliente: ");
-							String telefone = sc.nextLine();
-							System.out.println("Digite o email do cliente: ");
-							String email = sc.nextLine();
-							System.out.println("Digite a preferência de comunicação do cliente: ");
-							String preferenciaComunicacao = sc.nextLine();
-							System.out.println("Digite o endereco residencial do cliente: ");
-							String endereco = sc.nextLine();
-							System.out.println("Digite o aniversário do cliente (e.g. 12/12/2012): ");
-							String aniversario = sc.nextLine();
-							System.out.println("Digite o gênero do cliente: ");
-							String genero = sc.nextLine();
-							new Cliente(nome, cpf, telefone, email, preferenciaComunicacao, endereco, aniversario, genero);
-							System.out.println("Cliente registrado com sucesso!");
+							Cliente.getClienteNovo();
 							break;
 						// Retornar ao menu principal
 						case 0:
@@ -82,35 +64,14 @@ public class Main {
 							System.out.println(Historico.getHistoricoFuncionario(idFuncionario));
 							break;
 						// Registrar funcionário
-						// TODO: ajeitar pra usar enum
 						case 3:
-							System.out.println("Digite o nome do funcionário: ");
-							String nome = sc.nextLine();
-							System.out.println("Digite o cpf do funcionário: ");
-							String cpf = sc.nextLine();
-							System.out.println("Digite o telefone do funcionário: ");
-							String telefone = sc.nextLine();
-							System.out.println("Digite o email do funcionário: ");
-							String email = sc.nextLine();
-							System.out.println("Digite a preferência de comunicação do funcionário: ");
-							String preferenciaComunicacao = sc.nextLine();
-							System.out.println("Digite o endereco residencial do funcionário: ");
-							String endereco = sc.nextLine();
-							System.out.println("Digite o aniversário do funcionário (e.g. 12/12/2012): ");
-							String aniversario = sc.nextLine();
-							System.out.println("Digite o gênero do funcionário: ");
-							String genero = sc.nextLine();
-							int idCargo = sc.nextInt();
-							double salario = sc.nextDouble();
-							new Funcionario(nome, cpf, telefone, email, preferenciaComunicacao, endereco, aniversario, genero, idCargo, salario);
-							System.out.println("Funcionário registrado com sucesso!");
+							Funcionario.getFuncionarioNovo();
 							break;
 						// Retornar ao menu principal
 						case 0:
 							break loopFuncionario;
 						}
 					}
-				// TO DO: resolver parte de estoque
 				// Menu estoque
 				case 3:
 					loopEstoque: while (true) {
@@ -118,6 +79,7 @@ public class Main {
 						opcao = sc.nextInt();
 						switch (opcao) {
 							// Pesquisar um produto em estoque
+							// TODO: dá pra enxugar
 							case 1:
 								loopPesquisarEstoque: while (true) {
 									System.out.println(Menu.menuPesquisarEstoque);
@@ -140,11 +102,16 @@ public class Main {
 											break loopPesquisarEstoque;
 									}
 								}
-							// Exibir uma categoria de produtos
+							// Exibir todas as categorias
+							// TODO: ajeitar pra usar enum
 							case 2:
-								System.out.println("Digite o id da categoria desejada: ");
-								int idCategoria = sc.nextInt();
-								System.out.println(Produto.getCategoriaById(idCategoria));
+								System.out.println(String.format("""
+
+Categorias disponíveis:
+
+%s
+
+""", Produto.getTodasCategorias()));
 								break;
 							// Exibir todo o estoque
 							case 3:
@@ -152,17 +119,8 @@ public class Main {
 									System.out.println(produto);
 								}
 								break;
-							// Exibir todas as categorias
-							case 4:
-								System.out.println(String.format("""
-
-Categorias disponíveis:
-
-%s
-
-""", Produto.getMapaCategorias()));
 							// Gerenciar estoque
-							case 5:
+							case 4:
 								loopGerenciarEstoque: while (true) {
 									System.out.println(Menu.menuGerenciarEstoque);
 									opcao = sc.nextInt();
@@ -414,7 +372,6 @@ Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser r
 						opcao = sc.nextInt();
 						switch (opcao) {
 							// Realizar venda
-							// TODO: alterar status para realizada, algo assim.
 							case 1:
 								vendaSucesso = Venda.realizarVenda();
 								if (vendaSucesso) {
@@ -425,74 +382,10 @@ Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser r
 								break;
 							// Pesquisar vendas
 							case 2:
-								loopPesquisarVendas: while (true) {
-									System.out.println(Menu.menuPesquisarVendas);
-									opcao = sc.nextInt();
-									switch (opcao) {
-										// Pesquisar por cliente
-										case 1:
-											Cliente cliente = null;
-											loopSelecionarCliente: while (true) {
-												System.out.println(Menu.menuSelecionarCliente);
-												opcao = sc.nextInt();
-												switch (opcao) {
-													case 1:
-														System.out.println("Digite o id do cliente: ");
-														int idCliente = sc.nextInt();
-														cliente = Cliente.getClienteById(idCliente);
-														break;
-													case 2:
-														System.out.println("Digite o nome do cliente: ");
-														String nomeCliente = sc.nextLine();
-														cliente = Cliente.getClienteByNome(nomeCliente);
-														break;
-													case 0:
-														break loopSelecionarCliente;
-												}
-												break loopSelecionarCliente;
-											}
-											if (cliente != null) {
-												Historico.getHistoricoCliente(cliente.getIdCliente());
-											}
-											break loopPesquisarVendas;
-										// Pesquisar por funcionário
-										case 2:
-											Funcionario funcionario = null;
-											loopSelecionarFuncionario: while (true) {
-												System.out.println(Menu.menuSelecionarFuncionario);
-												opcao = sc.nextInt();
-												switch (opcao) {
-													case 1:
-														System.out.println("Digite o id do funcionário: ");
-														int idFuncionario = sc.nextInt();
-														funcionario = Funcionario.getFuncionarioById(idFuncionario);
-														break;
-													case 2:
-														System.out.println("Digite o nome do funcionário: ");
-														String nomeFuncionario = sc.nextLine();
-														funcionario = Funcionario.getFuncionarioByNome(nomeFuncionario);
-														break;
-													case 0:
-														break loopSelecionarFuncionario;
-												}
-												break loopSelecionarFuncionario;
-											}
-											if (funcionario != null) {
-												Historico.getHistoricoFuncionario(funcionario.getIdFuncionario());
-											}
-											break loopPesquisarVendas;
-										// Exibir todas as vendas
-										case 3:
-											Historico.exibirHistoricoCompleto();
-											break loopPesquisarVendas;
-										// Retornar ao menu anterior
-										case 0:
-											break loopPesquisarVendas;
-									}
-								}
+								break;
 							// Cancelar venda realizada
 							case 3:
-								// TODO
+								
 								break;
 							case 0:
 								break loopMenuVendas;

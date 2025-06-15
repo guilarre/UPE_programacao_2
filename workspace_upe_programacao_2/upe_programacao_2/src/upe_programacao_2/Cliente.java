@@ -86,6 +86,33 @@ public class Cliente extends Pessoa {
 		return null; // TODO: na Main, reconhece se é null e cancela operação
 	}
 	
+	// Getter para CRIAR e retornar objeto Cliente novo
+	public static Cliente getClienteNovo() {
+		// Setup
+		Scanner sc = new Scanner(System.in);
+		// Prompts
+		System.out.println("Digite o nome do cliente: ");
+		String nome = sc.nextLine();
+		System.out.println("Digite o cpf do cliente: ");
+		String cpf = sc.nextLine();
+		System.out.println("Digite o telefone do cliente: ");
+		String telefone = sc.nextLine();
+		System.out.println("Digite o email do cliente: ");
+		String email = sc.nextLine();
+		System.out.println("Digite a preferência de comunicação do cliente: ");
+		String preferenciaComunicacao = sc.nextLine();
+		System.out.println("Digite o endereco residencial do cliente: ");
+		String endereco = sc.nextLine();
+		System.out.println("Digite o aniversário do cliente (e.g. 12/12/2012): ");
+		String aniversario = sc.nextLine();
+		System.out.println("Digite o gênero do cliente: ");
+		String genero = sc.nextLine();
+		Cliente cliente = new Cliente(nome, cpf, telefone, email, preferenciaComunicacao, endereco, aniversario, genero);
+		System.out.println("Cliente registrado com sucesso!");
+		sc.close();
+		return cliente;
+	}
+	
 	// Usado por JsonReader
 	public static ArrayList<Cliente> getListaClientes() {
 		return listaClientes;

@@ -28,6 +28,7 @@ Selecione a opção desejada:
 
 -> """;
 	
+	// TODO: exibir todos os cargos
 	public static String menuFuncionarios = """
 
 [1] = Exibir funcionários
@@ -41,10 +42,9 @@ Selecione a opção desejada:
 	public static String menuEstoque = """
 
 [1] = Pesquisar um produto em estoque
-[2] = Exibir uma categoria de produtos
+[2] = Exibir todas as categorias
 [3] = Exibir todo o estoque
-[4] = Exibir todas as categorias
-[5] = Gerenciar estoque
+[4] = Gerenciar estoque
 
 [0] = Retornar ao menu principal
 
@@ -63,7 +63,7 @@ Selecione a opção desejada:
 
 [1] = Adicionar produto novo ao estoque
 [2] = Modificar produto no estoque
-[3] = Excluir produto do estoque
+[3] = Remover produto do estoque
 
 [0] = Retornar ao menu anterior
 
@@ -104,9 +104,10 @@ O que deseja alterar?
 
 [0] = Retornar ao menu anterior
 
-
 """;
 	
+	// TODO: falta ajeitar historico pra mostrar apenas vendas com sucesso.
+	// TODO: opção pra mostrar vendas canceladas
 	public static String menuVendas = """
 
 [1] = Realizar venda

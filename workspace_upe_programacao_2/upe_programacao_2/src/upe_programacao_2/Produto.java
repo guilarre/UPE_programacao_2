@@ -78,6 +78,14 @@ public class Produto {
 				return "ERRO! Categoria ainda não registrada";
 		}
 	}
+	// TODO: Checar se precisa mesmo disso
+	public static String getTodasCategorias() {
+		StringBuilder stringBuilder = new StringBuilder();
+		for (Categoria categoria : Categoria.values()) {
+			stringBuilder.append(Produto.getCategoriaValue(categoria));
+		}
+		return String.valueOf(stringBuilder);
+	}
 	public int getQtdEstoque() {
 		return qtdEstoque;
 	}

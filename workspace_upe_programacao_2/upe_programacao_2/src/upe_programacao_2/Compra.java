@@ -90,6 +90,14 @@ public class Compra {
 				return "ERRO! Forma de pagamento ainda não registrada";
 		}
 	}
+	// TODO: Checar se precisa mesmo disso
+	public static String getTodosPagamentos() {
+		StringBuilder stringBuilder = new StringBuilder();
+		for (Pagamento pagamento : Pagamento.values()) {
+			stringBuilder.append(Compra.getPagamentoValue(pagamento));
+		}
+		return String.valueOf(stringBuilder);
+	}
 	public Status getStatus() {
 		return status;
 	}
@@ -107,6 +115,14 @@ public class Compra {
 			default:
 				return "ERRO! Status ainda não registrado";
 		}
+	}
+	// TODO: Checar se precisa mesmo disso
+	public static String getTodosStatus() {
+		StringBuilder stringBuilder = new StringBuilder();
+		for (Status status : Status.values()) {
+			stringBuilder.append(Compra.getStatusValue(status));
+		}
+		return String.valueOf(stringBuilder);
 	}
 	public double getSubtotal() {
 		return subtotal;
@@ -127,8 +143,8 @@ public class Compra {
 		this.total = total;
 	}
 	
-	// Getter para objeto Compra
-	public static ArrayList<CompraProduto> getObjetoCompraProduto() {
+	// Getter para CRIAR e retornar objeto Compra novo (usado pela Main)
+	public static ArrayList<CompraProduto> getCompraProdutoNovo() {
 		// TODO: case default???
 		// Menu para selecionar modo de busca
 		// TEST: espaçamento correto na UI
@@ -196,20 +212,20 @@ Selecione o(s) produto(s):
 		sc.close();
 		return null; // TODO: em getObjetoCompra, reconhece se é null e cancela operação
 	}
-	public static Compra getObjetoCompra(Cliente cliente, Funcionario funcionario) {
+	public static Compra getCompraNova(Cliente cliente, Funcionario funcionario) {
 		// Setup
-		ArrayList<CompraProduto> listaProdutos = Compra.getObjetoCompraProduto();
+		ArrayList<CompraProduto> listaProdutos = Compra.getCompraProdutoNovo();
 		double subtotal = 0;
 		Pagamento pagamento = null;
-		//Subtotal
+		Scanner sc = new Scanner(System.in);
+		// Subtotal
 		for (CompraProduto compraProduto : listaProdutos) {
 			subtotal += compraProduto.getTotal();
 		}
 		// Desconto
-		Scanner sc = new Scanner(System.in);
 		System.out.println("Digite o desconto DA COMPRA em porcentagem, se aplicável (e.g. 12.5).\nSe não houver desconto, digite 0: ");
 		double desconto = sc.nextDouble();
-		// pagemento (forma de pagamento)
+		// Pagamento (forma de pagamento)
 		System.out.println("""
 
 Escolha a forma de pagamento:

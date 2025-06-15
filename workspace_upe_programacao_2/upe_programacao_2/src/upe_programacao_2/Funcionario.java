@@ -3,6 +3,7 @@ package upe_programacao_2;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import enums.Cargo;
+import enums.Pagamento;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -47,6 +48,14 @@ public class Funcionario extends Pessoa {
 				return "ERRO! Cargo ainda não registrado";
 		}
 	}
+	// TODO: Checar se precisa mesmo disso
+	public static String getTodosCargos() {
+		StringBuilder stringBuilder = new StringBuilder();
+		for (Cargo cargo : Cargo.values()) {
+			stringBuilder.append(Funcionario.getCargoValue(cargo));
+		}
+		return String.valueOf(stringBuilder);
+	}
 	public double getSalario() {
 		return salario;
 	}
@@ -64,7 +73,7 @@ public class Funcionario extends Pessoa {
 		return String.valueOf(funcionarios);
 	}
 	
-	// Getter para selecionar objeto funcionário
+	// Getter para selecionar objeto Funcionario
 	public static Funcionario getFuncionarioById(int idFuncionario) {
 		for (Funcionario funcionario : Funcionario.getListaFuncionarios()) {
 			if (funcionario.getIdFuncionario() == idFuncionario) {
@@ -114,9 +123,67 @@ public class Funcionario extends Pessoa {
 			case 0:
 				System.out.println("Operação cancelada!");
 				break;
+			default:
+				System.out.println("ERRO! Opção inválida");
+				break;
 		}
 		sc.close();
 		return null; // TODO: na Main, reconhece se é null e cancela operação
+	}
+	
+	// Getter para CRIAR e retornar objeto Funcionario novo
+	public static Funcionario getFuncionarioNovo() {
+		// Setup
+		Scanner sc = new Scanner(System.in);
+		Cargo cargo = null;
+		// Prompts
+		System.out.println("Digite o nome do funcionário: ");
+		String nome = sc.nextLine();
+		System.out.println("Digite o cpf do funcionário: ");
+		String cpf = sc.nextLine();
+		System.out.println("Digite o telefone do funcionário: ");
+		String telefone = sc.nextLine();
+		System.out.println("Digite o email do funcionário: ");
+		String email = sc.nextLine();
+		System.out.println("Digite a preferência de comunicação do funcionário: ");
+		String preferenciaComunicacao = sc.nextLine();
+		System.out.println("Digite o endereco residencial do funcionário: ");
+		String endereco = sc.nextLine();
+		System.out.println("Digite o aniversário do funcionário (e.g. 12/12/2012): ");
+		String aniversario = sc.nextLine();
+		System.out.println("Digite o gênero do funcionário: ");
+		String genero = sc.nextLine();
+		System.out.println("""
+
+Escolha o cargo do funcionário:
+
+[1] = Vendedor
+[2] = Caixa
+[3] = Estoquista
+[4] = Sócio
+
+""");
+		int opcaoCargo = sc.nextInt();
+		switch (opcaoCargo) {
+			case 1:
+				cargo = Cargo.VENDEDOR;
+				break;
+			case 2:
+				cargo = Cargo.CAIXA;
+				break;
+			case 3:
+				cargo = Cargo.ESTOQUISTA;
+				break;
+			case 4:
+				cargo = Cargo.SOCIO;
+				break;
+		}
+		System.out.println("Digite o salário do funcionário (e.g. 1459.90: ");
+		double salario = sc.nextDouble();
+		sc.close();
+		Funcionario funcionario = new Funcionario(nome, cpf, telefone, email, preferenciaComunicacao, endereco, aniversario, genero, cargo, salario);
+		System.out.println("Funcionário registrado com sucesso!");
+		return funcionario;
 	}
 	
 	// Usado por JsonReader

@@ -53,9 +53,10 @@ public class Historico {
 		}
 		// Pegar histórico do cliente
 		StringBuilder historicoCliente = new StringBuilder();
-		for (Compra compra : historico) {
+		for (int i = 0; i < historico.size(); i++) {
+			Compra compra = historico.get(i);
 			if (compra.getIdCliente() == idCliente) {
-				historicoCliente.append(compra.toString() + "\n\n");
+				historicoCliente.append(String.format("Índice: %d\nCompra:\n%s\n\n", i, compra.toString()));
 			}
 		}
 		if (historicoCliente.isEmpty()) {
@@ -81,9 +82,10 @@ Compras do cliente de id '%d':
 		}
 		// Pegar histórico do funcionário
 		StringBuilder historicoFuncionario = new StringBuilder();
-		for (Compra compra : historico) {
+		for (int i = 0; i < historico.size(); i++) {
+			Compra compra = historico.get(i);
 			if (compra.getIdFuncionario() == idFuncionario) {
-				historicoFuncionario.append(compra.toString() + "\n\n");
+				historicoFuncionario.append(String.format("Índice: %d\nCompra:\n%s\n\n", i, compra.toString()));
 			}
 			if (historicoFuncionario.isEmpty()) {
 				return String.format("ERRO! O funcionário de id '%d' ainda não possui vendas registradas", idFuncionario);
