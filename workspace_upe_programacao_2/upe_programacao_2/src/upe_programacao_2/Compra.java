@@ -3,9 +3,11 @@ package upe_programacao_2;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Scanner;
 import java.util.concurrent.atomic.AtomicInteger;
+
+import enums.Pagamento;
+import enums.Status;
 
 public class Compra {
 	// Contador para autoincrementar idCompra
@@ -18,13 +20,11 @@ public class Compra {
 	private double subtotal = 0;
 	private double desconto = 1;
 	private double total = 0;
-	private int idPagamento;
-	private static HashMap<Integer, String> mapaPagamentos;
-	private int idStatus;
-	private static HashMap<Integer, String> mapaStatus;
+	private Pagamento pagamento = null;
+	private Status status = Status.EM_PROCESSAMENTO;
 	
 	// TODO: precisa passar listaProdutos(ArrayList de CompraProduto) ao criar Compra
-	public Compra(int idCliente, int idFuncionario, ArrayList<CompraProduto> listaProdutos, double subtotal, double desconto, int idPagamento) {
+	public Compra(int idCliente, int idFuncionario, ArrayList<CompraProduto> listaProdutos, double subtotal, double desconto, Pagamento pagamento) {
 		idCompra = count.incrementAndGet();
 		this.idCliente = idCliente;
 		this.idFuncionario = idFuncionario;
@@ -38,9 +38,12 @@ public class Compra {
 			this.desconto = Math.abs(desconto - 100) / 100;
 		}
 		this.total = subtotal * desconto;
-		this.idPagamento = idPagamento;
+		this.pagamento = pagamento;
+		status = Status.SUCESSO;
+		// Salvar compra no histórico
+		Historico.addToHistorico(this);
 	}
-		
+	
 	//getters and setters
 	public int getIdCliente() {
 		return idCliente;
@@ -65,17 +68,45 @@ public class Compra {
 	public void setDataHora(LocalDateTime dataHora) {
 		this.dataHora = dataHora;
 	}
-	public int getIdPagamento() {
-		return idPagamento;
+	public Pagamento getPagamento() {
+		return pagamento;
 	}
-	public void setIdPagamento(int idPagamento) {
-		this.idPagamento = idPagamento;
+	public void setPagamento(Pagamento pagamento) {
+		this.pagamento = pagamento;
 	}
-	public int getIdStatus() {
-		return idStatus;
+	public static String getPagamentoValue(Pagamento pagamento) {
+		switch (pagamento) {
+			case A_VISTA:
+				return "À vista";
+			case PIX:
+				return "Pix";
+			case DEBITO:
+				return "Débito";
+			case CREDITO:
+				return "Crédito";
+			case CHEQUE:
+				return "Cheque";
+			default:
+				return "ERRO! Forma de pagamento ainda não registrada";
+		}
 	}
-	public void setIdStatus(int idStatus) {
-		this.idStatus = idStatus;
+	public Status getStatus() {
+		return status;
+	}
+	public void setStatus(Status status) {
+		this.status = status;
+	}
+	public static String getStatusValue(Status status) {
+		switch (status) {
+			case CANCELADA:
+				return "Cancelada";
+			case EM_PROCESSAMENTO:
+				return "Em processamento";
+			case SUCESSO:
+				return "Sucesso";
+			default:
+				return "ERRO! Status ainda não registrado";
+		}
 	}
 	public double getSubtotal() {
 		return subtotal;
@@ -169,91 +200,52 @@ Selecione o(s) produto(s):
 		// Setup
 		ArrayList<CompraProduto> listaProdutos = Compra.getObjetoCompraProduto();
 		double subtotal = 0;
+		Pagamento pagamento = null;
 		//Subtotal
 		for (CompraProduto compraProduto : listaProdutos) {
 			subtotal += compraProduto.getTotal();
 		}
-		Scanner sc = new Scanner(System.in);
 		// Desconto
+		Scanner sc = new Scanner(System.in);
 		System.out.println("Digite o desconto DA COMPRA em porcentagem, se aplicável (e.g. 12.5).\nSe não houver desconto, digite 0: ");
 		double desconto = sc.nextDouble();
-		// idPagamento (forma de pagamento)
-		System.out.println("Digite o id da forma de pagamento: ");
-		int idPagamento = sc.nextInt();
+		// pagemento (forma de pagamento)
+		System.out.println("""
+
+Escolha a forma de pagamento:
+
+[1] = À vista
+[2] = Pix
+[3] = Débito
+[4] = Crédito
+[5] = Cheque
+
+""");
+		int opcaoPagamento = sc.nextInt();
+		switch (opcaoPagamento) {
+			case 1:
+				pagamento = Pagamento.A_VISTA;
+				break;
+			case 2:
+				pagamento = Pagamento.PIX;
+				break;
+			case 3:
+				pagamento = Pagamento.DEBITO;
+				break;
+			case 4:
+				pagamento = Pagamento.CREDITO;
+				break;
+			case 5:
+				pagamento = Pagamento.CHEQUE;
+				break;
+		}
 		sc.close();
 		// Retornar objeto compra
-		Compra compra = new Compra(cliente.getIdCliente(), funcionario.getIdFuncionario(), listaProdutos, subtotal, desconto, idPagamento);
+		Compra compra = new Compra(cliente.getIdCliente(), funcionario.getIdFuncionario(), listaProdutos, subtotal, desconto, pagamento);
 		return compra;
 	}
 	
-	// CRUD para mapaPagamentos, mapaStatus e listaProdutos
-	public static void putPagamentos(int idPagamento, String pagamento) {
-		mapaPagamentos.put(idPagamento, pagamento);
-		System.out.println(String.format("Id '%d', Pagamento '%s' adicionado com sucesso!", idPagamento, mapaPagamentos.get(idPagamento)));
-	}
-	public static String getMapaPagamentos() {
-		for (int i : mapaPagamentos.keySet()) {
-			return String.format("Id '%d', Forma de pagamento '%s'", i, mapaPagamentos.get(i)); 
-		}
-		return "ERRO! Ainda não existem formas de pagamento registradas.";
-	}
-	public static String getPagamentoById(int idPagamento) {
-		if (mapaPagamentos.containsKey(idPagamento)){
-			return mapaPagamentos.get(idPagamento);
-		} else { 
-			throw new IllegalArgumentException(String.format("ERRO! Id '%d' não existe!", idPagamento));
-		}
-	}
-	public static void modifyPagamentos(int idPagamento, String pagamento) {
-		if (mapaPagamentos.containsKey(idPagamento)){
-			mapaPagamentos.put(idPagamento, pagamento);
-			System.out.println(String.format("Id '%d' modificado para forma de pagamento: '%s' com sucesso!", idPagamento, pagamento));
-		} else { 
-			System.out.println("ERRO! Id '%d' não existe!");
-		}
-	}
-	public static void removePagamentos(int idPagamento) {
-		if (mapaPagamentos.containsKey(idPagamento)){
-			mapaPagamentos.remove(idPagamento);
-			System.out.println(String.format("Id '%d', Pagamento '%s' removido com sucesso!", idPagamento, mapaPagamentos.get(idPagamento)));
-		} else { 
-			System.out.println("ERRO! Id '%d' não existe!");
-		}
-	}
-	public static void putStatus(int idStatus, String status) {
-		mapaStatus.put(idStatus, status);
-		System.out.println(String.format("Id '%d', Status '%s' adicionado com sucesso!", idStatus, mapaStatus.get(idStatus)));
-	}
-	public static String getMapaStatus() {
-		for (int i : mapaStatus.keySet()) {
-			return String.format("Id '%d', Status de compra '%s'", i, mapaStatus.get(i)); 
-		}
-		return "ERRO! Ainda não existem status de compra registrados.";
-	}
-	public static String getStatusById(int idStatus) {
-		if (mapaStatus.containsKey(idStatus)){
-			return mapaStatus.get(idStatus);
-		} else { 
-			throw new IllegalArgumentException(String.format("ERRO! Id '%d' não existe!", idStatus));
-		}
-	}
-	public static void modifyStatus(int idStatus, String status) {
-		if (mapaStatus.containsKey(idStatus)){
-			mapaStatus.put(idStatus, status);
-			System.out.println(String.format("Id '%d' modificado para status de compra: '%s' com sucesso!", idStatus, status));
-		} else { 
-			System.out.println("ERRO! Id '%d' não existe!");
-		}
-	}
-	public static void removeStatus(int idStatus) {
-		if (mapaStatus.containsKey(idStatus)){
-			mapaStatus.remove(idStatus);
-			System.out.println(String.format("Id '%d', Status '%s' removido com sucesso!", idStatus, mapaStatus.get(idStatus)));
-		} else { 
-			System.out.println(String.format("ERRO! Id '%d' não existe!", idStatus));
-		}
-	}
-	
+	// TODO: resto dos CRUD de listaProdutos
 	public ArrayList<CompraProduto> getListaProdutos() {
 		return listaProdutos;
 	}
@@ -264,8 +256,6 @@ Selecione o(s) produto(s):
 		}
 		return total;
 	}
-	
-	// TODO: resto do crud de listaProdutos
 	
 	@Override 
 	public String toString() {
@@ -282,7 +272,7 @@ Total: R$ %.2f
 Forma de pagamento: '%s'
 Status: '%s'
 
-""", this.getIdCliente(), this.getIdFuncionario(), this.getDataHora(), this.getSubtotal(), this.getDesconto(), this.getTotal(), Compra.getPagamentoById(this.getIdPagamento()), Compra.getStatusById(this.getIdStatus()));
+""", this.getIdCliente(), this.getIdFuncionario(), this.getDataHora(), this.getSubtotal(), this.getDesconto(), this.getTotal(), Compra.getPagamentoValue(pagamento), Compra.getStatusValue(status));
 	}
 	
 	public static class CompraProduto {

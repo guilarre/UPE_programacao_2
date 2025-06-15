@@ -39,6 +39,7 @@ public class Main {
 							System.out.println(Historico.getHistoricoCliente(idCliente));
 							break;
 						// Registrar cliente
+						// TODO: ajeitar pra usar enum
 						case 3:
 							System.out.println("Digite o nome do cliente: ");
 							String nome = sc.nextLine();
@@ -81,6 +82,7 @@ public class Main {
 							System.out.println(Historico.getHistoricoFuncionario(idFuncionario));
 							break;
 						// Registrar funcionário
+						// TODO: ajeitar pra usar enum
 						case 3:
 							System.out.println("Digite o nome do funcionário: ");
 							String nome = sc.nextLine();
@@ -166,6 +168,7 @@ Categorias disponíveis:
 									opcao = sc.nextInt();
 									switch (opcao) {
 										// Adicionar produto novo ao estoque
+										// TODO: ajeitar pra usar enum
 										case 1:
 											System.out.println("Digite o código de estoque (SKU): ");
 											String sku = sc.nextLine();
@@ -307,6 +310,7 @@ Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser r
 															}
 															break loopModificarProduto;
 														// Categoria
+														// TODO: ajeitar pra usar enum
 														case 5:
 															int categoriaAtual = produtoAModificar.getIdCategoria();
 															System.out.println("Digite o id da categoria nova: ");

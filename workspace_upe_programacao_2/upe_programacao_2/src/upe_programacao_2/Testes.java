@@ -1,10 +1,13 @@
 package upe_programacao_2;
 
+import java.io.FileWriter;
+import java.io.IOException;
+
 //import java.io.FileReader;
 //import java.io.IOException;
 //import java.time.LocalDate;
 //
-//import com.google.gson.Gson;
+import com.google.gson.Gson;
 //import com.google.gson.GsonBuilder;
 
 public class Testes {
@@ -31,11 +34,18 @@ public class Testes {
 //			e.printStackTrace();
 //		}
 		
-		JsonReader.carregarClientes();
-		for (Cliente cliente : Cliente.getListaClientes()) {
-			System.out.println(cliente);
-		}
+//		JsonReader.carregarClientes();
+//		for (Cliente cliente : Cliente.getListaClientes()) {
+//			System.out.println(cliente);
+//		}
 		Cliente cliente6 = new Cliente("asdasdsada", "12332112311", "81996212351", "guilhermelarre@gmail.com", "email", "R. Pereira Simões", "20/07/1996", "masculino");
-		JsonWriter.salvarClientes(Cliente.getListaClientes());
+//		JsonWriter.salvarClientes(Cliente.getListaClientes());
+		
+		Gson gson = new Gson();
+		try (FileWriter fw = new FileWriter("teste.json")) {
+			gson.toJson(cliente6, fw);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }

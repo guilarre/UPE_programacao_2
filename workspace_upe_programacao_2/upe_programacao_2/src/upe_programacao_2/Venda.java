@@ -8,7 +8,7 @@ public class Venda {
 		Funcionario funcionario = Funcionario.getObjetoFuncionario();
 		Compra compra = Compra.getObjetoCompra(cliente, funcionario);
 		if (compra != null) {
-			return true;			
+			return true;
 		}
 		return false;
 	}

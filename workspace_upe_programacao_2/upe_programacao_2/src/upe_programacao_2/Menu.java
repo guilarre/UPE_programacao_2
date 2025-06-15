@@ -4,7 +4,7 @@ public class Menu {
 	// TODO: falta crud para clientes, funcionários, estoque, e falta opção para gerar relatório de vendas
 	// TODO: falta pergunta em alguns dos menus
 	public static String menuPrincipal = """
-###### Sistema de gerenciamento LasCa ######
+###### Sistema de gerenciamento LaSca ######
 
 Selecione a opção desejada:
 

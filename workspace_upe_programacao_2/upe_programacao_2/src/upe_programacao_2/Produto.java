@@ -1,9 +1,10 @@
 package upe_programacao_2;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Scanner;
 import java.util.concurrent.atomic.AtomicInteger;
+
+import enums.Categoria;
 
 public class Produto {
 	private static ArrayList<Produto> listaProdutos = new ArrayList<Produto>();
@@ -13,17 +14,16 @@ public class Produto {
 	private String nomeProduto;
 	private String descricao;
 	private double valor;
-	private int idCategoria;
-	private static HashMap<Integer, String> mapaCategorias;
+	private Categoria categoria = null;
 	private int qtdEstoque;
 	
-	public Produto(String sku, String nomeProduto, String descricao, double valor, int idCategoria, int qtdEstoque) {
+	public Produto(String sku, String nomeProduto, String descricao, double valor, Categoria categoria, int qtdEstoque) {
 		idProduto = count.incrementAndGet();
 		this.sku = sku;
 		this.nomeProduto= nomeProduto;
 		this.descricao = descricao;
 		this.valor = valor;
-		this.idCategoria = idCategoria;
+		this.categoria = categoria;
 		this.qtdEstoque = qtdEstoque;
 		listaProdutos.add(this);
 	}
@@ -56,11 +56,27 @@ public class Produto {
 	public void setValor(double valor) {
 		this.valor = valor;
 	}
-	public int getIdCategoria() {
-		return idCategoria;
+	public Categoria getCategoria() {
+		return categoria;
 	}
-	public void setIdCategoria(int idCategoria) {
-		this.idCategoria = idCategoria;
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
+	}
+	public static String getCategoriaValue(Categoria categoria) {
+		switch (categoria) {
+			case CALCA:
+				return "Calça";
+			case SAIA:
+				return "Saia";
+			case JAQUETA:
+				return "Jaqueta";
+			case BLUSA:
+				return "Blusa";
+			case SHORTS:
+				return "Shorts";
+			default:
+				return "ERRO! Categoria ainda não registrada";
+		}
 	}
 	public int getQtdEstoque() {
 		return qtdEstoque;
@@ -114,41 +130,6 @@ Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser r
 		listaProdutos.add(produto);
 		count = new AtomicInteger(listaProdutos.size());
 	}
-	
-	// CRUD para mapaCategorias
-	public static void putCategoria(int idCategoria, String categoria) {
-		mapaCategorias.put(idCategoria, categoria);
-		System.out.println(String.format("Id '%d', Categoria '%s' adicionado com sucesso!", idCategoria, mapaCategorias.get(idCategoria)));
-	}
-	public static String getMapaCategorias() {
-		for (int i : mapaCategorias.keySet()) {
-			return String.format("Id '%d', Categoria '%s'", i, mapaCategorias.get(i)); 
-		}
-		return "ERRO! Ainda não existem categorias registradas.";
-	}
-	public static String getCategoriaById(int idCategoria) {
-		if (mapaCategorias.containsKey(idCategoria)) {
-			return String.format("Id '%d', categoria '%s'", idCategoria, mapaCategorias.get(idCategoria));
-		} else {
-			throw new IllegalArgumentException(String.format("ERRO! Id '%d' não existe!", idCategoria));
-		}
-	}
-	public static void modifyCategoria(int idCategoria, String categoria) {
-		if (mapaCategorias.containsKey(idCategoria)){
-			mapaCategorias.put(idCategoria, categoria);
-			System.out.println(String.format("Id '%d' modificado para Categoria: '%s' com sucesso!", idCategoria, categoria));
-		} else { 
-			System.out.println("ERRO! Id '%d' não existe!");
-		}	
-	}
-		public static void removeCategoria(int idCategoria) {
-			if (mapaCategorias.containsKey(idCategoria)){
-				mapaCategorias.remove(idCategoria);
-				System.out.println(String.format("Id '%d', Categoria '%s' removido com sucesso!", idCategoria, mapaCategorias.get(idCategoria)));
-			} else { 
-				System.out.println(String.format("ERRO! Id '%d' não existe!", idCategoria));
-			}
-		}
 
 	// toString()
 	@Override
@@ -164,6 +145,6 @@ Valor: R$ %.2f
 Id da categoria: '%d'
 Quantidade em estoque: %d.
 
-""", this.getIdProduto(), this.getSku(), this.getNomeProduto(), this.getDescricao(), this.getValor(), Produto.getCategoriaById(this.getIdCategoria()), getQtdEstoque());
+""", this.getIdProduto(), this.getSku(), this.getNomeProduto(), this.getDescricao(), this.getValor(), Produto.getCategoriaValue(categoria), getQtdEstoque());
 	}
 }

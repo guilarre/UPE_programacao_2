@@ -6,7 +6,7 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="lib" path="C:/Users/guilh/Documents/# UPE/2025/UPE_programacao_2/workspace_upe_programacao_2/upe_programacao_2/gson-2.13.1.jar">
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/lib">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
