@@ -2,9 +2,11 @@ package upe_programacao_2;
 
 import java.util.Scanner;
 
+// Vai conectar com Historico, Compra, Produto, Funcionario, Cliente	
+// Retorna true/false e Main gerencia mensagem de erro/sucesso
+
 public class Venda {
-	// Vai conectar com Historico, Compra, Produto, Funcionario, Cliente	
-	// Retorna true/false e Main gerencia mensagem de erro/sucesso
+	
 	public static boolean realizarVenda() {
 		Cliente cliente = Cliente.getObjetoCliente();
 		Funcionario funcionario = Funcionario.getObjetoFuncionario();
@@ -15,7 +17,7 @@ public class Venda {
 		return false;
 	}
 	
-	public static String pesquisarVendas() {
+	public static boolean pesquisarVendas() {
 		// Setup
 		Scanner sc = new Scanner(System.in);
 		int opcao;
@@ -26,68 +28,67 @@ public class Venda {
 			switch (opcao) {
 				// Pesquisar por cliente
 				case 1:
-					Cliente cliente = null;
-					loopSelecionarCliente: while (true) {
-						System.out.println(Menu.menuSelecionarCliente);
-						opcao = sc.nextInt();
-						switch (opcao) {
-							case 1:
-								System.out.println("Digite o id do cliente: ");
-								int idCliente = sc.nextInt();
-								cliente = Cliente.getClienteById(idCliente);
-								break;
-							case 2:
-								System.out.println("Digite o nome do cliente: ");
-								String nomeCliente = sc.nextLine();
-								cliente = Cliente.getClienteByNome(nomeCliente);
-								break;
-							case 0:
-								break loopSelecionarCliente;
-						}
-						break loopSelecionarCliente;
-					}
+					Cliente cliente = Cliente.getObjetoCliente();
 					if (cliente != null) {
 						Historico.getHistoricoCliente(cliente.getIdCliente());
+					} else {
+						return false;
 					}
-					break loopPesquisarVendas;
+					return true;
 				// Pesquisar por funcionário
 				case 2:
-					Funcionario funcionario = null;
-					loopSelecionarFuncionario: while (true) {
-						System.out.println(Menu.menuSelecionarFuncionario);
-						opcao = sc.nextInt();
-						switch (opcao) {
-							case 1:
-								System.out.println("Digite o id do funcionário: ");
-								int idFuncionario = sc.nextInt();
-								funcionario = Funcionario.getFuncionarioById(idFuncionario);
-								break;
-							case 2:
-								System.out.println("Digite o nome do funcionário: ");
-								String nomeFuncionario = sc.nextLine();
-								funcionario = Funcionario.getFuncionarioByNome(nomeFuncionario);
-								break;
-							case 0:
-								break loopSelecionarFuncionario;
-						}
-						break loopSelecionarFuncionario;
-					}
+					Funcionario funcionario = Funcionario.getObjetoFuncionario();
 					if (funcionario != null) {
 						Historico.getHistoricoFuncionario(funcionario.getIdFuncionario());
+					} else {
+						return false;
 					}
-					break loopPesquisarVendas;
+					return true;
 				// Exibir todas as vendas
 				case 3:
-					Historico.exibirHistoricoCompleto();
-					break loopPesquisarVendas;
+					String historico = Historico.exibirHistoricoCompleto();
+					if (historico != null) {
+						System.out.println(historico);
+					} else {
+						return false;
+					}
+					return true;
 				// Retornar ao menu anterior
 				case 0:
 					break loopPesquisarVendas;
 			}
 		}
+		sc.close();
+		return false;
 	}
 	
 	public static boolean cancelarVenda() {
-		
+		// Pegar índice da compra a cancelar
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Digite o índice da venda que deseja cancelar: ");
+		int idx = sc.nextInt();
+		// Pegar compra a cancelar para confirmar
+		String compraACancelar = Historico.getCompraByIndex(idx);
+		if (compraACancelar == null) {
+			System.out.println(String.format("ERRO! Índice '%d' não existe", idx));
+			sc.close();
+			return false;
+		}
+		// Confirmar operação
+		System.out.println(String.format("""
+Você tem certeza que deseja cancelar a compra a seguir?
+
+Compra:
+%s
+
+Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser revertida):""", compraACancelar));
+		char confirmacao = sc.next().charAt(0);
+		sc.close();
+		if (Character.toLowerCase(confirmacao) == 's') {
+			Historico.cancelarCompra(idx);
+			return true;
+		} else {
+			return false;
+		}
 	}
 }

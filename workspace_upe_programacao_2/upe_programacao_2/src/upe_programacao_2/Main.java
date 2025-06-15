@@ -369,6 +369,8 @@ Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser r
 					loopMenuVendas: while (true) {
 						System.out.println(Menu.menuVendas);
 						boolean vendaSucesso = false;
+						boolean pesquisaSucesso = false;
+						boolean cancelamentoSucesso = false;
 						opcao = sc.nextInt();
 						switch (opcao) {
 							// Realizar venda
@@ -382,10 +384,17 @@ Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser r
 								break;
 							// Pesquisar vendas
 							case 2:
+								pesquisaSucesso = Venda.pesquisarVendas();
+								if (pesquisaSucesso == false) {
+									System.out.println("A pesquisa falhou!");
+								}
 								break;
 							// Cancelar venda realizada
 							case 3:
-								
+								cancelamentoSucesso = Venda.cancelarVenda();
+								if (cancelamentoSucesso == false) {
+									System.out.println("O cancelamento falhou!");
+								}
 								break;
 							case 0:
 								break loopMenuVendas;

@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import enums.Status;
 import upe_programacao_2.Compra.CompraProduto;
 
 public class Historico {
@@ -21,7 +22,7 @@ public class Historico {
 	// Getter do histórico geral (chama toString() de cada objeto Compra)
 	public static String exibirHistoricoCompleto() {
 		if (historico.isEmpty()) {
-			return "O histórico ainda não foi registrado";
+			return null;
 		}
 		StringBuilder historicoCompleto = new StringBuilder();
 		for (int i = 0; i < historico.size(); i++) {
@@ -35,7 +36,7 @@ public class Historico {
 		try {
 			return String.format("Índice: %d\nCompra:\n%s", idx, historico.get(idx).toString());
 		} catch (IndexOutOfBoundsException e) {
-			return String.format("ERRO! Índice '%d' não existe", idx);
+			return null;
 		}
 	}
 	
@@ -92,10 +93,17 @@ Compras do cliente de id '%d':
 			}
 		}
 		return String.format("""
+				
 Vendas do funcionário de id '%d':
 
 %s
+
 """, idFuncionario, historicoFuncionario);
+	}
+	
+	public static void cancelarCompra(int idx) {
+		Compra compraACancelar = historico.get(idx);			
+		compraACancelar.setStatus(Status.CANCELADA);
 	}
 	
 	// TODO: testar esse setter!
@@ -103,57 +111,58 @@ Vendas do funcionário de id '%d':
 	// que depois seria passado para setCompraHistorico
 	// VERIFICAR: checar se somente pessoas adm poderão modificar/deletar (se sim,
 	// deve haver uma validação de usuário logado nos respectivos métodos).
-	public static void setCompraHistorico(int idx, Compra compra) {
-		try {
-			// Pegar compra a ser modificada para mostrar ao usuário (também já checa se existe ou não)
-			String compraAModificar = Historico.getCompraByIndex(idx);
-			// Confirmar operação
-			Scanner sc = new Scanner(System.in);
-			System.out.println(String.format("""
-Você tem certeza que deseja modificar a compra a seguir?
-
-Compra:
-%s
-
-Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser revertida):""", compraAModificar));
-			char confirmacao = sc.next().charAt(0);
-			sc.close();
-			if (Character.toLowerCase(confirmacao) == 's') {
-				historico.set(idx, compra);
-				System.out.println(String.format("Histórico foi modificado com sucesso!\n\nId: '%d'\nCompra modificada:\n%s", idx, Historico.getCompraByIndex(idx)));
-			} else {
-				System.out.println("Operação cancelada!");
-			}
-		} catch (IndexOutOfBoundsException e) {
-			System.out.println(String.format("ERRO! Índice '%d' não existe", idx));
-		}
-	}
-	
-	public static void removeCompraHistorico(int idx) {
-		try {
-			// Pegar compra a ser deletada para mostrar ao usuário (também já checa se existe ou não)
-			String compraADeletar = Historico.getCompraByIndex(idx);
-			// Confirmar operação
-			Scanner sc = new Scanner(System.in);
-			System.out.println(String.format("""
-Você tem certeza que deseja remover a compra a seguir?
-
-Compra:
-%s
-
-Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser revertida):""", compraADeletar));
-			char confirmacao = sc.next().charAt(0);
-			sc.close();
-			if (Character.toLowerCase(confirmacao) == 's') {
-				historico.remove(idx);
-				System.out.println(String.format("Compra foi removida com sucesso!"));
-			} else {
-				System.out.println("Operação cancelada!");
-			}
-		} catch (IndexOutOfBoundsException e) {
-			System.out.println(String.format("ERRO! Índice '%d' não existe", idx));
-		}
-	}
+//	public static void setCompraHistorico(int idx, Compra compra) {
+//		try {
+//			// Pegar compra a ser modificada para mostrar ao usuário (também já checa se existe ou não)
+//			String compraAModificar = Historico.getCompraByIndex(idx);
+//			// Confirmar operação
+//			Scanner sc = new Scanner(System.in);
+//			System.out.println(String.format("""
+//Você tem certeza que deseja modificar a compra a seguir?
+//
+//Compra:
+//%s
+//
+//Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser revertida):""", compraAModificar));
+//			char confirmacao = sc.next().charAt(0);
+//			sc.close();
+//			if (Character.toLowerCase(confirmacao) == 's') {
+//				historico.set(idx, compra);
+//				System.out.println(String.format("Histórico foi modificado com sucesso!\n\nId: '%d'\nCompra modificada:\n%s", idx, Historico.getCompraByIndex(idx)));
+//			} else {
+//				System.out.println("Operação cancelada!");
+//			}
+//		} catch (IndexOutOfBoundsException e) {
+//			System.out.println(String.format("ERRO! Índice '%d' não existe", idx));
+//		}
+//	}
+//	
+	// NÃO PODE REMOVER COMPRAS, SÓ CANCELAR
+//	public static void removeCompraHistorico(int idx) {
+//		try {
+//			// Pegar compra a ser deletada para mostrar ao usuário (também já checa se existe ou não)
+//			String compraADeletar = Historico.getCompraByIndex(idx);
+//			// Confirmar operação
+//			Scanner sc = new Scanner(System.in);
+//			System.out.println(String.format("""
+//Você tem certeza que deseja remover a compra a seguir?
+//
+//Compra:
+//%s
+//
+//Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser revertida):""", compraADeletar));
+//			char confirmacao = sc.next().charAt(0);
+//			sc.close();
+//			if (Character.toLowerCase(confirmacao) == 's') {
+//				historico.remove(idx);
+//				System.out.println(String.format("Compra foi removida com sucesso!"));
+//			} else {
+//				System.out.println("Operação cancelada!");
+//			}
+//		} catch (IndexOutOfBoundsException e) {
+//			System.out.println(String.format("ERRO! Índice '%d' não existe", idx));
+//		}
+//	}
 	
 	// Gerar relatório
 	public static String gerarRelatorio() {

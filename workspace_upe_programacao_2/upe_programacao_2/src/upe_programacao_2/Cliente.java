@@ -83,7 +83,7 @@ public class Cliente extends Pessoa {
 				break;
 		}
 		sc.close();
-		return null; // TODO: na Main, reconhece se é null e cancela operação
+		return null;
 	}
 	
 	// Getter para CRIAR e retornar objeto Cliente novo
