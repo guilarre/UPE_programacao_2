@@ -31,11 +31,11 @@ public class Testes {
 //			e.printStackTrace();
 //		}
 		
-//		JsonReader.carregarClientes();
-//		for (Cliente cliente : Cliente.getListaClientes()) {
-//			System.out.println(cliente);
-//		}
-//		Cliente cliente6 = new Cliente("asdasdsada", "12332112311", "81996212351", "guilhermelarre@gmail.com", "email", "R. Pereira Simões", "20/07/1996", "masculino");
-//		JsonWriter.salvarClientes(Cliente.getListaClientes());
+		JsonReader.carregarClientes();
+		for (Cliente cliente : Cliente.getListaClientes()) {
+			System.out.println(cliente);
+		}
+		Cliente cliente6 = new Cliente("asdasdsada", "12332112311", "81996212351", "guilhermelarre@gmail.com", "email", "R. Pereira Simões", "20/07/1996", "masculino");
+		JsonWriter.salvarClientes(Cliente.getListaClientes());
 	}
 }

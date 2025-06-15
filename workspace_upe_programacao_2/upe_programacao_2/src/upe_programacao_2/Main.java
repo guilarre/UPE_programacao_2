@@ -7,6 +7,9 @@ public class Main {
 	public static void main(String[] args) {
 		// TODO: Falta verificar se tem todos os CRUD na main
 		// TODO: configurar os default para os switch/case
+		// TODO: verificar breaks
+		// TODO: comentar main
+		// TODO: evolução: tentar enxugar main
 		// Carregar arquivos em memória
 		JsonReader.carregarClientes();
 		JsonReader.carregarFuncionarios();
@@ -114,8 +117,8 @@ public class Main {
 						switch (opcao) {
 							// Pesquisar um produto em estoque
 							case 1:
-								loopPesquisaEstoque: while (true) {
-									System.out.println(Menu.menuPesquisaEstoque);
+								loopPesquisarEstoque: while (true) {
+									System.out.println(Menu.menuPesquisarEstoque);
 									opcao = sc.nextInt();
 									switch (opcao) {
 										// Pesquisar por id do produto
@@ -128,11 +131,11 @@ public class Main {
 										case 2:
 											System.out.println("Digite o nome do produto: ");
 											String nomeProduto = sc.nextLine();
-											System.out.println(Produto.getProdutoByName(nomeProduto));
+											System.out.println(Produto.getProdutoByNome(nomeProduto));
 											break;
 										// Retornar ao menu anterior
 										case 0:
-											break loopPesquisaEstoque;
+											break loopPesquisarEstoque;
 									}
 								}
 							// Exibir uma categoria de produtos
@@ -197,7 +200,7 @@ Categorias disponíveis:
 														case 2:
 															System.out.println("Digite o nome do produto: ");
 															nomeProduto = sc.nextLine();
-															produtoAModificar = Produto.getProdutoByName(nomeProduto);
+															produtoAModificar = Produto.getProdutoByNome(nomeProduto);
 															break;
 														case 0:
 															break loopModificarProduto;
@@ -376,7 +379,7 @@ Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser r
 														case 2:
 															System.out.println("Digite o nome do produto: ");
 															nomeProduto = sc.nextLine();
-															produtoARemover = Produto.getProdutoByName(nomeProduto);
+															produtoARemover = Produto.getProdutoByNome(nomeProduto);
 															break;
 														case 0:
 															break loopRemoverProduto;
@@ -385,8 +388,6 @@ Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser r
 												}
 												if (produtoARemover != null) {
 													Produto.removeProduto(produtoARemover);
-												} else {													
-													break loopRemoverProduto;
 												}
 												break loopRemoverProduto;
 											}
@@ -408,6 +409,8 @@ Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser r
 						boolean vendaSucesso = false;
 						opcao = sc.nextInt();
 						switch (opcao) {
+							// Realizar venda
+							// TODO: alterar status para realizada, algo assim.
 							case 1:
 								vendaSucesso = Venda.realizarVenda();
 								if (vendaSucesso) {
@@ -416,11 +419,81 @@ Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser r
 								}
 								System.out.println("ERRO! A venda não foi registrada");
 								break;
+							// Pesquisar vendas
 							case 2:
-								
+								loopPesquisarVendas: while (true) {
+									System.out.println(Menu.menuPesquisarVendas);
+									opcao = sc.nextInt();
+									switch (opcao) {
+										// Pesquisar por cliente
+										case 1:
+											Cliente cliente = null;
+											loopSelecionarCliente: while (true) {
+												System.out.println(Menu.menuSelecionarCliente);
+												opcao = sc.nextInt();
+												switch (opcao) {
+													case 1:
+														System.out.println("Digite o id do cliente: ");
+														int idCliente = sc.nextInt();
+														cliente = Cliente.getClienteById(idCliente);
+														break;
+													case 2:
+														System.out.println("Digite o nome do cliente: ");
+														String nomeCliente = sc.nextLine();
+														cliente = Cliente.getClienteByNome(nomeCliente);
+														break;
+													case 0:
+														break loopSelecionarCliente;
+												}
+												break loopSelecionarCliente;
+											}
+											if (cliente != null) {
+												Historico.getHistoricoCliente(cliente.getIdCliente());
+											}
+											break loopPesquisarVendas;
+										// Pesquisar por funcionário
+										case 2:
+											Funcionario funcionario = null;
+											loopSelecionarFuncionario: while (true) {
+												System.out.println(Menu.menuSelecionarFuncionario);
+												opcao = sc.nextInt();
+												switch (opcao) {
+													case 1:
+														System.out.println("Digite o id do funcionário: ");
+														int idFuncionario = sc.nextInt();
+														funcionario = Funcionario.getFuncionarioById(idFuncionario);
+														break;
+													case 2:
+														System.out.println("Digite o nome do funcionário: ");
+														String nomeFuncionario = sc.nextLine();
+														funcionario = Funcionario.getFuncionarioByNome(nomeFuncionario);
+														break;
+													case 0:
+														break loopSelecionarFuncionario;
+												}
+												break loopSelecionarFuncionario;
+											}
+											if (funcionario != null) {
+												Historico.getHistoricoFuncionario(funcionario.getIdFuncionario());
+											}
+											break loopPesquisarVendas;
+										// Exibir todas as vendas
+										case 3:
+											Historico.exibirHistoricoCompleto();
+											break loopPesquisarVendas;
+										// Retornar ao menu anterior
+										case 0:
+											break loopPesquisarVendas;
+									}
+								}
+							// Cancelar venda realizada
+							case 3:
+								// TODO
+								break;
+							case 0:
+								break loopMenuVendas;
 						}
 					}
-					break;
 				// TEST: Gerar relatório mensal
 				case 5:
 					Historico.gerarRelatorio();

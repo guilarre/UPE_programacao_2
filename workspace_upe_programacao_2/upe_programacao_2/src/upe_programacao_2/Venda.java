@@ -12,5 +12,7 @@ public class Venda {
 		}
 		return false;
 	}
-	
+//	public static pesquisarVenda() {
+//		
+//	}
 }
