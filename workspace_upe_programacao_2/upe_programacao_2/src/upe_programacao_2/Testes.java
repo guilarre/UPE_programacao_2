@@ -1,14 +1,16 @@
 package upe_programacao_2;
 
-import java.io.FileWriter;
-import java.io.IOException;
+//import java.io.FileWriter;
+//import java.io.IOException;
 
 //import java.io.FileReader;
 //import java.io.IOException;
 //import java.time.LocalDate;
 //
-import com.google.gson.Gson;
+//import com.google.gson.Gson;
 //import com.google.gson.GsonBuilder;
+
+import enums.Categoria;
 
 public class Testes {
 
@@ -38,14 +40,26 @@ public class Testes {
 //		for (Cliente cliente : Cliente.getListaClientes()) {
 //			System.out.println(cliente);
 //		}
-		Cliente cliente6 = new Cliente("asdasdsada", "12332112311", "81996212351", "guilhermelarre@gmail.com", "email", "R. Pereira Simões", "20/07/1996", "masculino");
 //		JsonWriter.salvarClientes(Cliente.getListaClientes());
+//		Cliente cliente6 = new Cliente("asdasdsada", "12332112311", "81996212351", "guilhermelarre@gmail.com", "email", "R. Pereira Simões", "20/07/1996", "masculino");
+//		
+//		Gson gson = new Gson();
+//		try (FileWriter fw = new FileWriter("teste.json")) {
+//			gson.toJson(cliente6, fw);
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
 		
-		Gson gson = new Gson();
-		try (FileWriter fw = new FileWriter("teste.json")) {
-			gson.toJson(cliente6, fw);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		Produto produtoNovo = new Produto("123", "jaqueta", "asdasdad", 200, Categoria.JAQUETA, 2);
+		System.out.println(produtoNovo);
+		
+		Produto produtoAModificar = Produto.getProdutoByNome("jaqueta");
+		produtoAModificar.setSku("666");
+		System.out.println("Produto modificado:");
+		System.out.println(produtoAModificar);
+		System.out.println("Produto depois de modificado no estoque:");
+		System.out.println(Produto.getProdutoByNome("jaqueta"));
+
+		
 	}
 }

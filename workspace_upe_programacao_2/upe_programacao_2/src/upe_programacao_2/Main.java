@@ -9,7 +9,6 @@ public class Main {
 		// TODO: configurar os default para os switch/case
 		// TODO: verificar breaks
 		// TODO: comentar main
-		// TODO: evolução: tentar enxugar main
 		// Carregar arquivos em memória
 		JsonReader.carregarClientes();
 		JsonReader.carregarFuncionarios();
@@ -79,7 +78,6 @@ public class Main {
 						opcao = sc.nextInt();
 						switch (opcao) {
 							// Pesquisar um produto em estoque
-							// TODO: dá pra enxugar
 							case 1:
 								loopPesquisarEstoque: while (true) {
 									System.out.println(Menu.menuPesquisarEstoque);
@@ -103,7 +101,6 @@ public class Main {
 									}
 								}
 							// Exibir todas as categorias
-							// TODO: ajeitar pra usar enum
 							case 2:
 								System.out.println(String.format("""
 
@@ -143,187 +140,103 @@ Categorias disponíveis:
 											Produto produtoNovo = new Produto(sku, nomeProduto, descricao, valor, idCategoria, qtdEstoque);
 											System.out.println(String.format("O produto foi adicionado com sucesso!\n\n%s", produtoNovo.toString()));
 											break;
-											// Modificar produto no estoque
+										// Modificar produto no estoque
 										case 2:
-											loopModificarProduto: while (true) {
-												Produto produtoAModificar = null;
-												// TODO: testar se throw new erro interrompe programa no caso de id/nome não existir.
-												loopSelecionarProduto: while (true) {
-													System.out.println(Menu.menuSelecionarProduto);
-													opcao = sc.nextInt();
-													switch (opcao) {
-														// TEST: Checar se "break loopSelecionarProduto" no final é suficiente
-														case 1:
-															System.out.println("Digite o id do produto: ");
-															int idProduto = sc.nextInt();
-															produtoAModificar = Produto.getProdutoById(idProduto);
-															break;
-														case 2:
-															System.out.println("Digite o nome do produto: ");
-															nomeProduto = sc.nextLine();
-															produtoAModificar = Produto.getProdutoByNome(nomeProduto);
-															break;
-														case 0:
-															break loopModificarProduto;
-													}
-													break loopSelecionarProduto;
-												}
-												if (produtoAModificar != null) {
+											Produto produtoModificado = null;
+											Produto produtoAModificar = Produto.selecionarProduto();
+											if (produtoAModificar != null) {
+												loopModificarProduto: while (true) {
 													System.out.println(Menu.menuModificarProduto);
 													opcao = sc.nextInt();
 													switch (opcao) {
-														// SKU
 														case 1:
-															String skuAtual = produtoAModificar.getSku();
-															System.out.println("Digite o SKU novo: ");
-															String skuNovo = sc.nextLine();
+															produtoModificado = Produto.modificarProduto(produtoAModificar, opcao);
+															if (produtoModificado == null) {
+																System.out.println("ERRO! Modificação cancelada");
+															}
 															System.out.println(String.format("""
-Você tem certeza que deseja modificar o SKU do produto?
 
-Produto:
+Produto modificado com sucesso:
+
 %s
 
-SKU atual: %s
-SKU novo: %s
-
-Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser revertida):""", produtoAModificar, skuAtual, skuNovo));
-															char confirmacao = sc.next().charAt(0);
-															if (Character.toLowerCase(confirmacao) == 's') {
-																produtoAModificar.setSku(skuNovo);
-																System.out.println(String.format("Produto foi modificado com sucesso!"));
-															} else {
-																System.out.println("Operação cancelada!");
-																break loopModificarProduto;
-															}
-															break loopModificarProduto;
-														// Nome do produto
+""", produtoModificado.toString()));
+															break;
 														case 2:
-															String nomeAtual = produtoAModificar.getNomeProduto();
-															System.out.println("Digite o nome novo: ");
-															String nomeNovo = sc.nextLine();
+															produtoModificado = Produto.modificarProduto(produtoAModificar, opcao);
+															if (produtoModificado == null) {
+																System.out.println("ERRO! Modificação cancelada");
+															}
 															System.out.println(String.format("""
-Você tem certeza que deseja modificar o nome do produto?
 
-Produto:
+Produto modificado com sucesso:
+
 %s
 
-Nome atual: %s
-Nome novo: %s
-
-Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser revertida):""", produtoAModificar, nomeAtual, nomeNovo));
-															confirmacao = sc.next().charAt(0);
-															if (Character.toLowerCase(confirmacao) == 's') {
-																produtoAModificar.setNome(nomeNovo);
-																System.out.println(String.format("Produto foi modificado com sucesso!"));
-															} else {
-																System.out.println("Operação cancelada!");
-																break loopModificarProduto;
-															}
-															break loopModificarProduto;
-														// Descrição
+""", produtoModificado.toString()));
+															break;
 														case 3:
-															String descricaoAtual = produtoAModificar.getDescricao();
-															System.out.println("Digite a descrição nova: ");
-															String descricaoNova = sc.nextLine();
+															produtoModificado = Produto.modificarProduto(produtoAModificar, opcao);
+															if (produtoModificado == null) {
+																System.out.println("ERRO! Modificação cancelada");
+															}
 															System.out.println(String.format("""
-Você tem certeza que deseja modificar a descrição do produto?
 
-Produto:
+Produto modificado com sucesso:
+
 %s
 
-Descrição atual: %s
-Descrição nova: %s
-
-Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser revertida):""", produtoAModificar, descricaoAtual, descricaoNova));
-															confirmacao = sc.next().charAt(0);
-															if (Character.toLowerCase(confirmacao) == 's') {
-																produtoAModificar.setDescricao(descricaoNova);
-																System.out.println(String.format("Produto foi modificado com sucesso!"));
-															} else {
-																System.out.println("Operação cancelada!");
-																break loopModificarProduto;
-															}
-															break loopModificarProduto;
+""", produtoModificado.toString()));
+															break;
 														case 4:
-															double valorAtual = produtoAModificar.getValor();
-															System.out.println("Digite o valor novo: ");
-															double valorNovo = sc.nextDouble();
+															produtoModificado = Produto.modificarProduto(produtoAModificar, opcao);
+															if (produtoModificado == null) {
+																System.out.println("ERRO! Modificação cancelada");
+															}
 															System.out.println(String.format("""
-Você tem certeza que deseja modificar o valor do produto?
 
-Produto:
+Produto modificado com sucesso:
+
 %s
 
-Valor atual: %s
-Valor novo: %s
-
-Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser revertida):""", produtoAModificar, valorAtual, valorNovo));
-															confirmacao = sc.next().charAt(0);
-															if (Character.toLowerCase(confirmacao) == 's') {
-																produtoAModificar.setValor(valorNovo);
-																System.out.println(String.format("Produto foi modificado com sucesso!"));
-															} else {
-																System.out.println("Operação cancelada!");
-																break loopModificarProduto;
-															}
-															break loopModificarProduto;
-														// Categoria
-														// TODO: ajeitar pra usar enum
+""", produtoModificado.toString()));
+															break;
 														case 5:
-															int categoriaAtual = produtoAModificar.getIdCategoria();
-															System.out.println("Digite o id da categoria nova: ");
-															int categoriaNova = sc.nextInt();
+															produtoModificado = Produto.modificarProduto(produtoAModificar, opcao);
+															if (produtoModificado == null) {
+																System.out.println("ERRO! Modificação cancelada");
+															}
 															System.out.println(String.format("""
-Você tem certeza que deseja modificar a categoria do produto?
 
-Produto:
+Produto modificado com sucesso:
+
 %s
 
-Id da categoria atual: %s
-Id da categoria nova: %s
-
-Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser revertida):""", produtoAModificar, categoriaAtual, categoriaNova));
-															confirmacao = sc.next().charAt(0);
-															if (Character.toLowerCase(confirmacao) == 's') {
-																produtoAModificar.setIdCategoria(categoriaNova);
-																System.out.println(String.format("Produto foi modificado com sucesso!"));
-															} else {
-																System.out.println("Operação cancelada!");
-																break loopModificarProduto;
-															}
-															break loopModificarProduto;
-														// Quantidade em estoque
+""", produtoModificado.toString()));
+															break;
 														case 6:
-															int qtdAtual = produtoAModificar.getQtdEstoque();
-															System.out.println("Digite a quantidade nova: ");
-															int qtdNova = sc.nextInt();
+															produtoModificado = Produto.modificarProduto(produtoAModificar, opcao);
+															if (produtoModificado == null) {
+																System.out.println("ERRO! Modificação cancelada");
+															}
 															System.out.println(String.format("""
-Você tem certeza que deseja modificar a quantidade do produto?
 
-Produto:
+Produto modificado com sucesso:
+
 %s
 
-Quantidade atual: %s
-Quantidade nova: %s
-
-Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser revertida):""", produtoAModificar, qtdAtual, qtdNova));
-															confirmacao = sc.next().charAt(0);
-															if (Character.toLowerCase(confirmacao) == 's') {
-																produtoAModificar.setQtdEstoque(qtdNova);
-																System.out.println(String.format("Produto foi modificado com sucesso!"));
-															} else {
-																System.out.println("Operação cancelada!");
-																break loopModificarProduto;
-															}
-															break loopModificarProduto;
-														// Retornar ao menu anterior
+""", produtoModificado.toString()));
+															break;
 														case 0:
 															break loopModificarProduto;
+														default:
+															System.out.println("ERRO! Opção inválida");
 													}
-												} else {
-													break loopModificarProduto;
 												}
+											} else {
+												System.out.println("ERRO! Produto inexistente");
 											}
+											break;
 										// Excluir produto do estoque
 										case 3:
 											loopRemoverProduto: while (true) {
@@ -353,6 +266,7 @@ Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser r
 												}
 												break loopRemoverProduto;
 											}
+											break;
 										// Retornar ao menu anterior
 										case 0:
 											break loopGerenciarEstoque;
@@ -406,7 +320,7 @@ Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser r
 					break;
 				// Sair do sistema
 				case 0:
-					// TO DO: Salvar tudo em json antes de fechar
+					// TODO: Salvar tudo em json antes de fechar
 					System.out.println("Até logo!");
 					sc.close();
 					break loopMain;
