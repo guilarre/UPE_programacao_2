@@ -3,13 +3,14 @@ import com.google.gson.*;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
-//import java.util.ArrayList;
+import java.time.LocalDateTime;
 
 public class JsonWriter {
 	// Criando objeto Gson com as opções abaixo
 	private static Gson gson = new GsonBuilder()
 			.setPrettyPrinting()
 			.registerTypeAdapter(LocalDate.class, new LocalDateTypeAdapter())
+			.registerTypeAdapter(LocalDateTime.class, new LocalDateTimeTypeAdapter())
 			.serializeNulls()
 			.create();
 	

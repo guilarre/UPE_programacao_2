@@ -31,7 +31,7 @@ public class Cliente extends Pessoa {
 		return String.valueOf(clientes);
 	}
 	
-	// CRUD para cliente
+	// CRUD para Cliente
 	// CREATE e retornar objeto Cliente novo
 		public static Cliente getClienteNovo() {
 			// Setup
@@ -346,12 +346,15 @@ Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser r
 		// Confirmar operação
 		Scanner sc = new Scanner(System.in);
 		System.out.println(String.format("""
+				
 Você tem certeza que deseja remover o cliente a seguir?
 
 Cliente:
 %s
 
-Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser revertida):""", cliente));
+Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser revertida):
+
+""", cliente));
 		char confirmacao = sc.next().charAt(0);
 		sc.close();
 		if (Character.toLowerCase(confirmacao) == 's') {

@@ -13,7 +13,7 @@ import com.google.gson.JsonPrimitive;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 
-//TypeAdapter p/ LocalDate (requerimento do Gson)
+	//TypeAdapter p/ LocalDate (requerimento do Gson)
 	public class LocalDateTypeAdapter implements JsonSerializer<LocalDate>, JsonDeserializer<LocalDate> {
 		private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
@@ -27,19 +27,3 @@ import com.google.gson.JsonSerializer;
 			return LocalDate.parse(json.getAsString(), formatter);
 		}
 	}
-		
-	// TypeAdapter p/ LocalDateTime (requerimento do Gson)
-//	public class LocalDateTimeTypeAdapter implements JsonSerializer<LocalDateTime>, JsonDeserializer<LocalDateTime> {
-//
-//		private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d::MMM::uuuu HH::mm::ss");
-//
-//		@Override
-//		public JsonElement serialize(LocalDateTime localDateTime, Type srcType, JsonSerializationContext context) {
-//			return new JsonPrimitive(formatter.format(localDateTime));
-//		}
-//
-//		@Override
-//		public LocalDateTime deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
-//			return LocalDateTime.parse(json.getAsString(), formatter);
-//		}
-//	}

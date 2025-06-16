@@ -64,25 +64,8 @@ public class Funcionario extends Pessoa {
 		return String.valueOf(funcionarios);
 	}
 	
-	// READ para selecionar objeto Funcionario
-	public static Funcionario getFuncionarioById(int idFuncionario) {
-		for (Funcionario funcionario : Funcionario.getListaFuncionarios()) {
-			if (funcionario.getIdFuncionario() == idFuncionario) {
-				return funcionario;
-			}
-		}
-		return null;
-	}
-	public static Funcionario getFuncionarioByNome(String nomeFuncionario) {
-		for (Funcionario funcionario : Funcionario.getListaFuncionarios()) {
-			if (funcionario.getNome() == nomeFuncionario) {
-				return funcionario;
-			}
-		}
-		return null;
-	}
-	
-	// Getter para CRIAR e retornar objeto Funcionario novo
+	// CRUD para Funcionario
+	// CREATE e retornar objeto Funcionario novo
 	public static Funcionario getFuncionarioNovo() {
 		// Setup
 		Scanner sc = new Scanner(System.in);
@@ -143,8 +126,23 @@ Escolha o cargo do funcionário:
 		System.out.println("Funcionário registrado com sucesso!");
 		return funcionario;
 	}
-	
-	// Getter pra selecionar um funcionário	
+	// READ para selecionar objeto Funcionario
+	public static Funcionario getFuncionarioById(int idFuncionario) {
+		for (Funcionario funcionario : Funcionario.getListaFuncionarios()) {
+			if (funcionario.getIdFuncionario() == idFuncionario) {
+				return funcionario;
+			}
+		}
+		return null;
+	}
+	public static Funcionario getFuncionarioByNome(String nomeFuncionario) {
+		for (Funcionario funcionario : Funcionario.getListaFuncionarios()) {
+			if (funcionario.getNome() == nomeFuncionario) {
+				return funcionario;
+			}
+		}
+		return null;
+	}
 	public static Funcionario selecionarFuncionario() {
 		// TEST: espaçamento correto na UI
 		String menuSelecionarFuncionario = """
@@ -180,6 +178,340 @@ Escolha o cargo do funcionário:
 		}
 		sc.close();
 		return null; // TODO: na Main, reconhece se é null e cancela operação
+	}
+	// UPDATE
+	public static Funcionario modificarFuncionario(Funcionario funcionarioAModificar, int opcao) {
+		// Setup
+		Scanner sc = new Scanner(System.in);
+		Funcionario funcionarioModificado = null;
+		char confirmacao = 'n';
+		// Prompts
+		switch (opcao) {
+			// Nome
+			case 1:
+				String nomeAtual = funcionarioAModificar.getNome();
+				System.out.println("Digite o nome novo: ");
+				String nomeNovo = sc.nextLine();
+				System.out.println(String.format("""
+						
+Você tem certeza que deseja modificar o nome do funcionário?
+	
+Funcionário:
+%s
+	
+Nome atual: %s
+Nome novo: %s
+	
+Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser revertida):
+
+""", funcionarioAModificar, nomeAtual, nomeNovo));
+				confirmacao = sc.next().charAt(0);
+				sc.close();
+				if (Character.toLowerCase(confirmacao) == 's') {
+					funcionarioAModificar.setNome(nomeNovo);
+					funcionarioModificado = Funcionario.getFuncionarioById(funcionarioAModificar.getIdFuncionario());
+					return funcionarioModificado;
+				} else {
+					return funcionarioModificado;
+				}
+			// CPF
+			case 2:
+				String cpfAtual = funcionarioAModificar.getCpf();
+				System.out.println("Digite o CPF novo: ");
+				String cpfNovo = sc.nextLine();
+				System.out.println(String.format("""
+						
+Você tem certeza que deseja modificar o CPF do funcionário?
+	
+Funcionário:
+%s
+	
+CPF atual: %s
+CPF novo: %s
+	
+Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser revertida):
+
+""", funcionarioAModificar, cpfAtual, cpfNovo));
+				confirmacao = sc.next().charAt(0);
+				sc.close();
+				if (Character.toLowerCase(confirmacao) == 's') {
+					funcionarioAModificar.setCpf(cpfNovo);
+					funcionarioModificado = Funcionario.getFuncionarioById(funcionarioAModificar.getIdFuncionario());
+					return funcionarioModificado;
+				} else {
+					return funcionarioModificado;
+				}
+			// Telefone
+			case 3:
+				String telefoneAtual = funcionarioAModificar.getTelefone();
+				System.out.println("Digite o telefone novo: ");
+				String telefoneNovo = sc.nextLine();
+				System.out.println(String.format("""
+						
+Você tem certeza que deseja modificar o telefone do funcionário?
+	
+Funcionário:
+%s
+	
+Telefone atual: %s
+Telefone novo: %s
+	
+Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser revertida):
+
+""", funcionarioAModificar, telefoneAtual, telefoneNovo));
+				confirmacao = sc.next().charAt(0);
+				sc.close();
+				if (Character.toLowerCase(confirmacao) == 's') {
+					funcionarioAModificar.setTelefone(telefoneNovo);
+					funcionarioModificado = Funcionario.getFuncionarioById(funcionarioAModificar.getIdFuncionario());
+					return funcionarioModificado;
+				} else {
+					return funcionarioModificado;
+				}
+			// Email
+			case 4:
+				String emailAtual = funcionarioAModificar.getEmail();
+				System.out.println("Digite o email novo: ");
+				String emailNovo = sc.nextLine();
+				System.out.println(String.format("""
+						
+Você tem certeza que deseja modificar o email do funcionário?
+	
+Funcionário:
+%s
+	
+Email atual: %s
+Email novo: %s
+	
+Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser revertida):
+
+""", funcionarioAModificar, emailAtual, emailNovo));
+				confirmacao = sc.next().charAt(0);
+				sc.close();
+				if (Character.toLowerCase(confirmacao) == 's') {
+					funcionarioAModificar.setEmail(emailNovo);
+					funcionarioModificado = Funcionario.getFuncionarioById(funcionarioAModificar.getIdFuncionario());
+					return funcionarioModificado;
+				} else {
+					return funcionarioModificado;
+				}
+			// Preferência de comunicação
+			case 5:
+				String preferenciaComunicacaoAtual = funcionarioAModificar.getPreferenciaComunicacao();
+				System.out.println("Digite a preferência de comunicação nova: ");
+				String preferenciaComunicacaoNova = sc.nextLine();
+				System.out.println(String.format("""
+						
+Você tem certeza que deseja modificar a preferência de comunicação do funcionário?
+	
+Funcionário:
+%s
+	
+Preferência de comunicacao atual: %s
+Preferência de comunicacao nova: %s
+	
+Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser revertida):
+
+""", funcionarioAModificar, preferenciaComunicacaoAtual, preferenciaComunicacaoNova));
+				confirmacao = sc.next().charAt(0);
+				sc.close();
+				if (Character.toLowerCase(confirmacao) == 's') {
+					funcionarioAModificar.setPreferenciaComunicacao(preferenciaComunicacaoNova);
+					funcionarioModificado = Funcionario.getFuncionarioById(funcionarioAModificar.getIdFuncionario());
+					return funcionarioModificado;
+				} else {
+					return funcionarioModificado;
+				}
+			// Endereço
+			case 6:
+				String enderecoAtual = funcionarioAModificar.getEndereco();
+				System.out.println("Digite o endereço novo: ");
+				String enderecoNovo = sc.nextLine();
+				System.out.println(String.format("""
+						
+Você tem certeza que deseja modificar o endereço do funcionário?
+	
+Funcionário:
+%s
+	
+Endereço atual: %s
+Endereço novo: %s
+	
+Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser revertida):
+
+""", funcionarioAModificar, enderecoAtual, enderecoNovo));
+				confirmacao = sc.next().charAt(0);
+				sc.close();
+				if (Character.toLowerCase(confirmacao) == 's') {
+					funcionarioAModificar.setEndereco(enderecoNovo);
+					funcionarioModificado = Funcionario.getFuncionarioById(funcionarioAModificar.getIdFuncionario());
+					return funcionarioModificado;
+				} else {
+					return funcionarioModificado;
+				}
+			// Aniversário
+			case 7:
+				String aniversarioAtual = funcionarioAModificar.getAniversario();
+				System.out.println("Digite o aniversário novo (e.g. 31/12/2020): ");
+				String aniversarioNovo = sc.nextLine();
+				System.out.println(String.format("""
+						
+Você tem certeza que deseja modificar o aniversário do funcionário?
+	
+Funcionário:
+%s
+	
+Aniversário atual: %s
+Aniversário novo: %s
+	
+Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser revertida):
+
+""", funcionarioAModificar, aniversarioAtual, aniversarioNovo));
+				confirmacao = sc.next().charAt(0);
+				sc.close();
+				if (Character.toLowerCase(confirmacao) == 's') {
+					funcionarioAModificar.setAniversario(aniversarioNovo);
+					funcionarioModificado = Funcionario.getFuncionarioById(funcionarioAModificar.getIdFuncionario());
+					return funcionarioModificado;
+				} else {
+					return funcionarioModificado;
+				}
+			// Gênero
+			case 8:
+				String generoAtual = funcionarioAModificar.getGenero();
+				System.out.println("Digite o gênero novo: ");
+				String generoNovo = sc.nextLine();
+				System.out.println(String.format("""
+						
+Você tem certeza que deseja modificar o gênero do funcionário?
+	
+Funcionário:
+%s
+	
+Gênero atual: %s
+Gênero novo: %s
+	
+Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser revertida):
+
+""", funcionarioAModificar, generoAtual, generoNovo));
+				confirmacao = sc.next().charAt(0);
+				sc.close();
+				if (Character.toLowerCase(confirmacao) == 's') {
+					funcionarioAModificar.setGenero(generoNovo);
+					funcionarioModificado = Funcionario.getFuncionarioById(funcionarioAModificar.getIdFuncionario());
+					return funcionarioModificado;
+				} else {
+					return funcionarioModificado;
+				}
+			// Cargo
+			case 9:
+				Cargo cargoAtual = funcionarioAModificar.getCargo();
+				Cargo cargoNovo = null;
+				System.out.println("""
+
+Escolha o cargo do funcionário:
+
+[1] = Vendedor
+[2] = Caixa
+[3] = Estoquista
+[4] = Sócio
+
+""");
+				int opcaoCargo = sc.nextInt();
+				switch (opcaoCargo) {
+					case 1:
+						cargoNovo = Cargo.VENDEDOR;
+						break;
+					case 2:
+						cargoNovo = Cargo.CAIXA;
+						break;
+					case 3:
+						cargoNovo = Cargo.ESTOQUISTA;
+						break;
+					case 4:
+						cargoNovo = Cargo.SOCIO;
+						break;
+				}
+				System.out.println(String.format("""
+						
+Você tem certeza que deseja modificar o cargo do funcionário?
+	
+Funcionário:
+%s
+	
+Cargo atual: %s
+Cargo novo: %s
+	
+Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser revertida):
+
+""", funcionarioAModificar, cargoAtual, cargoNovo));
+				confirmacao = sc.next().charAt(0);
+				sc.close();
+				if (Character.toLowerCase(confirmacao) == 's') {
+					funcionarioAModificar.setCargo(cargoNovo);
+					funcionarioModificado = Funcionario.getFuncionarioById(funcionarioAModificar.getIdFuncionario());
+					return funcionarioModificado;
+				} else {
+					return funcionarioModificado;
+				}
+			// Salário
+			case 10:
+				double salarioAtual = funcionarioAModificar.getSalario();
+				System.out.println("Digite o salário novo: ");
+				double salarioNovo = sc.nextDouble();
+				System.out.println(String.format("""
+						
+Você tem certeza que deseja modificar o salário do funcionário?
+	
+Funcionário:
+%s
+	
+Salário atual: %s
+Salário novo: %s
+	
+Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser revertida):
+
+""", funcionarioAModificar, salarioAtual, salarioNovo));
+				confirmacao = sc.next().charAt(0);
+				sc.close();
+				if (Character.toLowerCase(confirmacao) == 's') {
+					funcionarioAModificar.setSalario(salarioNovo);
+					funcionarioModificado = Funcionario.getFuncionarioById(funcionarioAModificar.getIdFuncionario());
+					return funcionarioModificado;
+				} else {
+					return funcionarioModificado;
+				}
+			case 0:
+				sc.close();
+				return funcionarioModificado;
+			default:
+				System.out.println("ERRO! Opção inválida");
+				sc.close();
+				return funcionarioModificado;
+		}
+	}
+	// REMOVE
+	public static void removerFuncionario(Funcionario funcionario) {
+		// Confirmar operação
+		Scanner sc = new Scanner(System.in);
+		System.out.println(String.format("""
+				
+Você tem certeza que deseja remover o funcionário a seguir?
+
+Funcionário:
+%s
+
+Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser revertida):
+
+""", funcionario));
+		char confirmacao = sc.next().charAt(0);
+		sc.close();
+		if (Character.toLowerCase(confirmacao) == 's') {
+			listaFuncionarios.remove(funcionario.getIdFuncionario());
+			System.out.println("Funcionário foi removido com sucesso!");
+		} else {
+			System.out.println("Operação cancelada!");
+		}
 	}
 	
 	// Usado por JsonReader

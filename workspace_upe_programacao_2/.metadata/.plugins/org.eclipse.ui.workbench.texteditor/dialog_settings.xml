@@ -4,6 +4,12 @@
 	<section name="java.lang.Class">
 		<item key="replaceBarOpen" value="true"/>
 		<list key="findhistory">
+			<item value="Gênero"/>
+			<item value="gênero"/>
+			<item value="Genero"/>
+			<item value="genero"/>
+			<item value="cargo"/>
+			<item value="Cargo cargo"/>
 			<item value="cliente"/>
 			<item value="Cliente"/>
 			<item value="remove"/>
@@ -13,14 +19,15 @@
 			<item value="Nome"/>
 			<item value="preferenciaComunicacaoNovo"/>
 			<item value="char"/>
-			<item value="cpf"/>
-			<item value="Produto produtoModificado = null;"/>
-			<item value="selecionarpr"/>
-			<item value="selecion"/>
-			<item value="getObjetoFuncionario"/>
-			<item value="setNome"/>
 		</list>
 		<list key="replacehistory">
+			<item value="Salário"/>
+			<item value="salário"/>
+			<item value="Salario"/>
+			<item value="salario"/>
+			<item value="cargoNovo"/>
+			<item value="cargo"/>
+			<item value="Cargo"/>
 			<item value="funcionario"/>
 			<item value="Funcionario"/>
 			<item value="genero"/>
@@ -29,13 +36,6 @@
 			<item value="aniversario"/>
 			<item value="Endereco"/>
 			<item value="endereco"/>
-			<item value="preferenciaComunicacaoNova"/>
-			<item value="PreferenciaComunicacao"/>
-			<item value="preferenciaComunicacao"/>
-			<item value="email"/>
-			<item value="Email"/>
-			<item value="Telefone"/>
-			<item value="telefone"/>
 		</list>
 	</section>
 </section>

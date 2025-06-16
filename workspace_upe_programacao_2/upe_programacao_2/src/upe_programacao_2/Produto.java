@@ -6,7 +6,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import enums.Categoria;
 
-public class Produto {
+public class Produto implements Rastreavel {
 	private static ArrayList<Produto> listaProdutos = new ArrayList<Produto>();
 	private static AtomicInteger count = new AtomicInteger(0);
 	private int idProduto;
@@ -28,7 +28,16 @@ public class Produto {
 		listaProdutos.add(this);
 	}
 
-// Getters/setters
+	// Método obrigatório da interface
+	@Override
+	public boolean estaDisponivel() {
+		if (Produto.listaProdutos.contains(this)) {
+			return true;
+		}
+		return false;
+	}
+	
+	// Getters/setters
 	public int getIdProduto() {
 		return idProduto;
 	}

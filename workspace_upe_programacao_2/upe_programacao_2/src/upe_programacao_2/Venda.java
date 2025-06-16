@@ -2,11 +2,10 @@ package upe_programacao_2;
 
 import java.util.Scanner;
 
-// Vai conectar com Historico, Compra, Produto, Funcionario, Cliente	
-// Retorna true/false e Main gerencia mensagem de erro/sucesso
 
 public class Venda {
 	
+	// Métodos retornam true/false e Main gerencia mensagem de erro/sucesso
 	public static boolean realizarVenda() {
 		Cliente cliente = Cliente.selecionarCliente();
 		Funcionario funcionario = Funcionario.selecionarFuncionario();
