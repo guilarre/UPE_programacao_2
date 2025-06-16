@@ -2,7 +2,6 @@ package upe_programacao_2;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 import enums.Status;
 import upe_programacao_2.Compra.CompraProduto;
@@ -10,16 +9,17 @@ import upe_programacao_2.Compra.CompraProduto;
 public class Historico {
 	private static ArrayList<Compra> historico = new ArrayList<Compra>();
 	
-	// CRUD para historico
+	// CRUD
+	// CREATE para carregar .json
 	public static void addToHistorico(Compra compra) {
 		historico.add(compra);
 		System.out.println("Compra adicionada ao histórico com sucesso!");
 	}
+	// READ do objeto historico
 	public static ArrayList<Compra> getHistorico() {
 		return historico;
 	}
-	
-	// Getter do histórico geral (chama toString() de cada objeto Compra)
+	// READ para exibir histórico geral ao usuário
 	public static String exibirHistoricoCompleto() {
 		if (historico.isEmpty()) {
 			return null;
@@ -30,8 +30,7 @@ public class Historico {
 		}
 		return String.valueOf(historicoCompleto);
 	}
-	
-	// Getter de uma compra específica do histórico
+	// READ para exibir compra específica ao usuário
 	public static String getCompraByIndex(int idx) {
 		try {
 			return String.format("Índice: %d\nCompra:\n%s", idx, historico.get(idx).toString());
@@ -39,12 +38,9 @@ public class Historico {
 			return null;
 		}
 	}
-	
-	// Getter para compras de um cliente específico
-	// TODO: quando tiver json dos clientes e funcionarios,
-	// extrair NOME do cliente/funcionário para mostrar no return em vez do idCliente???
+	// READ para exibir ao usuário compras de um cliente específico
 	public static String getHistoricoCliente(int idCliente) {
-		// Verificar primeiro se idCliente existe
+		// Checar primeiro se idCliente existe
 		ArrayList<Integer> idsDisponiveis = new ArrayList<Integer>();
 		for (Cliente cliente : Cliente.getListaClientes()) {
 			idsDisponiveis.add(cliente.getIdCliente());
@@ -52,6 +48,8 @@ public class Historico {
 		if (idsDisponiveis.contains(idCliente) == false) {
 			return String.format("ERRO! A id '%d' não foi registrada ainda", idCliente);
 		}
+		// Existindo, pegar nome do cliente
+		String nomeCliente = Cliente.getClienteById(idCliente).getNome();
 		// Pegar histórico do cliente
 		StringBuilder historicoCliente = new StringBuilder();
 		for (int i = 0; i < historico.size(); i++) {
@@ -64,15 +62,16 @@ public class Historico {
 			return String.format("ERRO! O cliente de id '%d' ainda não possui compras registradas", idCliente);
 		}
 		return String.format("""
-Compras do cliente de id '%d':
+				
+Compras de %s (id: '%d'):
 
 %s
-""", idCliente, historicoCliente);
+
+""", nomeCliente, idCliente, String.valueOf(historicoCliente));
 	}
-	
-	// Getter para vendas de um funcionário específico
+	// READ para exibir ao usuário vendas de um funcionário específico
 	public static String getHistoricoFuncionario(int idFuncionario) {
-		// Verificar primeiro se idFuncionario existe
+		// Checar primeiro se idFuncionario existe
 		ArrayList<Integer> idsDisponiveis = new ArrayList<Integer>(); 
 		for (Funcionario funcionario : Funcionario.getListaFuncionarios()) {
 			idsDisponiveis.add(funcionario.getIdFuncionario());
@@ -80,6 +79,8 @@ Compras do cliente de id '%d':
 		if (idsDisponiveis.contains(idFuncionario) == false) {
 			return String.format("ERRO! A id '%d' não foi registrada ainda", idFuncionario); 
 		}
+		// Existindo, pegar nome do cliente
+		String nomeFuncionario = Funcionario.getFuncionarioById(idFuncionario).getNome();
 		// Pegar histórico do funcionário
 		StringBuilder historicoFuncionario = new StringBuilder();
 		for (int i = 0; i < historico.size(); i++) {
@@ -93,19 +94,21 @@ Compras do cliente de id '%d':
 		}
 		return String.format("""
 				
-Vendas do funcionário de id '%d':
+Vendas de %s (id '%d'):
 
 %s
 
-""", idFuncionario, historicoFuncionario);
+""", nomeFuncionario, idFuncionario, String.valueOf(historicoFuncionario));
 	}
-	
+	// UPDATE
 	public static void cancelarCompra(int idx) {
-		Compra compraACancelar = historico.get(idx);			
+		Compra compraACancelar = historico.get(idx);
+		// Alterando qtd em estoque após cancelar
+		Compra.incrementarEstoque(compraACancelar.getListaCompraProdutos());
 		compraACancelar.setStatus(Status.CANCELADA);
 	}
-	
-	// Gerar relatório
+
+	// Gerar relatório do mês
 	public static String gerarRelatorio() {
 		ArrayList<Compra> comprasMes = new ArrayList<Compra>();
 		for (Compra compra : historico) {
@@ -113,11 +116,10 @@ Vendas do funcionário de id '%d':
 				comprasMes.add(compra);
 			}
 		}
-		
 		int qtdCompradaMes = 0;
 		double totalCompradoMes = 0;
 		for (Compra compra : comprasMes) {
-			for (CompraProduto compraProduto : compra.getListaProdutos()) {
+			for (CompraProduto compraProduto : compra.getListaCompraProdutos()) {
 				qtdCompradaMes += compraProduto.getQtdComprada();
 			}
 			totalCompradoMes += compra.getTotal();
@@ -127,7 +129,7 @@ Vendas do funcionário de id '%d':
 ############ Relatório do mês ############
 
 Foram realizadas %d compras neste mês,
-Totalizando R$ %.2f.
+Totalizando: R$ %.2f.
 
 """, qtdCompradaMes, totalCompradoMes);
 	}

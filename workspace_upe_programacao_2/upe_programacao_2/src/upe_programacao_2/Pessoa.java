@@ -22,7 +22,7 @@ public abstract class Pessoa {
 		}
 		this.cpf = cpf;
 		if (validarTelefone(telefone) == false) {
-			throw new IllegalArgumentException("ERRO: Telefone inválido! Escreva o DDD e o número.");
+			throw new IllegalArgumentException("ERRO: Telefone inválido! Escreva o DDD + número (e.g. 00-000000000).");
 		}
 		this.telefone = telefone;
 		if (validarEmail(email) == false) {
@@ -79,12 +79,12 @@ public abstract class Pessoa {
 		this.endereco = endereco;
 	}
 	public String getAniversario() {
-		String formatterString = "dd/MM/yyyy";
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern(formatterString);
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 		return aniversario.format(formatter);
 	}
-	public void setAniversario(LocalDate aniversario) {
-		this.aniversario = aniversario;
+	public void setAniversario(String aniversarioString) {
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		this.aniversario = LocalDate.parse(aniversarioString, formatter);
 	}
 	public String getGenero() {
 		return genero;

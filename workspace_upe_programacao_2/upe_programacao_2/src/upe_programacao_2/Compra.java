@@ -16,22 +16,22 @@ public class Compra {
 	private int idCliente;
 	private int idFuncionario;
 	private LocalDateTime dataHora;
-	private ArrayList<CompraProduto> listaProdutos = null;
+	private ArrayList<CompraProduto> listaCompraProdutos = null;
 	private double subtotal = 0;
 	private double desconto = 1;
 	private double total = 0;
 	private Pagamento pagamento = null;
 	private Status status = Status.EM_PROCESSAMENTO;
 	
-	// TODO: precisa passar listaProdutos(ArrayList de CompraProduto) ao criar Compra
-	public Compra(int idCliente, int idFuncionario, ArrayList<CompraProduto> listaProdutos, double subtotal, double desconto, Pagamento pagamento) {
+	// TODO: precisa passar listaCompraProdutos ao criar Compra
+	public Compra(int idCliente, int idFuncionario, ArrayList<CompraProduto> listaCompraProdutos, double desconto, Pagamento pagamento) {
 		idCompra = count.incrementAndGet();
 		this.idCliente = idCliente;
 		this.idFuncionario = idFuncionario;
-		this.dataHora = LocalDateTime.now();
-		this.listaProdutos = listaProdutos;
-		for (CompraProduto compraProduto : listaProdutos) {
-			this.subtotal += compraProduto.getTotal();			
+		dataHora = LocalDateTime.now();
+		this.listaCompraProdutos = listaCompraProdutos;
+		for (CompraProduto compraProduto : listaCompraProdutos) {
+			subtotal += compraProduto.getTotal();
 		}
 		if (desconto != 0) {
 			// Math.abs para deixar positivo
@@ -39,12 +39,17 @@ public class Compra {
 		}
 		this.total = subtotal * desconto;
 		this.pagamento = pagamento;
+		// Alterando qtd em estoque após sucesso
+		Compra.decrementarEstoque(this.listaCompraProdutos);
 		status = Status.SUCESSO;
 		// Salvar compra no histórico
 		Historico.addToHistorico(this);
 	}
 	
-	//getters and setters
+	// Getters/setters
+	public int getIdCompra() {
+		return idCompra;
+	}
 	public int getIdCliente() {
 		return idCliente;
 	}
@@ -65,8 +70,19 @@ public class Compra {
 	public LocalDateTime getObjetoDataHora() {
 		return dataHora;
 	}
-	public void setDataHora(LocalDateTime dataHora) {
-		this.dataHora = dataHora;
+	public double getSubtotal() {
+		return subtotal;
+	}
+	public double getDesconto() {
+		return desconto;
+	}
+	public void setDesconto(double desconto) {
+		this.desconto = desconto;
+		// Atualizando o total após alterar desconto
+		total = subtotal * this.desconto;
+	}
+	public double getTotal() {
+		return total;
 	}
 	public Pagamento getPagamento() {
 		return pagamento;
@@ -108,32 +124,12 @@ public class Compra {
 				return "ERRO! Status ainda não registrado";
 		}
 	}
-	public double getSubtotal() {
-		return subtotal;
-	}
-	public void setSubtotal(double subtotal) {
-		this.subtotal = subtotal;
-	}
-	public double getDesconto() {
-		return desconto;
-	}
-	public void setDesconto(double desconto) {
-		this.desconto = desconto;
-	}
-	public double getTotal() {
-		return total;
-	}
-	public void setTotal(double total) {
-		this.total = total;
-	}
 	
 	// Getter para CRIAR e retornar objeto Compra novo (usado pela Main)
 	public static ArrayList<CompraProduto> getCompraProdutoNovo() {
 		// TODO: case default???
-		// Menu para selecionar modo de busca
 		// TEST: espaçamento correto na UI
-		// TODO: falta passar o desconto para cada produto e para total da compra
-		ArrayList<CompraProduto> listaProdutos = new ArrayList<CompraProduto>();
+		ArrayList<CompraProduto> listaCompraProdutos = new ArrayList<CompraProduto>();
 		Produto produtoSelecionado = null;
 		double desconto = 1;
 		int qtdComprada = 0;
@@ -168,7 +164,7 @@ Selecione o(s) produto(s):
 					System.out.println("Digite a quantidade que será comprada: ");
 					qtdComprada = sc.nextInt();
 					compraProduto = new Compra.CompraProduto(produtoSelecionado, qtdComprada, desconto);
-					listaProdutos.add(compraProduto);
+					listaCompraProdutos.add(compraProduto);
 					break;
 				case 2:
 					// Selecionando o produto pelo nome
@@ -183,36 +179,34 @@ Selecione o(s) produto(s):
 					System.out.println("Digite a quantidade que será comprada: ");
 					qtdComprada = sc.nextInt();
 					compraProduto = new Compra.CompraProduto(produtoSelecionado, qtdComprada, desconto);
-					listaProdutos.add(compraProduto);
+					listaCompraProdutos.add(compraProduto);
 					break;
 				case 3:
 					sc.close();
-					return listaProdutos;
+					return listaCompraProdutos;
 				case 0:
 					System.out.println("Operação cancelada!");
 					break loopSelecaoProdutos;
+				default:
+					System.out.println("ERRO! Opção inválida");
+					break;
 			}
 		}
 		sc.close();
 		return null;
 	}
 	public static Compra getCompraNova(Cliente cliente, Funcionario funcionario) {
-		// Setup
-		ArrayList<CompraProduto> listaProdutos = Compra.getCompraProdutoNovo();
-		if (listaProdutos == null) {
+		// listaCompraProdutos
+		ArrayList<CompraProduto> listaCompraProdutos = Compra.getCompraProdutoNovo();
+		if (listaCompraProdutos == null) {
 			return null;
 		}
-		double subtotal = 0;
-		Pagamento pagamento = null;
 		Scanner sc = new Scanner(System.in);
-		// Subtotal
-		for (CompraProduto compraProduto : listaProdutos) {
-			subtotal += compraProduto.getTotal();
-		}
 		// Desconto
 		System.out.println("Digite o desconto DA COMPRA em porcentagem, se aplicável (e.g. 12.5).\nSe não houver desconto, digite 0: ");
 		double desconto = sc.nextDouble();
 		// Pagamento (forma de pagamento)
+		Pagamento pagamento = null;
 		System.out.println("""
 
 Escolha a forma de pagamento:
@@ -243,21 +237,43 @@ Escolha a forma de pagamento:
 				break;
 		}
 		sc.close();
-		// Retornar objeto compra
-		Compra compra = new Compra(cliente.getIdCliente(), funcionario.getIdFuncionario(), listaProdutos, subtotal, desconto, pagamento);
+		// Criar e retornar objeto Compra
+		Compra compra = new Compra(cliente.getIdCliente(), funcionario.getIdFuncionario(), listaCompraProdutos, desconto, pagamento);
 		return compra;
 	}
 	
-	// TODO: resto dos CRUD de listaProdutos
-	public ArrayList<CompraProduto> getListaProdutos() {
-		return listaProdutos;
+	// ListaCompraProdutos
+	public ArrayList<CompraProduto> getListaCompraProdutos() {
+		return listaCompraProdutos;
 	}
-	public double getTotalListaProdutos() {
+	public double getTotalListaCompraProdutos() {
 		double total = 0;
-		for (CompraProduto compraProduto : listaProdutos) {
+		for (CompraProduto compraProduto : listaCompraProdutos) {
 			total += compraProduto.getTotal();
 		}
 		return total;
+	}
+	
+	// Chamado após compra ter sucesso
+	public static void decrementarEstoque(ArrayList<CompraProduto> listaCompraProdutos) {
+		for (CompraProduto compraProduto : listaCompraProdutos) {
+			Produto produto = compraProduto.getProduto();
+			int qtdEmEstoqueAtual = produto.getQtdEstoque();
+			int qtdComprada = compraProduto.getQtdComprada();
+			int qtdEmEstoqueNova = qtdEmEstoqueAtual - qtdComprada;
+			produto.setQtdEstoque(qtdEmEstoqueNova);
+		}
+	}
+	
+	// Chamado após compra ser cancelada
+	public static void incrementarEstoque(ArrayList<CompraProduto> listaCompraProdutos) {
+		for (CompraProduto compraProduto : listaCompraProdutos) {
+			Produto produto = compraProduto.getProduto();
+			int qtdEmEstoqueAtual = produto.getQtdEstoque();
+			int qtdComprada = compraProduto.getQtdComprada();
+			int qtdEmEstoqueNova = qtdEmEstoqueAtual + qtdComprada;
+			produto.setQtdEstoque(qtdEmEstoqueNova);
+		}
 	}
 	
 	@Override 
@@ -291,7 +307,7 @@ Status: '%s'
 				// Math.abs para deixar positivo
 				this.desconto = Math.abs(desconto - 100) / 100;
 			}
-			this.total = (produto.getValor() * qtdComprada) * desconto;
+			this.total = produto.getValor() * qtdComprada * desconto;
 		}
 		
 		//Getters and Setters
@@ -300,24 +316,27 @@ Status: '%s'
 		}
 		public void setProduto(Produto produto) {
 			this.produto = produto;
+			// Atualizando total após alterar produto
+			total = this.produto.getValor() * qtdComprada * desconto;
 		}
 		public int getQtdComprada() {
 			return qtdComprada;
 		}
 		public void setQtdComprada(int qtdComprada) {
 			this.qtdComprada = qtdComprada;
+			// Atualizando total após alterar qtdComprada
+			total = produto.getValor() * this.qtdComprada * desconto;
 		}
 		public double getDesconto() {
 			return desconto;
 		}
 		public void setDesconto(int desconto) {
 			this.desconto = desconto;
+			// Atualizando total após alterar o produto
+			total = produto.getValor() * qtdComprada * this.desconto;
 		}
 		public double getTotal() {
 			return total;
-		}
-		public void setTotal(double total) {
-			this.total = total;
 		}
 
 		@Override

@@ -7,6 +7,7 @@ public class Main {
 	public static void main(String[] args) {
 		// TODO: Falta verificar se tem todos os CRUD na main
 		// TODO: comentar main
+		// TEST: espaçamento correto na UI
 		// Carregar arquivos em memória
 		JsonReader.carregarClientes();
 		JsonReader.carregarFuncionarios();
@@ -26,60 +27,280 @@ public class Main {
 						System.out.println(Menu.menuClientes);
 						opcao = sc.nextInt();
 						switch (opcao) {
-						// Exibir todos os clientes
-						case 1:
-							System.out.println(Cliente.getClientes());
-							break;
-						// Pesquisar um cliente
-						case 2:
-							cliente = Cliente.selecionarCliente();
-							if (cliente != null) {
-								System.out.println(cliente.toString());
-							} else {
-								System.out.println("ERRO! Cliente inexistente");
-							}
-							break;
-						// Exibir histórico de compras de um cliente
-						case 3:
-							cliente = Cliente.selecionarCliente();
-							if (cliente != null) {
-								System.out.println(Historico.getHistoricoCliente(cliente.getIdCliente()));
-							} else {
-								System.out.println("Operação cancelada!");
-							}
-							break;
-						// Registrar cliente
-						case 4:
-							Cliente.getClienteNovo();
-							break;
-						// Retornar ao menu principal
-						case 0:
-							break loopCliente;
-						default:
-							System.out.println("ERRO! Opção inválida");
-							break;
+							// Exibir todos os clientes
+							case 1:
+								System.out.println(Cliente.getClientes());
+								break;
+							// Exibir informações de um cliente
+							case 2:
+								cliente = Cliente.selecionarCliente();
+								if (cliente != null) {
+									System.out.println(cliente.toString());
+								} else {
+									System.out.println("ERRO! Cliente inexistente");
+								}
+								break;
+							// Exibir histórico de compras de um cliente
+							case 3:
+								cliente = Cliente.selecionarCliente();
+								if (cliente != null) {
+									System.out.println(Historico.getHistoricoCliente(cliente.getIdCliente()));
+								} else {
+									System.out.println("Operação cancelada!");
+								}
+								break;
+							// Registrar um cliente
+							case 4:
+								Cliente.getClienteNovo();
+								break;
+							// Modificar um cliente
+							case 5:
+								Cliente clienteModificado = null;
+								Cliente clienteAModificar = Cliente.selecionarCliente();
+								if (clienteAModificar != null) {
+									loopModificarCliente: while (true) {
+										System.out.println(Menu.menuModificarCliente);
+										opcao = sc.nextInt();
+										switch (opcao) {
+											case 1:
+												clienteModificado = Cliente.modificarCliente(clienteAModificar, opcao);
+												if (clienteModificado == null) {
+													System.out.println("Modificação cancelada!");
+												}
+												System.out.println(String.format("""
+
+Cliente modificado com sucesso:
+
+%s
+
+""", clienteModificado.toString()));
+												break;
+											case 2:
+												clienteModificado = Cliente.modificarCliente(clienteAModificar, opcao);
+												if (clienteModificado == null) {
+													System.out.println("Modificação cancelada!");
+												}
+												System.out.println(String.format("""
+
+Cliente modificado com sucesso:
+
+%s
+
+""", clienteModificado.toString()));
+												break;
+											case 3:
+												clienteModificado = Cliente.modificarCliente(clienteAModificar, opcao);
+												if (clienteModificado == null) {
+													System.out.println("Modificação cancelada!");
+												}
+												System.out.println(String.format("""
+
+Cliente modificado com sucesso:
+
+%s
+
+""", clienteModificado.toString()));
+												break;
+											case 4:
+												clienteModificado = Cliente.modificarCliente(clienteAModificar, opcao);
+												if (clienteModificado == null) {
+													System.out.println("Modificação cancelada!");
+												}
+												System.out.println(String.format("""
+
+Cliente modificado com sucesso:
+
+%s
+
+""", clienteModificado.toString()));
+												break;
+											case 5:
+												clienteModificado = Cliente.modificarCliente(clienteAModificar, opcao);
+												if (clienteModificado == null) {
+													System.out.println("Modificação cancelada!");
+												}
+												System.out.println(String.format("""
+
+Cliente modificado com sucesso:
+
+%s
+
+""", clienteModificado.toString()));
+												break;
+											case 6:
+												clienteModificado = Cliente.modificarCliente(clienteAModificar, opcao);
+												if (clienteModificado == null) {
+													System.out.println("Modificação cancelada!");
+												}
+												System.out.println(String.format("""
+
+Cliente modificado com sucesso:
+
+%s
+
+""", clienteModificado.toString()));
+												break;
+											case 0:
+												break loopModificarCliente;
+											default:
+												System.out.println("ERRO! Opção inválida");
+												break;
+										}
+									}
+								} else {
+									System.out.println("ERRO! Cliente inexistente");
+								}
+								break;
+							case 6:
+								Cliente clienteARemover = Cliente.selecionarCliente();
+								if (clienteARemover != null) {
+									Cliente.removerCliente(clienteARemover);
+								} else {
+									System.out.println("ERRO! Cliente inexistente");
+								}
+								break;
+							// Retornar ao menu principal
+							case 0:
+								break loopCliente;
+							default:
+								System.out.println("ERRO! Opção inválida");
+								break;
 						}
 					}
 					break;
 				// Menu funcionários
 				case 2:
+					Funcionario funcionario = null;
 					loopFuncionario: while (true) {
 						System.out.println(Menu.menuFuncionarios);
 						opcao = sc.nextInt();
 						switch (opcao) {
-						// Exibir funcionários
+						// Exibir todos os funcionários
 						case 1:
 							System.out.println(Funcionario.getFuncionarios());
 							break;
-						// Exibir histórico de vendas de um funcionário
+						// Exibir informações de um funcionário
 						case 2:
-							System.out.println("Digite o id do Funcionário: ");
-							int idFuncionario = sc.nextInt();
-							System.out.println(Historico.getHistoricoFuncionario(idFuncionario));
+							funcionario = Funcionario.selecionarFuncionario();
+							if (funcionario != null) {
+								System.out.println(funcionario.toString());
+							} else {
+								System.out.println("ERRO! Funcionário inexistente");
+							}
 							break;
-						// Registrar funcionário
+						// Exibir histórico de vendas de um funcionário
 						case 3:
+							funcionario = Funcionario.selecionarFuncionario();
+							if (funcionario != null) {
+								System.out.println(Historico.getHistoricoFuncionario(funcionario.getIdFuncionario()));
+							} else {
+								System.out.println("Operação cancelada!");
+							}
+							break;
+						// Registrar um funcionário
+						case 4:
 							Funcionario.getFuncionarioNovo();
+							break;
+						// Modificar um funcionário
+						case 5:
+							Funcionario funcionarioModificado = null;
+							Funcionario funcionarioAModificar = Funcionario.selecionarFuncionario();
+							if (funcionarioAModificar != null) {
+								loopModificarFuncionario: while (true) {
+									System.out.println(Menu.menuModificarFuncionario);
+									opcao = sc.nextInt();
+									switch (opcao) {
+										case 1:
+											funcionarioModificado = Funcionario.modificarFuncionario(funcionarioAModificar, opcao);
+											if (funcionarioModificado == null) {
+												System.out.println("Modificação cancelada!");
+											}
+											System.out.println(String.format("""
+
+Funcionario modificado com sucesso:
+
+%s
+
+""", funcionarioModificado.toString()));
+											break;
+										case 2:
+											funcionarioModificado = Funcionario.modificarFuncionario(funcionarioAModificar, opcao);
+											if (funcionarioModificado == null) {
+												System.out.println("Modificação cancelada!");
+											}
+											System.out.println(String.format("""
+
+Funcionario modificado com sucesso:
+
+%s
+
+""", funcionarioModificado.toString()));
+											break;
+										case 3:
+											funcionarioModificado = Funcionario.modificarFuncionario(funcionarioAModificar, opcao);
+											if (funcionarioModificado == null) {
+												System.out.println("Modificação cancelada!");
+											}
+											System.out.println(String.format("""
+
+Funcionario modificado com sucesso:
+
+%s
+
+""", funcionarioModificado.toString()));
+											break;
+										case 4:
+											funcionarioModificado = Funcionario.modificarFuncionario(funcionarioAModificar, opcao);
+											if (funcionarioModificado == null) {
+												System.out.println("Modificação cancelada!");
+											}
+											System.out.println(String.format("""
+
+Funcionario modificado com sucesso:
+
+%s
+
+""", funcionarioModificado.toString()));
+											break;
+										case 5:
+											funcionarioModificado = Funcionario.modificarFuncionario(funcionarioAModificar, opcao);
+											if (funcionarioModificado == null) {
+												System.out.println("Modificação cancelada!");
+											}
+											System.out.println(String.format("""
+
+Funcionario modificado com sucesso:
+
+%s
+
+""", funcionarioModificado.toString()));
+											break;
+										case 6:
+											funcionarioModificado = Funcionario.modificarFuncionario(funcionarioAModificar, opcao);
+											if (funcionarioModificado == null) {
+												System.out.println("Modificação cancelada!");
+											}
+											System.out.println(String.format("""
+
+Funcionario modificado com sucesso:
+
+%s
+
+""", funcionarioModificado.toString()));
+											break;
+										case 0:
+											break loopModificarFuncionario;
+										default:
+											System.out.println("ERRO! Opção inválida");
+											break;
+									}
+								}
+							} else {
+								System.out.println("ERRO! Funcionario inexistente");
+							}
+							break;
+						// Remover um funcionário
+						case 6:
 							break;
 						// Retornar ao menu principal
 						case 0:
@@ -267,36 +488,11 @@ Produto modificado com sucesso:
 											break;
 										// Excluir produto do estoque
 										case 3:
-											loopRemoverProduto: while (true) {
-												Produto produtoARemover = null;
-												loopSelecionarProduto: while (true) {
-													System.out.println(Menu.menuRemoverProduto);
-													opcao = sc.nextInt();
-													switch (opcao) {
-														case 1:
-															System.out.println("Digite o id do produto: ");
-															int idProduto = sc.nextInt();
-															produtoARemover = Produto.getProdutoById(idProduto);
-															break;
-														case 2:
-															System.out.println("Digite o nome do produto: ");
-															String nomeProduto = sc.nextLine();
-															produtoARemover = Produto.getProdutoByNome(nomeProduto);
-															break;
-														case 0:
-															break loopRemoverProduto;
-														default:
-															System.out.println("ERRO! Opção inválida");
-															break;
-													}
-													break loopSelecionarProduto;
-												}
-												if (produtoARemover != null) {
-													Produto.removeProduto(produtoARemover);
-												} else {
-													System.out.println("ERRO! Produto inexistente");
-												}
-												break loopRemoverProduto;
+											Produto produtoARemover = Produto.selecionarProduto();
+											if (produtoARemover != null) {
+												Produto.removerProduto(produtoARemover);
+											} else {
+												System.out.println("ERRO! Produto inexistente");
 											}
 											break;
 										// Retornar ao menu anterior

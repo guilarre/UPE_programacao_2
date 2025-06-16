@@ -21,23 +21,82 @@ Selecione a opção desejada:
 	public static String menuClientes = """
 
 [1] = Exibir todos os clientes
-[2] = Pesquisar um cliente
+[2] = Exibir informações de um cliente
 [3] = Exibir histórico de compras de um cliente
-[4] = Registrar cliente
+[4] = Registrar um cliente
+[5] = Modificar um cliente
+[6] = Remover um cliente
 
 [0] = Retornar ao menu principal
 
 -> """;
 	
+	public static String menuSelecionarCliente = """
+
+[1] = Procurar cliente por seu id
+[2] = Procurar cliente por seu nome
+
+[0] = Retornar ao menu anterior
+
+""";
+	
+	public static String menuModificarCliente = """
+
+O que deseja alterar?
+
+[1] = Nome
+[2] = CPF
+[3] = Telefone
+[4] = Email
+[5] = Preferência de comunicação
+[6] = Endereço
+[7] = Aniversário
+[8] = Gênero
+
+[0] = Retornar ao menu anterior
+
+""";
+	
 	public static String menuFuncionarios = """
 
-[1] = Exibir funcionários
-[2] = Exibir histórico de vendas de um funcionário
-[3] = Registrar funcionário
+[1] = Exibir todos os funcionários
+[2] = Exibir informações de um funcionário
+[3] = Exibir histórico de vendas de um funcionário
+[4] = Registrar um funcionário
+[5] = Modificar um funcionário
+[6] = Remover um funcionário
 
 [0] = Retornar ao menu principal
 
 -> """;
+	
+	public static String menuSelecionarFuncionario = """
+
+[1] = Procurar funcionário por seu id
+[2] = Procurar funcionário por seu nome
+
+[0] = Retornar ao menu anterior
+
+""";
+	
+	public static String menuModificarFuncionario = """
+
+O que deseja alterar?
+
+[1] = Nome
+[2] = CPF
+[3] = Telefone
+[4] = Email
+[5] = Preferência de comunicação
+[6] = Endereço
+[7] = Aniversário
+[8] = Gênero
+[9] = Cargo
+[10] = Salário
+
+[0] = Retornar ao menu anterior
+
+""";
 	
 	public static String menuEstoque = """
 
@@ -72,17 +131,6 @@ Selecione a opção desejada:
 	public static String menuSelecionarProduto = """
 
 Qual produto deseja modificar?
-
-[1] = Procurar produto por seu id
-[2] = Procurar produto por seu nome
-
-[0] = Retornar ao menu anterior
-
-""";
-	
-	public static String menuRemoverProduto = """
-
-Qual produto deseja remover?
 
 [1] = Procurar produto por seu id
 [2] = Procurar produto por seu nome
@@ -126,24 +174,6 @@ O que deseja alterar?
 
 [0] = Retornar ao menu anterior
 
-""";
-	
-	public static String menuSelecionarCliente = """
-
-[1] = Procurar cliente por seu id
-[2] = Procurar cliente por seu nome
-
-[0] = Retornar ao menu anterior
-
-""";
-	
-	public static String menuSelecionarFuncionario = """
-
-[1] = Procurar funcionário por seu id
-[2] = Procurar funcionário por seu nome
-
-[0] = Retornar ao menu anterior
-
-""";
+""";	
 	
 }

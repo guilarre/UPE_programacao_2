@@ -9,7 +9,7 @@ public class Venda {
 	
 	public static boolean realizarVenda() {
 		Cliente cliente = Cliente.selecionarCliente();
-		Funcionario funcionario = Funcionario.getObjetoFuncionario();
+		Funcionario funcionario = Funcionario.selecionarFuncionario();
 		Compra compra = Compra.getCompraNova(cliente, funcionario);
 		if (compra != null) {
 			return true;
@@ -37,7 +37,7 @@ public class Venda {
 					return true;
 				// Pesquisar por funcionário
 				case 2:
-					Funcionario funcionario = Funcionario.getObjetoFuncionario();
+					Funcionario funcionario = Funcionario.selecionarFuncionario();
 					if (funcionario != null) {
 						Historico.getHistoricoFuncionario(funcionario.getIdFuncionario());
 					} else {

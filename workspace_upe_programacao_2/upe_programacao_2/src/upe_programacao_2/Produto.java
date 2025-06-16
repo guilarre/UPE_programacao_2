@@ -41,7 +41,7 @@ public class Produto {
 	public String getNomeProduto() {
 		return nomeProduto;
 	}
-	public void setNome(String nomeProduto) {
+	public void setNomeProduto(String nomeProduto) {
 		this.nomeProduto = nomeProduto;
 	}
 	public String getDescricao() {
@@ -91,6 +91,8 @@ public class Produto {
 	public void setQtdEstoque(int qtdEstoque) {
 		this.qtdEstoque = qtdEstoque;
 	}
+	
+	// Getter para selecionar objeto Produto
 	public static Produto getProdutoById(int idProduto) {
 		for (Produto produto : Produto.getListaProdutos()) {
 			if (produto.getIdProduto() == idProduto) {
@@ -108,7 +110,8 @@ public class Produto {
 		return null;
 	}
 
-	// Getter para CRIAR e retornar objeto Produto novo (usado pela Main)
+	// CRUD para produto
+	// CREATE e retornar objeto Produto novo (usado pela Main)
 	public static Produto getProdutoNovo() {
 		// Setup
 		Scanner sc = new Scanner(System.in);
@@ -159,14 +162,14 @@ Selecione a categoria do produto:
 		sc.close();
 		return produtoNovo;
 	}
-	
+	// READ
 	public static Produto selecionarProduto() {
 		// Setup
 		Produto produto = null;
-		int opcao;
 		Scanner sc = new Scanner(System.in);
+		// Prompts
 		System.out.println(Menu.menuSelecionarProduto);
-		opcao = sc.nextInt();
+		int opcao = sc.nextInt();
 		switch (opcao) {
 			case 1:
 				System.out.println("Digite o id do produto: ");
@@ -184,11 +187,12 @@ Selecione a categoria do produto:
 		sc.close();
 		return produto;
 	}
-
+	// UPDATE
 	public static Produto modificarProduto(Produto produtoAModificar, int opcao) {
 		// Setup
 		Scanner sc = new Scanner(System.in);
 		Produto produtoModificado = null;
+		char confirmacao = 'n';
 		// Prompts
 		switch (opcao) {
 			// SKU
@@ -209,7 +213,7 @@ SKU novo: %s
 Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser revertida):
 
 """, produtoAModificar, skuAtual, skuNovo));
-				char confirmacao = sc.next().charAt(0);
+				confirmacao = sc.next().charAt(0);
 				sc.close();
 				if (Character.toLowerCase(confirmacao) == 's') {
 					produtoAModificar.setSku(skuNovo);
@@ -239,7 +243,7 @@ Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser r
 				confirmacao = sc.next().charAt(0);
 				sc.close();
 				if (Character.toLowerCase(confirmacao) == 's') {
-					produtoAModificar.setNome(nomeNovo);
+					produtoAModificar.setNomeProduto(nomeNovo);
 					produtoModificado = Produto.getProdutoById(produtoAModificar.getIdProduto());
 					return produtoModificado;
 				} else {
@@ -380,12 +384,17 @@ Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser r
 				} else {
 					return produtoModificado;
 				}
+			case 0:
+				sc.close();
+				return produtoModificado;
 			default:
+				System.out.println("ERRO! Opção inválida");
 				sc.close();
 				return produtoModificado;
 		}
 	}
-	public static void removeProduto(Produto produto) {
+	// REMOVE
+	public static void removerProduto(Produto produto) {
 		// Confirmar operação
 		Scanner sc = new Scanner(System.in);
 		System.out.println(String.format("""
@@ -405,7 +414,7 @@ Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser r
 		}
 	}
 	
-	// listaProdutos
+	// Métodos para listaProdutos (usados para carregar/atualizar estoque em JsonReader e Main)
 	public static ArrayList<Produto> getListaProdutos() {
 		return listaProdutos;
 	}
