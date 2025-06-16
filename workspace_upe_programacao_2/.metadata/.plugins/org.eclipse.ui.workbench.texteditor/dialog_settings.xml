@@ -2,8 +2,23 @@
 <section name="Workbench">
 	<item key="hasShownOverlayPopupBefore" value="true"/>
 	<section name="java.lang.Class">
-		<item key="replaceBarOpen" value="false"/>
+		<item key="replaceBarOpen" value="true"/>
 		<list key="findhistory">
+			<item value="default"/>
+			<item value="Opção inválida"/>
+			<item value="getObjetoCliente"/>
+			<item value="getClienteById"/>
+			<item value="catego"/>
+			<item value="Nova"/>
+			<item value="getProdutoById"/>
+			<item value="confirmacao = sc.next().charAt(0);"/>
+			<item value="cancelada"/>
+			<item value="ERRO! "/>
+			<item value="getCategoriaValue"/>
+			<item value="calça"/>
+		</list>
+		<list key="replacehistory">
+			<item value="cancelada!"/>
 		</list>
 	</section>
 </section>

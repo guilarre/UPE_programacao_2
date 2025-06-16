@@ -48,14 +48,6 @@ public class Funcionario extends Pessoa {
 				return "ERRO! Cargo ainda não registrado";
 		}
 	}
-	// TODO: Checar se precisa mesmo disso
-	public static String getTodosCargos() {
-		StringBuilder stringBuilder = new StringBuilder();
-		for (Cargo cargo : Cargo.values()) {
-			stringBuilder.append(Funcionario.getCargoValue(cargo));
-		}
-		return String.valueOf(stringBuilder);
-	}
 	public double getSalario() {
 		return salario;
 	}

@@ -50,7 +50,7 @@ public class Cliente extends Pessoa {
 		// TEST: esse throw new quebra funcionamento da main?
 		throw new IllegalArgumentException(String.format("ERRO! Não existe cliente de nome '%s'", nomeCliente));
 	}
-	public static Cliente getObjetoCliente() {
+	public static Cliente selecionarCliente() {
 		// TODO: case default???
 		// Menu para selecionar modo de busca
 		// TEST: espaçamento correto na UI

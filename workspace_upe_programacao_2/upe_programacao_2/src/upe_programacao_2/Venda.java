@@ -8,7 +8,7 @@ import java.util.Scanner;
 public class Venda {
 	
 	public static boolean realizarVenda() {
-		Cliente cliente = Cliente.getObjetoCliente();
+		Cliente cliente = Cliente.selecionarCliente();
 		Funcionario funcionario = Funcionario.getObjetoFuncionario();
 		Compra compra = Compra.getCompraNova(cliente, funcionario);
 		if (compra != null) {
@@ -28,7 +28,7 @@ public class Venda {
 			switch (opcao) {
 				// Pesquisar por cliente
 				case 1:
-					Cliente cliente = Cliente.getObjetoCliente();
+					Cliente cliente = Cliente.selecionarCliente();
 					if (cliente != null) {
 						Historico.getHistoricoCliente(cliente.getIdCliente());
 					} else {

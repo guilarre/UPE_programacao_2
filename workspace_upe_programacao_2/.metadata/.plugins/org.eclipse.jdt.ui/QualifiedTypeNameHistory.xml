@@ -3,4 +3,7 @@
     <fullyQualifiedTypeName name="jdk.internal.misc.FileSystemOption"/>
     <fullyQualifiedTypeName name="jdk.internal.org.jline.terminal.TerminalBuilder.SystemOutput"/>
     <fullyQualifiedTypeName name="java.lang.IllegalArgumentException"/>
+    <fullyQualifiedTypeName name="upe_programacao_2.JsonWriter"/>
+    <fullyQualifiedTypeName name="upe_programacao_2.Funcionario"/>
+    <fullyQualifiedTypeName name="upe_programacao_2.Produto"/>
 </qualifiedTypeNameHistroy>

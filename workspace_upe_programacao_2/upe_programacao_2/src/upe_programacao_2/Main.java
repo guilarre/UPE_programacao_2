@@ -6,8 +6,6 @@ public class Main {
 
 	public static void main(String[] args) {
 		// TODO: Falta verificar se tem todos os CRUD na main
-		// TODO: configurar os default para os switch/case
-		// TODO: verificar breaks
 		// TODO: comentar main
 		// Carregar arquivos em memória
 		JsonReader.carregarClientes();
@@ -23,6 +21,7 @@ public class Main {
 			switch (opcao) {
 				// Menu clientes
 				case 1:
+					Cliente cliente = null;
 					loopCliente: while (true) {
 						System.out.println(Menu.menuClientes);
 						opcao = sc.nextInt();
@@ -31,21 +30,37 @@ public class Main {
 						case 1:
 							System.out.println(Cliente.getClientes());
 							break;
-						// Exibir histórico de compras de um cliente
+						// Pesquisar um cliente
 						case 2:
-							System.out.println("Digite o id do Cliente: ");
-							int idCliente = sc.nextInt();
-							System.out.println(Historico.getHistoricoCliente(idCliente));
+							cliente = Cliente.selecionarCliente();
+							if (cliente != null) {
+								System.out.println(cliente.toString());
+							} else {
+								System.out.println("ERRO! Cliente inexistente");
+							}
+							break;
+						// Exibir histórico de compras de um cliente
+						case 3:
+							cliente = Cliente.selecionarCliente();
+							if (cliente != null) {
+								System.out.println(Historico.getHistoricoCliente(cliente.getIdCliente()));
+							} else {
+								System.out.println("Operação cancelada!");
+							}
 							break;
 						// Registrar cliente
-						case 3:
+						case 4:
 							Cliente.getClienteNovo();
 							break;
 						// Retornar ao menu principal
 						case 0:
 							break loopCliente;
+						default:
+							System.out.println("ERRO! Opção inválida");
+							break;
 						}
 					}
+					break;
 				// Menu funcionários
 				case 2:
 					loopFuncionario: while (true) {
@@ -69,8 +84,12 @@ public class Main {
 						// Retornar ao menu principal
 						case 0:
 							break loopFuncionario;
+						default:
+							System.out.println("ERRO! Opção inválida");
+							break;
 						}
 					}
+					break;
 				// Menu estoque
 				case 3:
 					loopEstoque: while (true) {
@@ -79,6 +98,7 @@ public class Main {
 						switch (opcao) {
 							// Pesquisar um produto em estoque
 							case 1:
+								Produto produto = null;
 								loopPesquisarEstoque: while (true) {
 									System.out.println(Menu.menuPesquisarEstoque);
 									opcao = sc.nextInt();
@@ -87,19 +107,29 @@ public class Main {
 										case 1:
 											System.out.println("Digite o id do produto: ");
 											int idProduto = sc.nextInt();
-											System.out.println(Produto.getProdutoById(idProduto));
+											produto = Produto.getProdutoById(idProduto);
 											break;
 										// Pesquisar pelo nome do produto
 										case 2:
 											System.out.println("Digite o nome do produto: ");
 											String nomeProduto = sc.nextLine();
-											System.out.println(Produto.getProdutoByNome(nomeProduto));
+											produto = Produto.getProdutoByNome(nomeProduto);
 											break;
 										// Retornar ao menu anterior
 										case 0:
 											break loopPesquisarEstoque;
+										default:
+											System.out.println("ERRO! Opção inválida");
+											break;
 									}
+									if (produto != null) {
+										System.out.println(produto.toString());
+									} else {
+										System.out.println("ERRO! Produto inexistente");
+									}
+									break loopPesquisarEstoque;
 								}
+								break;
 							// Exibir todas as categorias
 							case 2:
 								System.out.println(String.format("""
@@ -112,8 +142,8 @@ Categorias disponíveis:
 								break;
 							// Exibir todo o estoque
 							case 3:
-								for (Produto produto : Produto.getListaProdutos()) {
-									System.out.println(produto);
+								for (Produto produtoAExibir : Produto.getListaProdutos()) {
+									System.out.println(produtoAExibir);
 								}
 								break;
 							// Gerenciar estoque
@@ -123,22 +153,19 @@ Categorias disponíveis:
 									opcao = sc.nextInt();
 									switch (opcao) {
 										// Adicionar produto novo ao estoque
-										// TODO: ajeitar pra usar enum
 										case 1:
-											System.out.println("Digite o código de estoque (SKU): ");
-											String sku = sc.nextLine();
-											System.out.println("Digite o nome do produto: ");
-											String nomeProduto = sc.nextLine();
-											System.out.println("Digite a descrição do produto: ");
-											String descricao = sc.nextLine();
-											System.out.println("Digite o valor do produto (e.g. 12.00): ");
-											double valor = sc.nextDouble();
-											System.out.println("Digite o id da categoria do produto: ");
-											idCategoria = sc.nextInt();
-											System.out.println("Digite a quantidade em estoque do produto: ");
-											int qtdEstoque = sc.nextInt();
-											Produto produtoNovo = new Produto(sku, nomeProduto, descricao, valor, idCategoria, qtdEstoque);
-											System.out.println(String.format("O produto foi adicionado com sucesso!\n\n%s", produtoNovo.toString()));
+											Produto produtoNovo = Produto.getProdutoNovo();
+											if (produtoNovo != null) {
+												System.out.println(String.format("""
+
+Produto adicionado com sucesso:
+
+%s
+
+""", produtoNovo.toString()));
+											} else {
+												System.out.println("ERRO! Operação cancelada");
+											}
 											break;
 										// Modificar produto no estoque
 										case 2:
@@ -152,7 +179,7 @@ Categorias disponíveis:
 														case 1:
 															produtoModificado = Produto.modificarProduto(produtoAModificar, opcao);
 															if (produtoModificado == null) {
-																System.out.println("ERRO! Modificação cancelada");
+																System.out.println("Modificação cancelada!");
 															}
 															System.out.println(String.format("""
 
@@ -165,7 +192,7 @@ Produto modificado com sucesso:
 														case 2:
 															produtoModificado = Produto.modificarProduto(produtoAModificar, opcao);
 															if (produtoModificado == null) {
-																System.out.println("ERRO! Modificação cancelada");
+																System.out.println("Modificação cancelada!");
 															}
 															System.out.println(String.format("""
 
@@ -178,7 +205,7 @@ Produto modificado com sucesso:
 														case 3:
 															produtoModificado = Produto.modificarProduto(produtoAModificar, opcao);
 															if (produtoModificado == null) {
-																System.out.println("ERRO! Modificação cancelada");
+																System.out.println("Modificação cancelada!");
 															}
 															System.out.println(String.format("""
 
@@ -191,7 +218,7 @@ Produto modificado com sucesso:
 														case 4:
 															produtoModificado = Produto.modificarProduto(produtoAModificar, opcao);
 															if (produtoModificado == null) {
-																System.out.println("ERRO! Modificação cancelada");
+																System.out.println("Modificação cancelada!");
 															}
 															System.out.println(String.format("""
 
@@ -204,7 +231,7 @@ Produto modificado com sucesso:
 														case 5:
 															produtoModificado = Produto.modificarProduto(produtoAModificar, opcao);
 															if (produtoModificado == null) {
-																System.out.println("ERRO! Modificação cancelada");
+																System.out.println("Modificação cancelada!");
 															}
 															System.out.println(String.format("""
 
@@ -217,7 +244,7 @@ Produto modificado com sucesso:
 														case 6:
 															produtoModificado = Produto.modificarProduto(produtoAModificar, opcao);
 															if (produtoModificado == null) {
-																System.out.println("ERRO! Modificação cancelada");
+																System.out.println("Modificação cancelada!");
 															}
 															System.out.println(String.format("""
 
@@ -231,6 +258,7 @@ Produto modificado com sucesso:
 															break loopModificarProduto;
 														default:
 															System.out.println("ERRO! Opção inválida");
+															break;
 													}
 												}
 											} else {
@@ -241,7 +269,6 @@ Produto modificado com sucesso:
 										case 3:
 											loopRemoverProduto: while (true) {
 												Produto produtoARemover = null;
-												// TODO: testar se throw new erro interrompe programa no caso de id/nome não existir.
 												loopSelecionarProduto: while (true) {
 													System.out.println(Menu.menuRemoverProduto);
 													opcao = sc.nextInt();
@@ -253,16 +280,21 @@ Produto modificado com sucesso:
 															break;
 														case 2:
 															System.out.println("Digite o nome do produto: ");
-															nomeProduto = sc.nextLine();
+															String nomeProduto = sc.nextLine();
 															produtoARemover = Produto.getProdutoByNome(nomeProduto);
 															break;
 														case 0:
 															break loopRemoverProduto;
+														default:
+															System.out.println("ERRO! Opção inválida");
+															break;
 													}
 													break loopSelecionarProduto;
 												}
 												if (produtoARemover != null) {
 													Produto.removeProduto(produtoARemover);
+												} else {
+													System.out.println("ERRO! Produto inexistente");
 												}
 												break loopRemoverProduto;
 											}
@@ -270,15 +302,21 @@ Produto modificado com sucesso:
 										// Retornar ao menu anterior
 										case 0:
 											break loopGerenciarEstoque;
+										default:
+											System.out.println("ERRO! Opção inválida");
+											break;
 									}
 								}
 								break;
 							// Retornar ao menu principal
 							case 0:
 								break loopEstoque;
+							default:
+								System.out.println("ERRO! Opção inválida");
+								break;
 						}
 					}
-				// TODO: Menu vendas
+					break;
 				case 4:
 					loopMenuVendas: while (true) {
 						System.out.println(Menu.menuVendas);
@@ -312,18 +350,29 @@ Produto modificado com sucesso:
 								break;
 							case 0:
 								break loopMenuVendas;
+							default:
+								System.out.println("ERRO! Opção inválida");
+								break;
 						}
 					}
+					break;
 				// TEST: Gerar relatório mensal
 				case 5:
 					Historico.gerarRelatorio();
 					break;
 				// Sair do sistema
 				case 0:
-					// TODO: Salvar tudo em json antes de fechar
-					System.out.println("Até logo!");
+					// TEST: Salvar tudo em json antes de fechar
 					sc.close();
+					System.out.println("Até logo!");
+					JsonWriter.salvarClientes(Cliente.getListaClientes());
+					JsonWriter.salvarFuncionarios(Funcionario.getListaFuncionarios());
+					JsonWriter.salvarEstoque(Produto.getListaProdutos());
+					JsonWriter.salvarHistorico(Historico.getHistorico());
 					break loopMain;
+				default:
+					System.out.println("ERRO! Opção inválida");
+					break;
 			}
 		}
 	}

@@ -21,14 +21,14 @@ Selecione a opção desejada:
 	public static String menuClientes = """
 
 [1] = Exibir todos os clientes
-[2] = Exibir histórico de compras de um cliente
-[3] = Registrar cliente
+[2] = Pesquisar um cliente
+[3] = Exibir histórico de compras de um cliente
+[4] = Registrar cliente
 
 [0] = Retornar ao menu principal
 
 -> """;
 	
-	// TODO: exibir todos os cargos
 	public static String menuFuncionarios = """
 
 [1] = Exibir funcionários

@@ -90,14 +90,6 @@ public class Compra {
 				return "ERRO! Forma de pagamento ainda não registrada";
 		}
 	}
-	// TODO: Checar se precisa mesmo disso
-	public static String getTodosPagamentos() {
-		StringBuilder stringBuilder = new StringBuilder();
-		for (Pagamento pagamento : Pagamento.values()) {
-			stringBuilder.append(Compra.getPagamentoValue(pagamento));
-		}
-		return String.valueOf(stringBuilder);
-	}
 	public Status getStatus() {
 		return status;
 	}
@@ -115,14 +107,6 @@ public class Compra {
 			default:
 				return "ERRO! Status ainda não registrado";
 		}
-	}
-	// TODO: Checar se precisa mesmo disso
-	public static String getTodosStatus() {
-		StringBuilder stringBuilder = new StringBuilder();
-		for (Status status : Status.values()) {
-			stringBuilder.append(Compra.getStatusValue(status));
-		}
-		return String.valueOf(stringBuilder);
 	}
 	public double getSubtotal() {
 		return subtotal;
@@ -210,11 +194,14 @@ Selecione o(s) produto(s):
 			}
 		}
 		sc.close();
-		return null; // TODO: em getObjetoCompra, reconhece se é null e cancela operação
+		return null;
 	}
 	public static Compra getCompraNova(Cliente cliente, Funcionario funcionario) {
 		// Setup
 		ArrayList<CompraProduto> listaProdutos = Compra.getCompraProdutoNovo();
+		if (listaProdutos == null) {
+			return null;
+		}
 		double subtotal = 0;
 		Pagamento pagamento = null;
 		Scanner sc = new Scanner(System.in);
