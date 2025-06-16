@@ -59,6 +59,7 @@ public class Venda {
 					break;
 			}
 		}
+		sc.close();
 		return false;
 	}
 	
@@ -71,6 +72,7 @@ public class Venda {
 		String compraACancelar = Historico.getCompraByIndex(idx);
 		if (compraACancelar == null) {
 			System.out.println(String.format("ERRO! Índice '%d' não existe", idx));
+			sc.close();
 			return false;
 		}
 		// Confirmar operação
@@ -82,6 +84,7 @@ Compra:
 
 Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser revertida):""", compraACancelar));
 		char confirmacao = sc.next().charAt(0);
+		sc.close();
 		if (Character.toLowerCase(confirmacao) == 's') {
 			Historico.cancelarCompra(idx);
 			return true;

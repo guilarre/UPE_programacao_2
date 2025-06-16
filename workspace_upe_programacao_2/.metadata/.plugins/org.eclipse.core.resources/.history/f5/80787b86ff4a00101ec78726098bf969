@@ -150,6 +150,7 @@ Selecione a categoria do produto:
 		int qtdEstoque = sc.nextInt();
 		produtoNovo = new Produto(sku, nomeProduto, descricao, valor, categoria, qtdEstoque);
 		System.out.println(String.format("O produto foi adicionado com sucesso!\n\n%s", produtoNovo.toString()));
+		sc.close();
 		return produtoNovo;
 	}
 	// READ para selecionar objeto Produto
@@ -193,6 +194,7 @@ Selecione a categoria do produto:
 				System.err.println("ERRO! Opção inválida");
 				break;
 		}
+		sc.close();
 		return produto;
 	}
 	// UPDATE
@@ -222,6 +224,7 @@ Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser r
 
 """, produtoAModificar, skuAtual, skuNovo));
 				confirmacao = sc.next().charAt(0);
+				sc.close();
 				if (Character.toLowerCase(confirmacao) == 's') {
 					produtoAModificar.setSku(skuNovo);
 					produtoModificado = Produto.getProdutoById(produtoAModificar.getIdProduto());
@@ -248,6 +251,7 @@ Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser r
 
 """, produtoAModificar, nomeAtual, nomeNovo));
 				confirmacao = sc.next().charAt(0);
+				sc.close();
 				if (Character.toLowerCase(confirmacao) == 's') {
 					produtoAModificar.setNomeProduto(nomeNovo);
 					produtoModificado = Produto.getProdutoById(produtoAModificar.getIdProduto());
@@ -274,6 +278,7 @@ Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser r
 
 """, produtoAModificar, descricaoAtual, descricaoNova));
 				confirmacao = sc.next().charAt(0);
+				sc.close();
 				if (Character.toLowerCase(confirmacao) == 's') {
 					produtoAModificar.setDescricao(descricaoNova);
 					produtoModificado = Produto.getProdutoById(produtoAModificar.getIdProduto());
@@ -299,6 +304,7 @@ Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser r
 
 """, produtoAModificar, valorAtual, valorNovo));
 				confirmacao = sc.next().charAt(0);
+				sc.close();
 				if (Character.toLowerCase(confirmacao) == 's') {
 					produtoAModificar.setValor(valorNovo);
 					produtoModificado = Produto.getProdutoById(produtoAModificar.getIdProduto());
@@ -356,6 +362,7 @@ Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser r
 
 """, produtoAModificar, categoriaAtual, categoriaNova));
 				confirmacao = sc.next().charAt(0);
+				sc.close();
 				if (Character.toLowerCase(confirmacao) == 's') {
 					produtoAModificar.setCategoria(categoriaNova);
 					produtoModificado = Produto.getProdutoById(produtoAModificar.getIdProduto());
@@ -382,6 +389,7 @@ Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser r
 
 """, produtoAModificar, qtdAtual, qtdNova));
 				confirmacao = sc.next().charAt(0);
+				sc.close();
 				if (Character.toLowerCase(confirmacao) == 's') {
 					produtoAModificar.setQtdEstoque(qtdNova);
 					produtoModificado = Produto.getProdutoById(produtoAModificar.getIdProduto());
@@ -390,9 +398,11 @@ Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser r
 					return produtoModificado;
 				}
 			case 0:
+				sc.close();
 				return produtoModificado;
 			default:
 				System.err.println("ERRO! Opção inválida");
+				sc.close();
 				return produtoModificado;
 		}
 	}
@@ -408,6 +418,7 @@ Produto:
 
 Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser revertida):""", produto));
 		char confirmacao = sc.next().charAt(0);
+		sc.close();
 		if (Character.toLowerCase(confirmacao) == 's') {
 			listaProdutos.remove(produto.getIdProduto());
 			System.out.println("Produto foi removido com sucesso!");

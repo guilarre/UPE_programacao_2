@@ -180,6 +180,7 @@ Selecione o(s) produto(s):
 					listaCompraProdutos.add(compraProduto);
 					break;
 				case 3:
+					sc.close();
 					return listaCompraProdutos;
 				case 0:
 					System.out.println("Operação cancelada!");
@@ -189,6 +190,7 @@ Selecione o(s) produto(s):
 					break;
 			}
 		}
+		sc.close();
 		return null;
 	}
 	public static Compra getCompraNova(Cliente cliente, Funcionario funcionario) {
@@ -235,6 +237,7 @@ Escolha a forma de pagamento:
 				System.err.println("ERRO! Opção inválida");
 				break;
 		}
+		sc.close();
 		// Criar e retornar objeto Compra
 		Compra compra = new Compra(cliente.getIdCliente(), funcionario.getIdFuncionario(), listaCompraProdutos, desconto, pagamento);
 		return compra;

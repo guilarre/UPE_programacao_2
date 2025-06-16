@@ -118,10 +118,12 @@ Escolha o cargo do funcionário:
 		}
 		System.out.println("Digite o salário do funcionário (e.g. 1459.90: ");
 		double salario = sc.nextDouble();
+		sc.close();
 		try {
 			funcionario = new Funcionario(nome, cpf, telefone, email, preferenciaComunicacao, endereco, aniversario, genero, cargo, salario);			
 		} catch (IllegalArgumentException e) {
 			System.err.println(e.getMessage());
+			sc.close();
 			return funcionario;
 		}
 		System.out.println("Funcionário registrado com sucesso!");
@@ -161,11 +163,13 @@ Escolha o cargo do funcionário:
 			case 1:
 				System.out.println("Digite o id do funcionário: ");
 				int idFuncionario = sc.nextInt();
+				sc.close();
 				System.out.println(String.format("Funcionário selecionado:\n\n%s", getFuncionarioById(idFuncionario)));
 				return Funcionario.getFuncionarioById(idFuncionario);
 			case 2:
 				System.out.println("Digite o nome do funcionário: ");
 				String nomeFuncionario = sc.nextLine();
+				sc.close();
 				System.out.println(String.format("Funcionário selecionado:\n\n%s", getFuncionarioByNome(nomeFuncionario)));
 				return Funcionario.getFuncionarioByNome(nomeFuncionario);
 			case 0:
@@ -175,6 +179,7 @@ Escolha o cargo do funcionário:
 				System.err.println("ERRO! Opção inválida");
 				break;
 		}
+		sc.close();
 		return null; // TODO: na Main, reconhece se é null e cancela operação
 	}
 	// UPDATE
@@ -204,6 +209,7 @@ Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser r
 
 """, funcionarioAModificar, nomeAtual, nomeNovo));
 				confirmacao = sc.next().charAt(0);
+				sc.close();
 				if (Character.toLowerCase(confirmacao) == 's') {
 					funcionarioAModificar.setNome(nomeNovo);
 					funcionarioModificado = Funcionario.getFuncionarioById(funcionarioAModificar.getIdFuncionario());
@@ -230,6 +236,7 @@ Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser r
 
 """, funcionarioAModificar, cpfAtual, cpfNovo));
 				confirmacao = sc.next().charAt(0);
+				sc.close();
 				if (Character.toLowerCase(confirmacao) == 's') {
 					funcionarioAModificar.setCpf(cpfNovo);
 					funcionarioModificado = Funcionario.getFuncionarioById(funcionarioAModificar.getIdFuncionario());
@@ -256,6 +263,7 @@ Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser r
 
 """, funcionarioAModificar, telefoneAtual, telefoneNovo));
 				confirmacao = sc.next().charAt(0);
+				sc.close();
 				if (Character.toLowerCase(confirmacao) == 's') {
 					funcionarioAModificar.setTelefone(telefoneNovo);
 					funcionarioModificado = Funcionario.getFuncionarioById(funcionarioAModificar.getIdFuncionario());
@@ -282,6 +290,7 @@ Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser r
 
 """, funcionarioAModificar, emailAtual, emailNovo));
 				confirmacao = sc.next().charAt(0);
+				sc.close();
 				if (Character.toLowerCase(confirmacao) == 's') {
 					funcionarioAModificar.setEmail(emailNovo);
 					funcionarioModificado = Funcionario.getFuncionarioById(funcionarioAModificar.getIdFuncionario());
@@ -308,6 +317,7 @@ Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser r
 
 """, funcionarioAModificar, preferenciaComunicacaoAtual, preferenciaComunicacaoNova));
 				confirmacao = sc.next().charAt(0);
+				sc.close();
 				if (Character.toLowerCase(confirmacao) == 's') {
 					funcionarioAModificar.setPreferenciaComunicacao(preferenciaComunicacaoNova);
 					funcionarioModificado = Funcionario.getFuncionarioById(funcionarioAModificar.getIdFuncionario());
@@ -334,6 +344,7 @@ Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser r
 
 """, funcionarioAModificar, enderecoAtual, enderecoNovo));
 				confirmacao = sc.next().charAt(0);
+				sc.close();
 				if (Character.toLowerCase(confirmacao) == 's') {
 					funcionarioAModificar.setEndereco(enderecoNovo);
 					funcionarioModificado = Funcionario.getFuncionarioById(funcionarioAModificar.getIdFuncionario());
@@ -360,6 +371,7 @@ Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser r
 
 """, funcionarioAModificar, aniversarioAtual, aniversarioNovo));
 				confirmacao = sc.next().charAt(0);
+				sc.close();
 				if (Character.toLowerCase(confirmacao) == 's') {
 					funcionarioAModificar.setAniversario(aniversarioNovo);
 					funcionarioModificado = Funcionario.getFuncionarioById(funcionarioAModificar.getIdFuncionario());
@@ -386,6 +398,7 @@ Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser r
 
 """, funcionarioAModificar, generoAtual, generoNovo));
 				confirmacao = sc.next().charAt(0);
+				sc.close();
 				if (Character.toLowerCase(confirmacao) == 's') {
 					funcionarioAModificar.setGenero(generoNovo);
 					funcionarioModificado = Funcionario.getFuncionarioById(funcionarioAModificar.getIdFuncionario());
@@ -439,6 +452,7 @@ Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser r
 
 """, funcionarioAModificar, cargoAtual, cargoNovo));
 				confirmacao = sc.next().charAt(0);
+				sc.close();
 				if (Character.toLowerCase(confirmacao) == 's') {
 					funcionarioAModificar.setCargo(cargoNovo);
 					funcionarioModificado = Funcionario.getFuncionarioById(funcionarioAModificar.getIdFuncionario());
@@ -465,6 +479,7 @@ Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser r
 
 """, funcionarioAModificar, salarioAtual, salarioNovo));
 				confirmacao = sc.next().charAt(0);
+				sc.close();
 				if (Character.toLowerCase(confirmacao) == 's') {
 					funcionarioAModificar.setSalario(salarioNovo);
 					funcionarioModificado = Funcionario.getFuncionarioById(funcionarioAModificar.getIdFuncionario());
@@ -473,9 +488,11 @@ Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser r
 					return funcionarioModificado;
 				}
 			case 0:
+				sc.close();
 				return funcionarioModificado;
 			default:
 				System.err.println("ERRO! Opção inválida");
+				sc.close();
 				return funcionarioModificado;
 		}
 	}
@@ -494,6 +511,7 @@ Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser r
 
 """, funcionario));
 		char confirmacao = sc.next().charAt(0);
+		sc.close();
 		if (Character.toLowerCase(confirmacao) == 's') {
 			listaFuncionarios.remove(funcionario.getIdFuncionario());
 			System.out.println("Funcionário foi removido com sucesso!");

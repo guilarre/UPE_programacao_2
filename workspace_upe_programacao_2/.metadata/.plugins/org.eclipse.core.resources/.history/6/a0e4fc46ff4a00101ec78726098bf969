@@ -58,9 +58,11 @@ public class Cliente extends Pessoa {
 				cliente = new Cliente(nome, cpf, telefone, email, preferenciaComunicacao, endereco, aniversario, genero);			
 			} catch (IllegalArgumentException e) {
 				System.err.println(e.getMessage());
+				sc.close();
 				return cliente;
 			}
 			System.out.println("Cliente registrado com sucesso!");
+			sc.close();
 			return cliente;
 		}
 	// READ para selecionar objeto Cliente
@@ -105,6 +107,7 @@ public class Cliente extends Pessoa {
 				System.err.println("ERRO! Opção inválida");
 				break;
 		}
+		sc.close();
 		return cliente;
 	}
 	// UPDATE
@@ -134,6 +137,7 @@ Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser r
 
 """, clienteAModificar, nomeAtual, nomeNovo));
 				confirmacao = sc.next().charAt(0);
+				sc.close();
 				if (Character.toLowerCase(confirmacao) == 's') {
 					clienteAModificar.setNome(nomeNovo);
 					clienteModificado = Cliente.getClienteById(clienteAModificar.getIdCliente());
@@ -160,6 +164,7 @@ Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser r
 
 """, clienteAModificar, cpfAtual, cpfNovo));
 				confirmacao = sc.next().charAt(0);
+				sc.close();
 				if (Character.toLowerCase(confirmacao) == 's') {
 					clienteAModificar.setCpf(cpfNovo);
 					clienteModificado = Cliente.getClienteById(clienteAModificar.getIdCliente());
@@ -186,6 +191,7 @@ Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser r
 
 """, clienteAModificar, telefoneAtual, telefoneNovo));
 				confirmacao = sc.next().charAt(0);
+				sc.close();
 				if (Character.toLowerCase(confirmacao) == 's') {
 					clienteAModificar.setTelefone(telefoneNovo);
 					clienteModificado = Cliente.getClienteById(clienteAModificar.getIdCliente());
@@ -212,6 +218,7 @@ Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser r
 
 """, clienteAModificar, emailAtual, emailNovo));
 				confirmacao = sc.next().charAt(0);
+				sc.close();
 				if (Character.toLowerCase(confirmacao) == 's') {
 					clienteAModificar.setEmail(emailNovo);
 					clienteModificado = Cliente.getClienteById(clienteAModificar.getIdCliente());
@@ -238,6 +245,7 @@ Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser r
 
 """, clienteAModificar, preferenciaComunicacaoAtual, preferenciaComunicacaoNova));
 				confirmacao = sc.next().charAt(0);
+				sc.close();
 				if (Character.toLowerCase(confirmacao) == 's') {
 					clienteAModificar.setPreferenciaComunicacao(preferenciaComunicacaoNova);
 					clienteModificado = Cliente.getClienteById(clienteAModificar.getIdCliente());
@@ -264,6 +272,7 @@ Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser r
 
 """, clienteAModificar, enderecoAtual, enderecoNovo));
 				confirmacao = sc.next().charAt(0);
+				sc.close();
 				if (Character.toLowerCase(confirmacao) == 's') {
 					clienteAModificar.setEndereco(enderecoNovo);
 					clienteModificado = Cliente.getClienteById(clienteAModificar.getIdCliente());
@@ -290,6 +299,7 @@ Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser r
 
 """, clienteAModificar, aniversarioAtual, aniversarioNovo));
 				confirmacao = sc.next().charAt(0);
+				sc.close();
 				if (Character.toLowerCase(confirmacao) == 's') {
 					clienteAModificar.setAniversario(aniversarioNovo);
 					clienteModificado = Cliente.getClienteById(clienteAModificar.getIdCliente());
@@ -316,6 +326,7 @@ Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser r
 
 """, clienteAModificar, generoAtual, generoNovo));
 				confirmacao = sc.next().charAt(0);
+				sc.close();
 				if (Character.toLowerCase(confirmacao) == 's') {
 					clienteAModificar.setGenero(generoNovo);
 					clienteModificado = Cliente.getClienteById(clienteAModificar.getIdCliente());
@@ -324,9 +335,11 @@ Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser r
 					return clienteModificado;
 				}
 			case 0:
+				sc.close();
 				return clienteModificado;
 			default:
 				System.err.println("ERRO! Opção inválida");
+				sc.close();
 				return clienteModificado;
 		}
 	}
@@ -345,6 +358,7 @@ Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser r
 
 """, cliente));
 		char confirmacao = sc.next().charAt(0);
+		sc.close();
 		if (Character.toLowerCase(confirmacao) == 's') {
 			listaClientes.remove(cliente.getIdCliente());
 			System.out.println("Cliente foi removido com sucesso!");
