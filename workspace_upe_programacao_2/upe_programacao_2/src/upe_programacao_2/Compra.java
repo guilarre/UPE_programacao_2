@@ -23,7 +23,6 @@ public class Compra {
 	private Pagamento pagamento = null;
 	private Status status = Status.EM_PROCESSAMENTO;
 	
-	// TODO: precisa passar listaCompraProdutos ao criar Compra
 	public Compra(int idCliente, int idFuncionario, ArrayList<CompraProduto> listaCompraProdutos, double desconto, Pagamento pagamento) {
 		idCompra = count.incrementAndGet();
 		this.idCliente = idCliente;
@@ -125,10 +124,9 @@ public class Compra {
 		}
 	}
 	
-	// Getter para CRIAR e retornar objeto Compra novo (usado pela Main)
+	// CREATE e retornar objeto Compra novo (usado pela Main)
 	public static ArrayList<CompraProduto> getCompraProdutoNovo() {
 		// TODO: case default???
-		// TEST: espaçamento correto na UI
 		ArrayList<CompraProduto> listaCompraProdutos = new ArrayList<CompraProduto>();
 		Produto produtoSelecionado = null;
 		double desconto = 1;
@@ -188,7 +186,7 @@ Selecione o(s) produto(s):
 					System.out.println("Operação cancelada!");
 					break loopSelecaoProdutos;
 				default:
-					System.out.println("ERRO! Opção inválida");
+					System.err.println("ERRO! Opção inválida");
 					break;
 			}
 		}
@@ -235,6 +233,9 @@ Escolha a forma de pagamento:
 			case 5:
 				pagamento = Pagamento.CHEQUE;
 				break;
+			default:
+				System.err.println("ERRO! Opção inválida");
+				break;
 		}
 		sc.close();
 		// Criar e retornar objeto Compra
@@ -242,7 +243,7 @@ Escolha a forma de pagamento:
 		return compra;
 	}
 	
-	// ListaCompraProdutos
+	// Métodos para listaCompraProdutos
 	public ArrayList<CompraProduto> getListaCompraProdutos() {
 		return listaCompraProdutos;
 	}
@@ -253,7 +254,6 @@ Escolha a forma de pagamento:
 		}
 		return total;
 	}
-	
 	// Chamado após compra ter sucesso
 	public static void decrementarEstoque(ArrayList<CompraProduto> listaCompraProdutos) {
 		for (CompraProduto compraProduto : listaCompraProdutos) {
@@ -264,7 +264,6 @@ Escolha a forma de pagamento:
 			produto.setQtdEstoque(qtdEmEstoqueNova);
 		}
 	}
-	
 	// Chamado após compra ser cancelada
 	public static void incrementarEstoque(ArrayList<CompraProduto> listaCompraProdutos) {
 		for (CompraProduto compraProduto : listaCompraProdutos) {
@@ -310,7 +309,7 @@ Status: '%s'
 			this.total = produto.getValor() * qtdComprada * desconto;
 		}
 		
-		//Getters and Setters
+		//Getters/Setters
 		public Produto getProduto() {
 			return produto;
 		}

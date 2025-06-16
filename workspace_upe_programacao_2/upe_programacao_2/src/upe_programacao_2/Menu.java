@@ -1,8 +1,6 @@
 package upe_programacao_2;
 
 public class Menu {
-	// TODO: falta crud para clientes, funcionários, estoque, e falta opção para gerar relatório de vendas
-	// TODO: falta pergunta em alguns dos menus
 	public static String menuPrincipal = """
 ###### Sistema de gerenciamento LaSca ######
 
@@ -130,10 +128,8 @@ O que deseja alterar?
 	
 	public static String menuSelecionarProduto = """
 
-Qual produto deseja modificar?
-
-[1] = Procurar produto por seu id
-[2] = Procurar produto por seu nome
+[1] = Procurar por id do produto
+[2] = Procurar pelo nome do produto
 
 [0] = Retornar ao menu anterior
 
@@ -154,8 +150,6 @@ O que deseja alterar?
 
 """;
 	
-	// TODO: falta ajeitar historico pra mostrar apenas vendas com sucesso.
-	// TODO: opção pra mostrar vendas canceladas
 	public static String menuVendas = """
 
 [1] = Realizar venda

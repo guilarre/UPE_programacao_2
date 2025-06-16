@@ -4,7 +4,6 @@ import java.util.Scanner;
 
 
 public class Venda {
-	
 	// Métodos retornam true/false e Main gerencia mensagem de erro/sucesso
 	public static boolean realizarVenda() {
 		Cliente cliente = Cliente.selecionarCliente();
@@ -55,6 +54,9 @@ public class Venda {
 				// Retornar ao menu anterior
 				case 0:
 					break loopPesquisarVendas;
+				default:
+					System.err.println("ERRO! Opção inválida");
+					break;
 			}
 		}
 		sc.close();

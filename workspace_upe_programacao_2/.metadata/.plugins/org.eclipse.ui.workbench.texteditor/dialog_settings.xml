@@ -4,6 +4,12 @@
 	<section name="java.lang.Class">
 		<item key="replaceBarOpen" value="true"/>
 		<list key="findhistory">
+			<item value="sc.close();"/>
+			<item value="sc.close"/>
+			<item value="sc.next"/>
+			<item value="System.out.println(&quot;ERRO!"/>
+			<item value="Cliente"/>
+			<item value="selecionarpro"/>
 			<item value="Gênero"/>
 			<item value="gênero"/>
 			<item value="Genero"/>
@@ -11,16 +17,12 @@
 			<item value="cargo"/>
 			<item value="Cargo cargo"/>
 			<item value="cliente"/>
-			<item value="Cliente"/>
 			<item value="remove"/>
 			<item value="getProdutoById"/>
-			<item value="selecionarc"/>
-			<item value="nome"/>
-			<item value="Nome"/>
-			<item value="preferenciaComunicacaoNovo"/>
-			<item value="char"/>
 		</list>
 		<list key="replacehistory">
+			<item value="System.err.println(&quot;ERRO!"/>
+			<item value="Funcionario"/>
 			<item value="Salário"/>
 			<item value="salário"/>
 			<item value="Salario"/>
@@ -29,13 +31,11 @@
 			<item value="cargo"/>
 			<item value="Cargo"/>
 			<item value="funcionario"/>
-			<item value="Funcionario"/>
 			<item value="genero"/>
 			<item value="Genero"/>
 			<item value="Aniversario"/>
 			<item value="aniversario"/>
 			<item value="Endereco"/>
-			<item value="endereco"/>
 		</list>
 	</section>
 </section>

@@ -112,6 +112,9 @@ Escolha o cargo do funcionário:
 			case 4:
 				cargo = Cargo.SOCIO;
 				break;
+			default:
+				System.err.println("ERRO! Opção inválida");
+				break;
 		}
 		System.out.println("Digite o salário do funcionário (e.g. 1459.90: ");
 		double salario = sc.nextDouble();
@@ -173,7 +176,7 @@ Escolha o cargo do funcionário:
 				System.out.println("Operação cancelada!");
 				break;
 			default:
-				System.out.println("ERRO! Opção inválida");
+				System.err.println("ERRO! Opção inválida");
 				break;
 		}
 		sc.close();
@@ -431,6 +434,9 @@ Escolha o cargo do funcionário:
 					case 4:
 						cargoNovo = Cargo.SOCIO;
 						break;
+					default:
+						System.err.println("ERRO! Opção inválida");
+						break;
 				}
 				System.out.println(String.format("""
 						
@@ -485,7 +491,7 @@ Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser r
 				sc.close();
 				return funcionarioModificado;
 			default:
-				System.out.println("ERRO! Opção inválida");
+				System.err.println("ERRO! Opção inválida");
 				sc.close();
 				return funcionarioModificado;
 		}

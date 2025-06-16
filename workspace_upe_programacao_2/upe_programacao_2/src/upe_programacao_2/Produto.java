@@ -100,24 +100,6 @@ public class Produto implements Rastreavel {
 	public void setQtdEstoque(int qtdEstoque) {
 		this.qtdEstoque = qtdEstoque;
 	}
-	
-	// Getter para selecionar objeto Produto
-	public static Produto getProdutoById(int idProduto) {
-		for (Produto produto : Produto.getListaProdutos()) {
-			if (produto.getIdProduto() == idProduto) {
-				return produto;
-			}
-		}
-		return null;
-	}
-	public static Produto getProdutoByNome(String nomeProduto) {
-		for (Produto produto : Produto.getListaProdutos()) {
-			if (produto.getNomeProduto() == nomeProduto) {
-				return produto;
-			}
-		}
-		return null;
-	}
 
 	// CRUD para produto
 	// CREATE e retornar objeto Produto novo (usado pela Main)
@@ -171,7 +153,23 @@ Selecione a categoria do produto:
 		sc.close();
 		return produtoNovo;
 	}
-	// READ
+	// READ para selecionar objeto Produto
+	public static Produto getProdutoById(int idProduto) {
+		for (Produto produto : Produto.getListaProdutos()) {
+			if (produto.getIdProduto() == idProduto) {
+				return produto;
+			}
+		}
+		return null;
+	}
+	public static Produto getProdutoByNome(String nomeProduto) {
+		for (Produto produto : Produto.getListaProdutos()) {
+			if (produto.getNomeProduto() == nomeProduto) {
+				return produto;
+			}
+		}
+		return null;
+	}
 	public static Produto selecionarProduto() {
 		// Setup
 		Produto produto = null;
@@ -191,6 +189,9 @@ Selecione a categoria do produto:
 				produto = Produto.getProdutoByNome(nomeProduto);
 				break;
 			case 0:
+				break;
+			default:
+				System.err.println("ERRO! Opção inválida");
 				break;
 		}
 		sc.close();
@@ -343,6 +344,9 @@ Selecione a categoria nova:
 					case 5:
 						categoriaNova = Categoria.SHORTS;
 						break;
+					default:
+						System.err.println("ERRO! Opção inválida");
+						break;
 				}
 				System.out.println(String.format("""
 						
@@ -397,7 +401,7 @@ Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser r
 				sc.close();
 				return produtoModificado;
 			default:
-				System.out.println("ERRO! Opção inválida");
+				System.err.println("ERRO! Opção inválida");
 				sc.close();
 				return produtoModificado;
 		}

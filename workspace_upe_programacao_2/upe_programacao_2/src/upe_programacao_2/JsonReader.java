@@ -3,12 +3,14 @@ package upe_programacao_2;
 import java.io.FileReader;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import com.google.gson.*;
 
 public class JsonReader {
 	private static Gson gson = new GsonBuilder()
 			.registerTypeAdapter(LocalDate.class, new LocalDateTypeAdapter())
+			.registerTypeAdapter(LocalDateTime.class, new LocalDateTimeTypeAdapter())
 			.create();
 	
 	// Métodos para carregar objetos em memória
@@ -19,7 +21,7 @@ public class JsonReader {
 				Cliente.addToListaClientes(cliente);
 			}
 		} catch (IOException e) {
-			e.printStackTrace();
+		} catch (JsonIOException e) {
 		}
 	}
 	
@@ -30,7 +32,7 @@ public class JsonReader {
 				Funcionario.addToListaFuncionarios(funcionario);
 			}
 		} catch (IOException e) {
-			e.printStackTrace();
+		} catch (JsonIOException e) {
 		}
 	}
 	
@@ -41,7 +43,7 @@ public class JsonReader {
 				Historico.addToHistorico(compra);
 			}
 		} catch (IOException e) {
-			e.printStackTrace();
+		} catch (JsonIOException e) {
 		}
 	}
 	
@@ -52,7 +54,7 @@ public class JsonReader {
 				Produto.addToListaProdutos(produto);
 			}
 		} catch (IOException e) {
-			e.printStackTrace();
+		} catch (JsonIOException e) {
 		}
 	}
 }
