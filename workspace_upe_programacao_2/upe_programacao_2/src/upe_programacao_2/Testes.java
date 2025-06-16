@@ -1,5 +1,8 @@
 package upe_programacao_2;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 //import java.io.FileWriter;
 //import java.io.IOException;
 
@@ -50,16 +53,19 @@ public class Testes {
 //			e.printStackTrace();
 //		}
 		
-		Produto produtoNovo = new Produto("123", "jaqueta", "asdasdad", 200, Categoria.JAQUETA, 2);
-		System.out.println(produtoNovo);
-		
-		Produto produtoAModificar = Produto.getProdutoByNome("jaqueta");
-		produtoAModificar.setSku("666");
-		System.out.println("Produto modificado:");
-		System.out.println(produtoAModificar);
-		System.out.println("Produto depois de modificado no estoque:");
-		System.out.println(Produto.getProdutoByNome("jaqueta"));
+//		Produto produtoNovo = new Produto("123", "jaqueta", "asdasdad", 200, Categoria.JAQUETA, 2);
+//		System.out.println(produtoNovo);
+//		
+//		Produto produtoAModificar = Produto.getProdutoByNome("jaqueta");
+//		produtoAModificar.setSku("666");
+//		System.out.println("Produto modificado:");
+//		System.out.println(produtoAModificar);
+//		System.out.println("Produto depois de modificado no estoque:");
+//		System.out.println(Produto.getProdutoByNome("jaqueta"));
 
+		String aniversario = "20-12-2121";
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		LocalDate aniversarioData = LocalDate.parse(aniversario, formatter);
 		
 	}
 }
