@@ -72,6 +72,7 @@ public class Cliente extends Pessoa {
 				return cliente;
 			}
 		}
+		System.err.println("ERRO! Cliente inexistente");
 		return null;
 	}
 	public static Cliente getClienteByNome(String nomeCliente) {
@@ -80,6 +81,7 @@ public class Cliente extends Pessoa {
 				return cliente;
 			}
 		}
+		System.err.println("ERRO! Cliente inexistente");
 		return null;
 	}
 	public static Cliente selecionarCliente() {
@@ -132,9 +134,7 @@ Cliente:
 Nome atual: %s
 Nome novo: %s
 	
-Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser revertida):
-
-""", clienteAModificar, nomeAtual, nomeNovo));
+Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser revertida):""", clienteAModificar, nomeAtual, nomeNovo));
 				confirmacao = sc.next().charAt(0);
 				if (Character.toLowerCase(confirmacao) == 's') {
 					clienteAModificar.setNome(nomeNovo);
@@ -158,9 +158,7 @@ Cliente:
 CPF atual: %s
 CPF novo: %s
 	
-Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser revertida):
-
-""", clienteAModificar, cpfAtual, cpfNovo));
+Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser revertida):""", clienteAModificar, cpfAtual, cpfNovo));
 				confirmacao = sc.next().charAt(0);
 				if (Character.toLowerCase(confirmacao) == 's') {
 					clienteAModificar.setCpf(cpfNovo);
@@ -184,9 +182,7 @@ Cliente:
 Telefone atual: %s
 Telefone novo: %s
 	
-Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser revertida):
-
-""", clienteAModificar, telefoneAtual, telefoneNovo));
+Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser revertida):""", clienteAModificar, telefoneAtual, telefoneNovo));
 				confirmacao = sc.next().charAt(0);
 				if (Character.toLowerCase(confirmacao) == 's') {
 					clienteAModificar.setTelefone(telefoneNovo);
@@ -210,9 +206,7 @@ Cliente:
 Email atual: %s
 Email novo: %s
 	
-Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser revertida):
-
-""", clienteAModificar, emailAtual, emailNovo));
+Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser revertida):""", clienteAModificar, emailAtual, emailNovo));
 				confirmacao = sc.next().charAt(0);
 				if (Character.toLowerCase(confirmacao) == 's') {
 					clienteAModificar.setEmail(emailNovo);
@@ -236,9 +230,7 @@ Cliente:
 Preferência de comunicacao atual: %s
 Preferência de comunicacao nova: %s
 	
-Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser revertida):
-
-""", clienteAModificar, preferenciaComunicacaoAtual, preferenciaComunicacaoNova));
+Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser revertida):""", clienteAModificar, preferenciaComunicacaoAtual, preferenciaComunicacaoNova));
 				confirmacao = sc.next().charAt(0);
 				if (Character.toLowerCase(confirmacao) == 's') {
 					clienteAModificar.setPreferenciaComunicacao(preferenciaComunicacaoNova);
@@ -262,9 +254,7 @@ Cliente:
 Endereço atual: %s
 Endereço novo: %s
 	
-Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser revertida):
-
-""", clienteAModificar, enderecoAtual, enderecoNovo));
+Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser revertida):""", clienteAModificar, enderecoAtual, enderecoNovo));
 				confirmacao = sc.next().charAt(0);
 				if (Character.toLowerCase(confirmacao) == 's') {
 					clienteAModificar.setEndereco(enderecoNovo);
@@ -288,9 +278,7 @@ Cliente:
 Aniversário atual: %s
 Aniversário novo: %s
 	
-Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser revertida):
-
-""", clienteAModificar, aniversarioAtual, aniversarioNovo));
+Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser revertida):""", clienteAModificar, aniversarioAtual, aniversarioNovo));
 				confirmacao = sc.next().charAt(0);
 				if (Character.toLowerCase(confirmacao) == 's') {
 					clienteAModificar.setAniversario(aniversarioNovo);
@@ -314,9 +302,7 @@ Cliente:
 Gênero atual: %s
 Gênero novo: %s
 	
-Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser revertida):
-
-""", clienteAModificar, generoAtual, generoNovo));
+Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser revertida):""", clienteAModificar, generoAtual, generoNovo));
 				confirmacao = sc.next().charAt(0);
 				if (Character.toLowerCase(confirmacao) == 's') {
 					clienteAModificar.setGenero(generoNovo);
@@ -343,9 +329,7 @@ Você tem certeza que deseja remover o cliente a seguir?
 Cliente:
 %s
 
-Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser revertida):
-
-""", cliente));
+Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser revertida):""", cliente));
 		char confirmacao = sc.next().charAt(0);
 		if (Character.toLowerCase(confirmacao) == 's') {
 			listaClientes.remove(cliente.getIdCliente());

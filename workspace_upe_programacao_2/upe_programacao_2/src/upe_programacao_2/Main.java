@@ -5,7 +5,6 @@ import java.util.Scanner;
 public class Main {
 
 	public static void main(String[] args) {
-		// FIX: espaçamento correto na UI
 		// Carregar arquivos em memória
 		try {			
 			JsonReader.carregarClientes();
@@ -38,7 +37,7 @@ public class Main {
 								if (cliente != null) {
 									System.out.println(cliente.toString());
 								} else {
-									System.err.println("ERRO! Cliente inexistente");
+									System.out.println("Operação cancelada");
 								}
 								break;
 							// Exibir histórico de compras de um cliente
@@ -175,7 +174,7 @@ Cliente modificado com sucesso:
 										}
 									}
 								} else {
-									System.err.println("ERRO! Cliente inexistente");
+									System.out.println("Operação cancelada");
 								}
 								break;
 							// Remover um cliente
@@ -184,7 +183,7 @@ Cliente modificado com sucesso:
 								if (clienteARemover != null) {
 									Cliente.removerCliente(clienteARemover);
 								} else {
-									System.err.println("ERRO! Cliente inexistente");
+									System.out.println("Operação cancelada");
 								}
 								break;
 							// Retornar ao menu principal
@@ -213,7 +212,7 @@ Cliente modificado com sucesso:
 							if (funcionario != null) {
 								System.out.println(funcionario.toString());
 							} else {
-								System.err.println("ERRO! Funcionário inexistente");
+								System.out.println("Operação cancelada");
 							}
 							break;
 						// Exibir histórico de vendas de um funcionário
@@ -376,7 +375,7 @@ Funcionario modificado com sucesso:
 									}
 								}
 							} else {
-								System.err.println("ERRO! Funcionario inexistente");
+								System.out.println("Operação cancelada");
 							}
 							break;
 						// Remover um funcionário
@@ -385,7 +384,7 @@ Funcionario modificado com sucesso:
 							if (funcionarioARemover != null) {
 								Funcionario.removerFuncionario(funcionarioARemover);
 							} else {
-								System.err.println("ERRO! Funcionário inexistente");
+								System.out.println("Operação cancelada");
 							}
 							break;
 						// Retornar ao menu principal
@@ -409,7 +408,7 @@ Funcionario modificado com sucesso:
 								if (produto != null) {
 									System.out.println(produto.toString());
 								} else {
-									System.err.println("ERRO! Produto inexistente");
+									System.out.println("Operação cancelada");
 								}
 								break;
 							// Exibir todas as categorias
@@ -446,7 +445,7 @@ Produto adicionado com sucesso:
 
 """, produtoNovo.toString()));
 											} else {
-												System.err.println("ERRO! Operação cancelada");
+												System.out.println("Operação cancelada");
 											}
 											break;
 										// Modificar produto no estoque
@@ -544,7 +543,7 @@ Produto modificado com sucesso:
 													}
 												}
 											} else {
-												System.err.println("ERRO! Produto inexistente");
+												System.out.println("Operação cancelada");
 											}
 											break;
 										// Remover produto do estoque
@@ -553,7 +552,7 @@ Produto modificado com sucesso:
 											if (produtoARemover != null) {
 												Produto.removerProduto(produtoARemover);
 											} else {
-												System.err.println("ERRO! Produto inexistente");
+												System.out.println("Operação cancelada");
 											}
 											break;
 										// Retornar ao menu anterior
@@ -590,7 +589,7 @@ Produto modificado com sucesso:
 									System.out.println("Venda registrada com sucesso!");
 									break;
 								}
-								System.err.println("ERRO! A venda não foi registrada");
+								System.out.println("A venda falhou!");
 								break;
 							// Pesquisar vendas
 							case 2:
@@ -621,7 +620,6 @@ Produto modificado com sucesso:
 					break;
 				// Sair do sistema
 				case 0:
-					// TEST: Salvar tudo em json antes de fechar
 					System.out.println("Até logo!");
 					JsonWriter.salvarClientes();
 					JsonWriter.salvarFuncionarios();

@@ -2,10 +2,10 @@
   {
     "idProduto": 1,
     "sku": "1",
-    "nomeProduto": "wsadasd",
-    "descricao": "rgfwrgfwe",
-    "valor": 12.6,
+    "nomeProduto": "Calça Jeans Baggy",
+    "descricao": "Calça mais folgada",
+    "valor": 139.9,
     "categoria": "CALCA",
-    "qtdEstoque": -1
+    "qtdEstoque": 200
   }
 ]

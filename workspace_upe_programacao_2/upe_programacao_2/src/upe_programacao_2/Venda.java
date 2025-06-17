@@ -7,7 +7,13 @@ public class Venda {
 	// Métodos retornam true/false e Main gerencia mensagem de erro/sucesso
 	public static boolean realizarVenda() {
 		Cliente cliente = Cliente.selecionarCliente();
+		if (cliente == null) {
+			return false;
+		}
 		Funcionario funcionario = Funcionario.selecionarFuncionario();
+		if (funcionario == null) {
+			return false;
+		}
 		Compra compra = Compra.getCompraNova(cliente, funcionario);
 		if (compra != null) {
 			return true;
@@ -75,6 +81,7 @@ public class Venda {
 		}
 		// Confirmar operação
 		System.out.println(String.format("""
+				
 Você tem certeza que deseja cancelar a compra a seguir?
 
 Compra:

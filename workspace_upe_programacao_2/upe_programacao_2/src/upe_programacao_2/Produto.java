@@ -119,7 +119,6 @@ Selecione a categoria do produto:
 [3] = Jaqueta
 [4] = Blusa
 [5] = Shorts
-
 """);
 		int opcaoCategoria = sc.nextInt();
 		switch (opcaoCategoria) {
@@ -152,6 +151,7 @@ Selecione a categoria do produto:
 				return produto;
 			}
 		}
+		System.err.println("ERRO! Produto inexistente");
 		return null;
 	}
 	public static Produto getProdutoByNome(String nomeProduto) {
@@ -160,6 +160,7 @@ Selecione a categoria do produto:
 				return produto;
 			}
 		}
+		System.err.println("ERRO! Produto inexistente");
 		return null;
 	}
 	public static Produto selecionarProduto() {
@@ -211,9 +212,7 @@ Produto:
 SKU atual: %s
 SKU novo: %s
 	
-Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser revertida):
-
-""", produtoAModificar, skuAtual, skuNovo));
+Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser revertida):""", produtoAModificar, skuAtual, skuNovo));
 				confirmacao = sc.next().charAt(0);
 				if (Character.toLowerCase(confirmacao) == 's') {
 					produtoAModificar.setSku(skuNovo);
@@ -237,9 +236,7 @@ Produto:
 Nome atual: %s
 Nome novo: %s
 
-Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser revertida):
-
-""", produtoAModificar, nomeAtual, nomeNovo));
+Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser revertida):""", produtoAModificar, nomeAtual, nomeNovo));
 				confirmacao = sc.next().charAt(0);
 				if (Character.toLowerCase(confirmacao) == 's') {
 					produtoAModificar.setNomeProduto(nomeNovo);
@@ -263,9 +260,7 @@ Produto:
 Descrição atual: %s
 Descrição nova: %s
 
-Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser revertida):
-
-""", produtoAModificar, descricaoAtual, descricaoNova));
+Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser revertida):""", produtoAModificar, descricaoAtual, descricaoNova));
 				confirmacao = sc.next().charAt(0);
 				if (Character.toLowerCase(confirmacao) == 's') {
 					produtoAModificar.setDescricao(descricaoNova);
@@ -288,9 +283,7 @@ Produto:
 Valor atual: %s
 Valor novo: %s
 
-Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser revertida):
-
-""", produtoAModificar, valorAtual, valorNovo));
+Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser revertida):""", produtoAModificar, valorAtual, valorNovo));
 				confirmacao = sc.next().charAt(0);
 				if (Character.toLowerCase(confirmacao) == 's') {
 					produtoAModificar.setValor(valorNovo);
@@ -312,7 +305,6 @@ Selecione a categoria nova:
 [3] = Jaqueta
 [4] = Blusa
 [5] = Shorts
-
 """);
 				int opcaoCategoriaNova = sc.nextInt();
 				switch (opcaoCategoriaNova) {
@@ -345,9 +337,7 @@ Produto:
 Categoria atual: %s
 Categoria nova: %s
 
-Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser revertida):
-
-""", produtoAModificar, categoriaAtual, categoriaNova));
+Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser revertida):""", produtoAModificar, categoriaAtual, categoriaNova));
 				confirmacao = sc.next().charAt(0);
 				if (Character.toLowerCase(confirmacao) == 's') {
 					produtoAModificar.setCategoria(categoriaNova);
@@ -371,9 +361,7 @@ Produto:
 Quantidade atual: %s
 Quantidade nova: %s
 
-Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser revertida):
-
-""", produtoAModificar, qtdAtual, qtdNova));
+Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser revertida):""", produtoAModificar, qtdAtual, qtdNova));
 				confirmacao = sc.next().charAt(0);
 				if (Character.toLowerCase(confirmacao) == 's') {
 					produtoAModificar.setQtdEstoque(qtdNova);

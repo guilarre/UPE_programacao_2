@@ -4,6 +4,9 @@
 	<section name="java.lang.Class">
 		<item key="replaceBarOpen" value="true"/>
 		<list key="findhistory">
+			<item value=": "/>
+			<item value="-&gt; "/>
+			<item value="selecion"/>
 			<item value="pesquisar "/>
 			<item value="quantidade"/>
 			<item value="Cliente.scanner"/>
@@ -16,9 +19,6 @@
 			<item value="Cliente"/>
 			<item value="selecionarpro"/>
 			<item value="Gênero"/>
-			<item value="gênero"/>
-			<item value="Genero"/>
-			<item value="genero"/>
 		</list>
 		<list key="replacehistory">
 			<item value="qtdComprada"/>

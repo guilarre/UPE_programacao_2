@@ -128,7 +128,6 @@ public class Compra {
 	
 	// CREATE e retornar objeto Compra novo (usado pela Main)
 	public static ArrayList<CompraProduto> getCompraProdutoNovo() {
-		// TODO: case default???
 		ArrayList<CompraProduto> listaCompraProdutos = new ArrayList<CompraProduto>();
 		Produto produtoSelecionado = null;
 		double desconto = 1;
@@ -139,44 +138,43 @@ public class Compra {
 		loopSelecaoProdutos: while (true) {
 			String menuSelecionarProduto = """
 
-Selecione o(s) produto(s):
+Selecione um ou mais produtos:
 
 [1] = Procurar produto por seu id
 [2] = Procurar produto por seu nome
-[3] = Terminar seleção de produtos
+[3] = TERMINAR seleção de produtos
 
 [0] = Retornar ao menu anterior
-
 """;
 			System.out.println(menuSelecionarProduto);
 			int opcao = sc.nextInt();
 			switch (opcao) {
 				case 1:
 					// Selecionando o produto pelo id
-					System.out.println("Digite o id do produto: ");
+					System.out.println("Digite o id do produto:");
 					int idProduto = sc.nextInt();
 					produtoSelecionado = Produto.getProdutoById(idProduto);
 					System.out.println(String.format("Produto selecionado:\n\n%s", produtoSelecionado));
 					// Desconto
-					System.out.println("Digite o desconto DO PRODUTO em porcentagem, se aplicável (e.g. 12,5).\nSe não houver desconto, digite 0: ");
+					System.out.println("Digite o desconto DO PRODUTO em porcentagem, se aplicável (e.g. 12,5).\nSe não houver desconto, digite 0:");
 					desconto = sc.nextDouble();
 					// Qtd comprada
-					System.out.println("Digite a quantidade que será comprada: ");
+					System.out.println("Digite a quantidade que será comprada:");
 					qtdComprada = sc.nextInt();
 					compraProduto = new Compra.CompraProduto(produtoSelecionado, qtdComprada, desconto);
 					listaCompraProdutos.add(compraProduto);
 					break;
 				case 2:
 					// Selecionando o produto pelo nome
-					System.out.println("Digite o nome do produto: ");
+					System.out.println("Digite o nome do produto:");
 					String nomeProduto = sc.nextLine();
 					produtoSelecionado = Produto.getProdutoByNome(nomeProduto);
 					System.out.println(String.format("Produto selecionado:\n\n%s", produtoSelecionado));
 					// Desconto
-					System.out.println("Digite o desconto DO PRODUTO em porcentagem, se aplicável (e.g. 12,5).\nSe não houver desconto, digite 0: ");
+					System.out.println("Digite o desconto DO PRODUTO em porcentagem, se aplicável (e.g. 12,5).\nSe não houver desconto, digite 0:");
 					desconto = sc.nextDouble();
 					// Qtd comprada
-					System.out.println("Digite a quantidade que será comprada: ");
+					System.out.println("Digite a quantidade que será comprada:");
 					qtdComprada = sc.nextInt();
 					compraProduto = new Compra.CompraProduto(produtoSelecionado, qtdComprada, desconto);
 					listaCompraProdutos.add(compraProduto);
@@ -201,7 +199,7 @@ Selecione o(s) produto(s):
 		}
 		Scanner sc = new Scanner(System.in);
 		// Desconto
-		System.out.println("Digite o desconto DA COMPRA em porcentagem, se aplicável (e.g. 12,5).\nSe não houver desconto, digite 0: ");
+		System.out.println("Digite o desconto DA COMPRA em porcentagem, se aplicável (e.g. 12,5).\nSe não houver desconto, digite 0:");
 		double desconto = sc.nextDouble();
 		// Pagamento (forma de pagamento)
 		Pagamento pagamento = null;

@@ -98,7 +98,6 @@ Escolha o cargo do funcionário:
 [2] = Caixa
 [3] = Estoquista
 [4] = Sócio
-
 """);
 		int opcaoCargo = sc.nextInt();
 		switch (opcaoCargo) {
@@ -136,6 +135,7 @@ Escolha o cargo do funcionário:
 				return funcionario;
 			}
 		}
+		System.err.println("ERRO! Funcionário inexistente");
 		return null;
 	}
 	public static Funcionario getFuncionarioByNome(String nomeFuncionario) {
@@ -144,17 +144,16 @@ Escolha o cargo do funcionário:
 				return funcionario;
 			}
 		}
+		System.err.println("ERRO! Funcionário inexistente");
 		return null;
 	}
 	public static Funcionario selecionarFuncionario() {
-		// TEST: espaçamento correto na UI
 		String menuSelecionarFuncionario = """
 
 [1] = Procurar funcionário por seu id
 [2] = Procurar funcionário por seu nome
 
 [0] = Retornar ao menu anterior
-
 """;
 		System.out.println(menuSelecionarFuncionario);
 		Scanner sc = new Scanner(System.in);
@@ -175,7 +174,7 @@ Escolha o cargo do funcionário:
 				System.err.println("ERRO! Opção inválida");
 				break;
 		}
-		return null; // TODO: na Main, reconhece se é null e cancela operação
+		return null;
 	}
 	// UPDATE
 	public static Funcionario modificarFuncionario(Funcionario funcionarioAModificar, int opcao) {
@@ -200,9 +199,7 @@ Funcionário:
 Nome atual: %s
 Nome novo: %s
 	
-Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser revertida):
-
-""", funcionarioAModificar, nomeAtual, nomeNovo));
+Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser revertida):""", funcionarioAModificar, nomeAtual, nomeNovo));
 				confirmacao = sc.next().charAt(0);
 				if (Character.toLowerCase(confirmacao) == 's') {
 					funcionarioAModificar.setNome(nomeNovo);
@@ -226,9 +223,7 @@ Funcionário:
 CPF atual: %s
 CPF novo: %s
 	
-Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser revertida):
-
-""", funcionarioAModificar, cpfAtual, cpfNovo));
+Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser revertida):""", funcionarioAModificar, cpfAtual, cpfNovo));
 				confirmacao = sc.next().charAt(0);
 				if (Character.toLowerCase(confirmacao) == 's') {
 					funcionarioAModificar.setCpf(cpfNovo);
@@ -252,9 +247,7 @@ Funcionário:
 Telefone atual: %s
 Telefone novo: %s
 	
-Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser revertida):
-
-""", funcionarioAModificar, telefoneAtual, telefoneNovo));
+Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser revertida):""", funcionarioAModificar, telefoneAtual, telefoneNovo));
 				confirmacao = sc.next().charAt(0);
 				if (Character.toLowerCase(confirmacao) == 's') {
 					funcionarioAModificar.setTelefone(telefoneNovo);
@@ -278,9 +271,7 @@ Funcionário:
 Email atual: %s
 Email novo: %s
 	
-Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser revertida):
-
-""", funcionarioAModificar, emailAtual, emailNovo));
+Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser revertida):""", funcionarioAModificar, emailAtual, emailNovo));
 				confirmacao = sc.next().charAt(0);
 				if (Character.toLowerCase(confirmacao) == 's') {
 					funcionarioAModificar.setEmail(emailNovo);
@@ -304,9 +295,7 @@ Funcionário:
 Preferência de comunicacao atual: %s
 Preferência de comunicacao nova: %s
 	
-Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser revertida):
-
-""", funcionarioAModificar, preferenciaComunicacaoAtual, preferenciaComunicacaoNova));
+Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser revertida):""", funcionarioAModificar, preferenciaComunicacaoAtual, preferenciaComunicacaoNova));
 				confirmacao = sc.next().charAt(0);
 				if (Character.toLowerCase(confirmacao) == 's') {
 					funcionarioAModificar.setPreferenciaComunicacao(preferenciaComunicacaoNova);
@@ -330,9 +319,7 @@ Funcionário:
 Endereço atual: %s
 Endereço novo: %s
 	
-Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser revertida):
-
-""", funcionarioAModificar, enderecoAtual, enderecoNovo));
+Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser revertida):""", funcionarioAModificar, enderecoAtual, enderecoNovo));
 				confirmacao = sc.next().charAt(0);
 				if (Character.toLowerCase(confirmacao) == 's') {
 					funcionarioAModificar.setEndereco(enderecoNovo);
@@ -356,9 +343,7 @@ Funcionário:
 Aniversário atual: %s
 Aniversário novo: %s
 	
-Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser revertida):
-
-""", funcionarioAModificar, aniversarioAtual, aniversarioNovo));
+Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser revertida):""", funcionarioAModificar, aniversarioAtual, aniversarioNovo));
 				confirmacao = sc.next().charAt(0);
 				if (Character.toLowerCase(confirmacao) == 's') {
 					funcionarioAModificar.setAniversario(aniversarioNovo);
@@ -382,9 +367,7 @@ Funcionário:
 Gênero atual: %s
 Gênero novo: %s
 	
-Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser revertida):
-
-""", funcionarioAModificar, generoAtual, generoNovo));
+Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser revertida):""", funcionarioAModificar, generoAtual, generoNovo));
 				confirmacao = sc.next().charAt(0);
 				if (Character.toLowerCase(confirmacao) == 's') {
 					funcionarioAModificar.setGenero(generoNovo);
@@ -405,7 +388,6 @@ Escolha o cargo do funcionário:
 [2] = Caixa
 [3] = Estoquista
 [4] = Sócio
-
 """);
 				int opcaoCargo = sc.nextInt();
 				switch (opcaoCargo) {
@@ -435,9 +417,7 @@ Funcionário:
 Cargo atual: %s
 Cargo novo: %s
 	
-Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser revertida):
-
-""", funcionarioAModificar, cargoAtual, cargoNovo));
+Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser revertida):""", funcionarioAModificar, cargoAtual, cargoNovo));
 				confirmacao = sc.next().charAt(0);
 				if (Character.toLowerCase(confirmacao) == 's') {
 					funcionarioAModificar.setCargo(cargoNovo);
@@ -461,9 +441,7 @@ Funcionário:
 Salário atual: %s
 Salário novo: %s
 	
-Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser revertida):
-
-""", funcionarioAModificar, salarioAtual, salarioNovo));
+Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser revertida):""", funcionarioAModificar, salarioAtual, salarioNovo));
 				confirmacao = sc.next().charAt(0);
 				if (Character.toLowerCase(confirmacao) == 's') {
 					funcionarioAModificar.setSalario(salarioNovo);
@@ -490,9 +468,7 @@ Você tem certeza que deseja remover o funcionário a seguir?
 Funcionário:
 %s
 
-Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser revertida):
-
-""", funcionario));
+Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser revertida):""", funcionario));
 		char confirmacao = sc.next().charAt(0);
 		if (Character.toLowerCase(confirmacao) == 's') {
 			listaFuncionarios.remove(funcionario.getIdFuncionario());

@@ -1,15 +1,1 @@
-[
-  {
-    "idCliente": 1,
-    "idFuncionario": 1,
-    "desconto": 0.99,
-    "pagamento": "A_VISTA",
-    "produtos": [
-      {
-        "idProduto": 1,
-        "quantidade": 1,
-        "descontoProduto": 0.99
-      }
-    ]
-  }
-]
+[]
