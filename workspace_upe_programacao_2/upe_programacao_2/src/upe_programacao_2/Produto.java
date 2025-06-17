@@ -83,7 +83,7 @@ public class Produto {
 	public static String getTodasCategorias() {
 		StringBuilder stringBuilder = new StringBuilder();
 		for (Categoria categoria : Categoria.values()) {
-			stringBuilder.append(Produto.getCategoriaValue(categoria));
+			stringBuilder.append(Produto.getCategoriaValue(categoria) + "\n");
 		}
 		return String.valueOf(stringBuilder);
 	}
@@ -108,7 +108,7 @@ public class Produto {
 		String nomeProduto = sc.nextLine();
 		System.out.println("Digite a descrição do produto: ");
 		String descricao = sc.nextLine();
-		System.out.println("Digite o valor do produto (e.g. 12.00): ");
+		System.out.println("Digite o valor do produto (e.g. 12,50): ");
 		double valor = sc.nextDouble();
 		System.out.println("""
 
@@ -156,7 +156,7 @@ Selecione a categoria do produto:
 	}
 	public static Produto getProdutoByNome(String nomeProduto) {
 		for (Produto produto : Produto.getListaProdutos()) {
-			if (produto.getNomeProduto() == nomeProduto) {
+			if (produto.getNomeProduto().equals(nomeProduto)) {
 				return produto;
 			}
 		}
@@ -178,6 +178,8 @@ Selecione a categoria do produto:
 				break;
 			case 2:
 				System.out.println("Digite o nome do produto: ");
+				// HACK: tem que dar esse nextLine() antes pra apagar o \n que sobra do nextInt()
+				sc.nextLine();
 				String nomeProduto = sc.nextLine();
 				produto = Produto.getProdutoByNome(nomeProduto);
 				break;
@@ -271,7 +273,7 @@ Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser r
 				}
 			case 4:
 				double valorAtual = produtoAModificar.getValor();
-				System.out.println("Digite o valor novo: ");
+				System.out.println("Digite o valor novo (e.g. 12,50): ");
 				double valorNovo = sc.nextDouble();
 				System.out.println(String.format("""
 						
@@ -390,7 +392,7 @@ Produto:
 Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser revertida):""", produto));
 		char confirmacao = sc.next().charAt(0);
 		if (Character.toLowerCase(confirmacao) == 's') {
-			listaProdutos.remove(produto.getIdProduto());
+			listaProdutos.remove(produto.getIdProduto() - 1);
 			System.out.println("Produto foi removido com sucesso!");
 		} else {
 			System.out.println("Operação cancelada!");

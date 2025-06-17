@@ -13,7 +13,6 @@ public class Historico {
 	// CREATE para carregar .json
 	public static void addToHistorico(Compra compra) {
 		historico.add(compra);
-		System.out.println("Compra adicionada ao histórico com sucesso!");
 	}
 	// READ do objeto historico
 	public static ArrayList<Compra> getHistorico() {
@@ -22,18 +21,19 @@ public class Historico {
 	// READ para exibir histórico geral ao usuário
 	public static String exibirHistoricoCompleto() {
 		if (historico.isEmpty()) {
+			System.err.println("ERRO! Ainda não existem compras registradas");
 			return null;
 		}
 		StringBuilder historicoCompleto = new StringBuilder();
 		for (int i = 0; i < historico.size(); i++) {
-			historicoCompleto.append(String.format("Índice: %d\nCompra:\n%s\n\n", i, historico.get(i).toString()));
+			historicoCompleto.append(String.format("Índice: %d\nCompra:\n%s\n\n", i + 1, historico.get(i).toString()));
 		}
 		return String.valueOf(historicoCompleto);
 	}
 	// READ para exibir compra específica ao usuário
 	public static String getCompraByIndex(int idx) {
 		try {
-			return String.format("Índice: %d\nCompra:\n%s", idx, historico.get(idx).toString());
+			return String.format("Índice: %d\nCompra:\n%s", idx + 1, historico.get(idx).toString());
 		} catch (IndexOutOfBoundsException e) {
 			return null;
 		}
@@ -46,7 +46,8 @@ public class Historico {
 			idsDisponiveis.add(cliente.getIdCliente());
 		}
 		if (idsDisponiveis.contains(idCliente) == false) {
-			return String.format("ERRO! A id '%d' não foi registrada ainda", idCliente);
+			System.out.println(String.format("ERRO! A id '%d' não foi registrada ainda", idCliente));
+			return null;
 		}
 		// Existindo, pegar nome do cliente
 		String nomeCliente = Cliente.getClienteById(idCliente).getNome();
@@ -55,19 +56,17 @@ public class Historico {
 		for (int i = 0; i < historico.size(); i++) {
 			Compra compra = historico.get(i);
 			if (compra.getIdCliente() == idCliente) {
-				historicoCliente.append(String.format("Índice: %d\nCompra:\n%s\n\n", i, compra.toString()));
+				historicoCliente.append(compra.toString());
 			}
 		}
 		if (historicoCliente.isEmpty()) {
-			return String.format("ERRO! O cliente de id '%d' ainda não possui compras registradas", idCliente);
+			System.out.println(String.format("ERRO! O cliente de id '%d' ainda não possui compras registradas", idCliente));
+			return null;
 		}
 		return String.format("""
-				
-Compras de %s (id: '%d'):
 
-%s
-
-""", nomeCliente, idCliente, String.valueOf(historicoCliente));
+Compras de %s (id do cliente: '%d'):
+%s""", nomeCliente, idCliente, String.valueOf(historicoCliente));
 	}
 	// READ para exibir ao usuário vendas de um funcionário específico
 	public static String getHistoricoFuncionario(int idFuncionario) {
@@ -77,7 +76,8 @@ Compras de %s (id: '%d'):
 			idsDisponiveis.add(funcionario.getIdFuncionario());
 		}
 		if (idsDisponiveis.contains(idFuncionario) == false) {
-			return String.format("ERRO! A id '%d' não foi registrada ainda", idFuncionario); 
+			System.out.println(String.format("ERRO! A id '%d' não foi registrada ainda", idFuncionario));
+			return null;
 		}
 		// Existindo, pegar nome do cliente
 		String nomeFuncionario = Funcionario.getFuncionarioById(idFuncionario).getNome();
@@ -86,19 +86,17 @@ Compras de %s (id: '%d'):
 		for (int i = 0; i < historico.size(); i++) {
 			Compra compra = historico.get(i);
 			if (compra.getIdFuncionario() == idFuncionario) {
-				historicoFuncionario.append(String.format("Índice: %d\nCompra:\n%s\n\n", i, compra.toString()));
+				historicoFuncionario.append(compra.toString());
 			}
 			if (historicoFuncionario.isEmpty()) {
-				return String.format("ERRO! O funcionário de id '%d' ainda não possui vendas registradas", idFuncionario);
+				System.out.println(String.format("ERRO! O funcionário de id '%d' ainda não possui vendas registradas", idFuncionario));
+				return null;
 			}
 		}
 		return String.format("""
 				
 Vendas de %s (id '%d'):
-
-%s
-
-""", nomeFuncionario, idFuncionario, String.valueOf(historicoFuncionario));
+%s""", nomeFuncionario, idFuncionario, String.valueOf(historicoFuncionario));
 	}
 	// UPDATE
 	public static void cancelarCompra(int idx) {

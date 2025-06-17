@@ -70,10 +70,7 @@ public class Main {
 												System.out.println(String.format("""
 
 Cliente modificado com sucesso:
-
-%s
-
-""", clienteModificado.toString()));
+%s""", clienteModificado.toString()));
 												break;
 											case 2:
 												clienteModificado = Cliente.modificarCliente(clienteAModificar, opcao);
@@ -83,10 +80,7 @@ Cliente modificado com sucesso:
 												System.out.println(String.format("""
 
 Cliente modificado com sucesso:
-
-%s
-
-""", clienteModificado.toString()));
+%s""", clienteModificado.toString()));
 												break;
 											case 3:
 												clienteModificado = Cliente.modificarCliente(clienteAModificar, opcao);
@@ -96,10 +90,7 @@ Cliente modificado com sucesso:
 												System.out.println(String.format("""
 
 Cliente modificado com sucesso:
-
-%s
-
-""", clienteModificado.toString()));
+%s""", clienteModificado.toString()));
 												break;
 											case 4:
 												clienteModificado = Cliente.modificarCliente(clienteAModificar, opcao);
@@ -109,10 +100,7 @@ Cliente modificado com sucesso:
 												System.out.println(String.format("""
 
 Cliente modificado com sucesso:
-
-%s
-
-""", clienteModificado.toString()));
+%s""", clienteModificado.toString()));
 												break;
 											case 5:
 												clienteModificado = Cliente.modificarCliente(clienteAModificar, opcao);
@@ -122,10 +110,7 @@ Cliente modificado com sucesso:
 												System.out.println(String.format("""
 
 Cliente modificado com sucesso:
-
-%s
-
-""", clienteModificado.toString()));
+%s""", clienteModificado.toString()));
 												break;
 											case 6:
 												clienteModificado = Cliente.modificarCliente(clienteAModificar, opcao);
@@ -135,10 +120,7 @@ Cliente modificado com sucesso:
 												System.out.println(String.format("""
 
 Cliente modificado com sucesso:
-
-%s
-
-""", clienteModificado.toString()));
+%s""", clienteModificado.toString()));
 												break;
 											case 7:
 												clienteModificado = Cliente.modificarCliente(clienteAModificar, opcao);
@@ -148,10 +130,7 @@ Cliente modificado com sucesso:
 												System.out.println(String.format("""
 
 Cliente modificado com sucesso:
-
-%s
-
-""", clienteModificado.toString()));
+%s""", clienteModificado.toString()));
 												break;
 											case 8:
 												clienteModificado = Cliente.modificarCliente(clienteAModificar, opcao);
@@ -161,10 +140,7 @@ Cliente modificado com sucesso:
 												System.out.println(String.format("""
 
 Cliente modificado com sucesso:
-
-%s
-
-""", clienteModificado.toString()));
+%s""", clienteModificado.toString()));
 												break;
 											case 0:
 												break loopModificarCliente;
@@ -245,10 +221,7 @@ Cliente modificado com sucesso:
 											System.out.println(String.format("""
 
 Funcionario modificado com sucesso:
-
-%s
-
-""", funcionarioModificado.toString()));
+%s""", funcionarioModificado.toString()));
 											break;
 										case 2:
 											funcionarioModificado = Funcionario.modificarFuncionario(funcionarioAModificar, opcao);
@@ -258,10 +231,7 @@ Funcionario modificado com sucesso:
 											System.out.println(String.format("""
 
 Funcionario modificado com sucesso:
-
-%s
-
-""", funcionarioModificado.toString()));
+%s""", funcionarioModificado.toString()));
 											break;
 										case 3:
 											funcionarioModificado = Funcionario.modificarFuncionario(funcionarioAModificar, opcao);
@@ -271,10 +241,7 @@ Funcionario modificado com sucesso:
 											System.out.println(String.format("""
 
 Funcionario modificado com sucesso:
-
-%s
-
-""", funcionarioModificado.toString()));
+%s""", funcionarioModificado.toString()));
 											break;
 										case 4:
 											funcionarioModificado = Funcionario.modificarFuncionario(funcionarioAModificar, opcao);
@@ -284,10 +251,7 @@ Funcionario modificado com sucesso:
 											System.out.println(String.format("""
 
 Funcionario modificado com sucesso:
-
-%s
-
-""", funcionarioModificado.toString()));
+%s""", funcionarioModificado.toString()));
 											break;
 										case 5:
 											funcionarioModificado = Funcionario.modificarFuncionario(funcionarioAModificar, opcao);
@@ -297,10 +261,7 @@ Funcionario modificado com sucesso:
 											System.out.println(String.format("""
 
 Funcionario modificado com sucesso:
-
-%s
-
-""", funcionarioModificado.toString()));
+%s""", funcionarioModificado.toString()));
 											break;
 										case 6:
 											funcionarioModificado = Funcionario.modificarFuncionario(funcionarioAModificar, opcao);
@@ -310,10 +271,7 @@ Funcionario modificado com sucesso:
 											System.out.println(String.format("""
 
 Funcionario modificado com sucesso:
-
-%s
-
-""", funcionarioModificado.toString()));
+%s""", funcionarioModificado.toString()));
 											break;
 										case 7:
 											funcionarioModificado = Funcionario.modificarFuncionario(funcionarioAModificar, opcao);
@@ -323,10 +281,7 @@ Funcionario modificado com sucesso:
 											System.out.println(String.format("""
 
 Funcionario modificado com sucesso:
-
-%s
-
-""", funcionarioModificado.toString()));
+%s""", funcionarioModificado.toString()));
 											break;
 										case 8:
 											funcionarioModificado = Funcionario.modificarFuncionario(funcionarioAModificar, opcao);
@@ -336,10 +291,7 @@ Funcionario modificado com sucesso:
 											System.out.println(String.format("""
 
 Funcionario modificado com sucesso:
-
-%s
-
-""", funcionarioModificado.toString()));
+%s""", funcionarioModificado.toString()));
 											break;
 										case 9:
 											funcionarioModificado = Funcionario.modificarFuncionario(funcionarioAModificar, opcao);
@@ -349,10 +301,7 @@ Funcionario modificado com sucesso:
 											System.out.println(String.format("""
 
 Funcionario modificado com sucesso:
-
-%s
-
-""", funcionarioModificado.toString()));
+%s""", funcionarioModificado.toString()));
 											break;
 										case 10:
 											funcionarioModificado = Funcionario.modificarFuncionario(funcionarioAModificar, opcao);
@@ -362,10 +311,7 @@ Funcionario modificado com sucesso:
 											System.out.println(String.format("""
 
 Funcionario modificado com sucesso:
-
-%s
-
-""", funcionarioModificado.toString()));
+%s""", funcionarioModificado.toString()));
 											break;
 										case 0:
 											break loopModificarFuncionario;
@@ -415,11 +361,9 @@ Funcionario modificado com sucesso:
 							case 2:
 								System.out.println(String.format("""
 
-Categorias disponíveis:
+Categorias disponíveis
 
-%s
-
-""", Produto.getTodasCategorias()));
+%s""", Produto.getTodasCategorias()));
 								break;
 							// Exibir todo o estoque
 							case 3:
@@ -440,10 +384,7 @@ Categorias disponíveis:
 												System.out.println(String.format("""
 
 Produto adicionado com sucesso:
-
-%s
-
-""", produtoNovo.toString()));
+%s""", produtoNovo.toString()));
 											} else {
 												System.out.println("Operação cancelada");
 											}
@@ -465,10 +406,7 @@ Produto adicionado com sucesso:
 															System.out.println(String.format("""
 
 Produto modificado com sucesso:
-
-%s
-
-""", produtoModificado.toString()));
+%s""", produtoModificado.toString()));
 															break;
 														case 2:
 															produtoModificado = Produto.modificarProduto(produtoAModificar, opcao);
@@ -478,10 +416,7 @@ Produto modificado com sucesso:
 															System.out.println(String.format("""
 
 Produto modificado com sucesso:
-
-%s
-
-""", produtoModificado.toString()));
+%s""", produtoModificado.toString()));
 															break;
 														case 3:
 															produtoModificado = Produto.modificarProduto(produtoAModificar, opcao);
@@ -491,10 +426,7 @@ Produto modificado com sucesso:
 															System.out.println(String.format("""
 
 Produto modificado com sucesso:
-
-%s
-
-""", produtoModificado.toString()));
+%s""", produtoModificado.toString()));
 															break;
 														case 4:
 															produtoModificado = Produto.modificarProduto(produtoAModificar, opcao);
@@ -504,10 +436,7 @@ Produto modificado com sucesso:
 															System.out.println(String.format("""
 
 Produto modificado com sucesso:
-
-%s
-
-""", produtoModificado.toString()));
+%s""", produtoModificado.toString()));
 															break;
 														case 5:
 															produtoModificado = Produto.modificarProduto(produtoAModificar, opcao);
@@ -517,10 +446,7 @@ Produto modificado com sucesso:
 															System.out.println(String.format("""
 
 Produto modificado com sucesso:
-
-%s
-
-""", produtoModificado.toString()));
+%s""", produtoModificado.toString()));
 															break;
 														case 6:
 															produtoModificado = Produto.modificarProduto(produtoAModificar, opcao);
@@ -530,9 +456,7 @@ Produto modificado com sucesso:
 															System.out.println(String.format("""
 
 Produto modificado com sucesso:
-
-%s
-
+%ss
 """, produtoModificado.toString()));
 															break;
 														case 0:
@@ -604,6 +528,7 @@ Produto modificado com sucesso:
 								if (cancelamentoSucesso == false) {
 									System.out.println("O cancelamento falhou!");
 								}
+								System.out.println("Venda cancelada com sucesso!");
 								break;
 							// Retornar ao menu anterior
 							case 0:
@@ -616,7 +541,7 @@ Produto modificado com sucesso:
 					break;
 				// TEST: Gerar relatório mensal
 				case 5:
-					Historico.gerarRelatorio();
+					System.out.println(Historico.gerarRelatorio());
 					break;
 				// Sair do sistema
 				case 0:

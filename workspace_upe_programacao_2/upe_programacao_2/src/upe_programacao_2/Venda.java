@@ -34,7 +34,7 @@ public class Venda {
 				case 1:
 					Cliente cliente = Cliente.selecionarCliente();
 					if (cliente != null) {
-						Historico.getHistoricoCliente(cliente.getIdCliente());
+						System.out.println(Historico.getHistoricoCliente(cliente.getIdCliente()));
 					} else {
 						return false;
 					}
@@ -43,7 +43,7 @@ public class Venda {
 				case 2:
 					Funcionario funcionario = Funcionario.selecionarFuncionario();
 					if (funcionario != null) {
-						Historico.getHistoricoFuncionario(funcionario.getIdFuncionario());
+						System.out.println(Historico.getHistoricoFuncionario(funcionario.getIdFuncionario()));
 					} else {
 						return false;
 					}
@@ -74,7 +74,7 @@ public class Venda {
 		System.out.println("Digite o índice da venda que deseja cancelar: ");
 		int idx = sc.nextInt();
 		// Pegar compra a cancelar para confirmar
-		String compraACancelar = Historico.getCompraByIndex(idx);
+		String compraACancelar = Historico.getCompraByIndex(idx - 1);
 		if (compraACancelar == null) {
 			System.out.println(String.format("ERRO! Índice '%d' não existe", idx));
 			return false;
@@ -90,7 +90,7 @@ Compra:
 Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser revertida):""", compraACancelar));
 		char confirmacao = sc.next().charAt(0);
 		if (Character.toLowerCase(confirmacao) == 's') {
-			Historico.cancelarCompra(idx);
+			Historico.cancelarCompra(idx - 1);
 			return true;
 		} else {
 			return false;

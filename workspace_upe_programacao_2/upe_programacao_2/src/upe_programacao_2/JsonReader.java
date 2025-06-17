@@ -7,6 +7,12 @@ import java.util.ArrayList;
 import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
 
+import typeadapter.ClienteTypeAdapter;
+import typeadapter.CompraTypeAdapter;
+import typeadapter.FuncionarioTypeAdapter;
+import typeadapter.HistoricoTypeAdapter;
+import typeadapter.ProdutoTypeAdapter;
+
 public class JsonReader {
 	private static Gson gson = new GsonBuilder()
 			.registerTypeAdapter(Cliente.class, new ClienteTypeAdapter())

@@ -7,4 +7,5 @@
     <fullyQualifiedTypeName name="upe_programacao_2.Funcionario"/>
     <fullyQualifiedTypeName name="upe_programacao_2.Produto"/>
     <fullyQualifiedTypeName name="java.lang.IllegalStateException"/>
+    <fullyQualifiedTypeName name="enums.Status"/>
 </qualifiedTypeNameHistroy>

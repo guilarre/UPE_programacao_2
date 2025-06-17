@@ -3,6 +3,12 @@ package upe_programacao_2;
 import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
 
+import typeadapter.ClienteTypeAdapter;
+import typeadapter.CompraTypeAdapter;
+import typeadapter.FuncionarioTypeAdapter;
+import typeadapter.HistoricoTypeAdapter;
+import typeadapter.ProdutoTypeAdapter;
+
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;

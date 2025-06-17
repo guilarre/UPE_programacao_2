@@ -25,7 +25,7 @@ public class Cliente extends Pessoa {
 	public static String getClientes() {
 		StringBuilder clientes = new StringBuilder();
 		for (Cliente cliente : listaClientes) {
-			clientes.append(cliente.toString() + "\n\n");			
+			clientes.append(cliente.toString());			
 		}
 		if (clientes.isEmpty()) {
 			return "ERRO! Nenhum cliente foi registrado ainda";
@@ -75,9 +75,9 @@ public class Cliente extends Pessoa {
 		System.err.println("ERRO! Cliente inexistente");
 		return null;
 	}
-	public static Cliente getClienteByNome(String nomeCliente) {
+	public static Cliente getClienteByNome(String nomeClientePesquisa) {
 		for (Cliente cliente : Cliente.getListaClientes()) {
-			if (cliente.getNome() == nomeCliente) {
+			if (cliente.getNome().equals(nomeClientePesquisa)) {
 				return cliente;
 			}
 		}
@@ -99,11 +99,12 @@ public class Cliente extends Pessoa {
 				break;
 			case 2:
 				System.out.println("Digite o nome do cliente: ");
+				// HACK: tem que dar esse nextLine() antes pra apagar o \n que sobra do nextInt()
+				sc.nextLine();
 				String nomeCliente = sc.nextLine();
 				cliente = Cliente.getClienteByNome(nomeCliente);
 				break;
 			case 0:
-				System.out.println("Operação cancelada!");
 				break;
 			default:
 				System.err.println("ERRO! Opção inválida");
@@ -332,7 +333,7 @@ Cliente:
 Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser revertida):""", cliente));
 		char confirmacao = sc.next().charAt(0);
 		if (Character.toLowerCase(confirmacao) == 's') {
-			listaClientes.remove(cliente.getIdCliente());
+			listaClientes.remove(cliente.getIdCliente() - 1);
 			System.out.println("Cliente foi removido com sucesso!");
 		} else {
 			System.out.println("Operação cancelada!");
@@ -352,6 +353,7 @@ Se sim, digite 's', se não digite 'n' (CUIDADO: Essa operação não pode ser r
 	@Override
 	public String toString() {
 		return String.format("""
+
 Id do cliente: '%d'
 
 Nome: %s
@@ -363,6 +365,7 @@ Endereço: %s
 Aniversário: %s
 Idade: %d
 Gênero: %s
+
 """, this.getIdCliente(), this.getNome(), this.getCpf(), this.getTelefone(), this.getEmail(), this.getPreferenciaComunicacao(), this.getEndereco(), this.getAniversario(), this.getIdade(), this.getGenero());
 	}
 }

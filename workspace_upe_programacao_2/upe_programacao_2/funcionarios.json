@@ -1,1 +1,41 @@
-[]
+[
+  {
+    "idFuncionario": 1,
+    "nome": "José Hugo",
+    "cpf": "00998877665",
+    "telefone": "81989889898",
+    "email": "hugo@yahoo.com",
+    "preferenciaComunicacao": "Bater na porta e gritar",
+    "endereco": "Rua da academia",
+    "aniversario": "20/02/2002",
+    "genero": "Masculino",
+    "cargo": "CAIXA",
+    "salario": 1500.0
+  },
+  {
+    "idFuncionario": 2,
+    "nome": "Claudenira",
+    "cpf": "98765432101",
+    "telefone": "14414114144",
+    "email": "nira@bol.com.br",
+    "preferenciaComunicacao": "Peteleco",
+    "endereco": "Rua do posto, 55",
+    "aniversario": "21/12/2021",
+    "genero": "Feminino",
+    "cargo": "SOCIO",
+    "salario": 99999.0
+  },
+  {
+    "idFuncionario": 3,
+    "nome": "Rony",
+    "cpf": "33445544332",
+    "telefone": "44998765432",
+    "email": "rony@ig.com.br",
+    "preferenciaComunicacao": "Abdução extraterrestre",
+    "endereco": "Via láctea, Sistema solar, Terra, Brasil",
+    "aniversario": "30/03/2003",
+    "genero": "Masculino",
+    "cargo": "VENDEDOR",
+    "salario": 1000.0
+  }
+]

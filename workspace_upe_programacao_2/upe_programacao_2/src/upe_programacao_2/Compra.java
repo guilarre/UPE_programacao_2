@@ -18,7 +18,7 @@ public class Compra {
 	private LocalDateTime dataHora;
 	private ArrayList<CompraProduto> listaCompraProdutos = null;
 	private double subtotal = 0;
-	private double desconto = 1;
+	private double desconto;
 	private double total = 0;
 	private Pagamento pagamento = null;
 	private Status status = Status.EM_PROCESSAMENTO;
@@ -32,11 +32,23 @@ public class Compra {
 		for (CompraProduto compraProduto : listaCompraProdutos) {
 			subtotal += compraProduto.getTotal();
 		}
-		if (desconto != 0) {
-			// Math.abs para deixar positivo
-			this.desconto = Math.abs(desconto - 100) / 100;
+		// autoAdd é usado como flag pra indicar se foi criado pelo gson
+		if (autoAdd == true) {
+			if (desconto != 0) {
+				// Math.abs para deixar positivo
+				this.desconto = Math.abs(desconto - 100) / 100;
+				this.total = subtotal * desconto;
+			} else {			
+				this.total = subtotal;
+			}
+		} else {
+			if (desconto != 0) {
+				this.desconto = desconto;
+				this.total = subtotal * desconto;
+			} else {			
+				this.total = subtotal;
+			}
 		}
-		this.total = subtotal * desconto;
 		this.pagamento = pagamento;
 		// Alterando qtd em estoque após sucesso
 		Compra.decrementarEstoque(this.listaCompraProdutos);
@@ -161,12 +173,14 @@ Selecione um ou mais produtos:
 					// Qtd comprada
 					System.out.println("Digite a quantidade que será comprada:");
 					qtdComprada = sc.nextInt();
-					compraProduto = new Compra.CompraProduto(produtoSelecionado, qtdComprada, desconto);
+					compraProduto = new Compra.CompraProduto(produtoSelecionado, qtdComprada, desconto, true);
 					listaCompraProdutos.add(compraProduto);
 					break;
 				case 2:
 					// Selecionando o produto pelo nome
 					System.out.println("Digite o nome do produto:");
+					// HACK: tem que dar esse nextLine() antes pra apagar o \n que sobra do nextInt()
+					sc.nextLine();
 					String nomeProduto = sc.nextLine();
 					produtoSelecionado = Produto.getProdutoByNome(nomeProduto);
 					System.out.println(String.format("Produto selecionado:\n\n%s", produtoSelecionado));
@@ -176,7 +190,7 @@ Selecione um ou mais produtos:
 					// Qtd comprada
 					System.out.println("Digite a quantidade que será comprada:");
 					qtdComprada = sc.nextInt();
-					compraProduto = new Compra.CompraProduto(produtoSelecionado, qtdComprada, desconto);
+					compraProduto = new Compra.CompraProduto(produtoSelecionado, qtdComprada, desconto, true);
 					listaCompraProdutos.add(compraProduto);
 					break;
 				case 3:
@@ -281,29 +295,41 @@ Id da compra: '%d'
 Id do cliente: '%d'
 Id do Funcionário: '%d'
 Data e hora da compra: '%s'
-Subtotal: '%d'
-Desconto: '%d'
+Subtotal: '%f'
+Desconto: '%f'
 Total: R$ %.2f
 Forma de pagamento: '%s'
 Status: '%s'
 
-""", this.getIdCliente(), this.getIdFuncionario(), this.getDataHora(), this.getSubtotal(), this.getDesconto(), this.getTotal(), Compra.getPagamentoValue(pagamento), Compra.getStatusValue(status));
+""", this.getIdCompra(), this.getIdCliente(), this.getIdFuncionario(), this.getDataHora(), this.getSubtotal(), this.getDesconto(), this.getTotal(), Compra.getPagamentoValue(pagamento), Compra.getStatusValue(status));
 	}
 	
 	public static class CompraProduto {
 		private Produto produto;
 		private int qtdComprada = 0;
-		private double desconto = 1;
+		private double desconto;
 		private double total = 0;
 		
-		public CompraProduto(Produto produto, int qtdComprada, double desconto) {
+		public CompraProduto(Produto produto, int qtdComprada, double desconto, boolean autoAdd) {
 			this.produto = produto;
 			this.qtdComprada = qtdComprada;
-			if (desconto != 0) {
-				// Math.abs para deixar positivo
-				this.desconto = Math.abs(desconto - 100) / 100;
+			// autoAdd é usado como flag pra indicar se foi criado pelo gson
+			if (autoAdd == true) {
+				if (desconto != 0) {
+					// Math.abs para deixar positivo
+					this.desconto = Math.abs(desconto - 100) / 100;
+					this.total = produto.getValor() * qtdComprada * desconto;
+				} else {
+					this.total = produto.getValor() * qtdComprada;
+				}
+			} else {
+				if (desconto != 0) {
+					this.desconto = desconto;
+					this.total = produto.getValor() * qtdComprada * desconto;
+				} else {
+					this.total = produto.getValor() * qtdComprada;
+				}
 			}
-			this.total = produto.getValor() * qtdComprada * desconto;
 		}
 		
 		//Getters/Setters

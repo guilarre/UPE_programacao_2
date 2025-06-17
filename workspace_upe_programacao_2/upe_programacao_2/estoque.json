@@ -2,10 +2,28 @@
   {
     "idProduto": 1,
     "sku": "1",
-    "nomeProduto": "Calça Jeans Baggy",
+    "nomeProduto": "Calça jeans baggy",
     "descricao": "Calça mais folgada",
-    "valor": 139.9,
+    "valor": 240.0,
     "categoria": "CALCA",
-    "qtdEstoque": 200
+    "qtdEstoque": 167
+  },
+  {
+    "idProduto": 2,
+    "sku": "2",
+    "nomeProduto": "Jaqueta jeans masculina",
+    "descricao": "Jaqueta jeans azul com bolso",
+    "valor": 200.0,
+    "categoria": "JAQUETA",
+    "qtdEstoque": 63
+  },
+  {
+    "idProduto": 3,
+    "sku": "3",
+    "nomeProduto": "Saia jeans",
+    "descricao": "Saia jeans longa azul",
+    "valor": 80.0,
+    "categoria": "SAIA",
+    "qtdEstoque": 372
   }
 ]
