@@ -1,1 +1,15 @@
-[]
+[
+  {
+    "idFuncionario": 1,
+    "nome": "asdasdsada",
+    "cpf": "12332112311",
+    "telefone": "81996212351",
+    "email": "guilhermelarre@gmail.com",
+    "preferenciaComunicacao": "email",
+    "endereco": "R. Pereira Simões",
+    "aniversario": "20/07/1996",
+    "genero": "masculino",
+    "cargo": "CAIXA",
+    "salario": 1212.12
+  }
+]

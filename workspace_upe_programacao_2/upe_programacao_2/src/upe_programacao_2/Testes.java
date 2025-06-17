@@ -3,17 +3,13 @@ package upe_programacao_2;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-//import java.io.FileWriter;
-//import java.io.IOException;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
-//import java.io.FileReader;
-//import java.io.IOException;
-//import java.time.LocalDate;
-//
-//import com.google.gson.Gson;
-//import com.google.gson.GsonBuilder;
+import enums.Cargo;
 
-import enums.Categoria;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class Testes {
 
@@ -43,16 +39,13 @@ public class Testes {
 //		for (Cliente cliente : Cliente.getListaClientes()) {
 //			System.out.println(cliente);
 //		}
-//		JsonWriter.salvarClientes(Cliente.getListaClientes());
-//		Cliente cliente6 = new Cliente("asdasdsada", "12332112311", "81996212351", "guilhermelarre@gmail.com", "email", "R. Pereira Simões", "20/07/1996", "masculino");
-//		
-//		Gson gson = new Gson();
-//		try (FileWriter fw = new FileWriter("teste.json")) {
+		
+//		try (FileWriter fw = new FileWriter("clientes.json")) {
 //			gson.toJson(cliente6, fw);
 //		} catch (IOException e) {
 //			e.printStackTrace();
 //		}
-		
+//		
 //		Produto produtoNovo = new Produto("123", "jaqueta", "asdasdad", 200, Categoria.JAQUETA, 2);
 //		System.out.println(produtoNovo);
 //		
@@ -63,9 +56,25 @@ public class Testes {
 //		System.out.println("Produto depois de modificado no estoque:");
 //		System.out.println(Produto.getProdutoByNome("jaqueta"));
 
-		String aniversario = "20-12-2121";
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-		LocalDate aniversarioData = LocalDate.parse(aniversario, formatter);
+//		String aniversario = "20-12-2121";
+//		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+//		LocalDate aniversarioData = LocalDate.parse(aniversario, formatter);
+
+//		Gson gson = new GsonBuilder()
+//				.setPrettyPrinting()
+//				.registerTypeAdapter(Cliente.class, new ClienteTypeAdapter())
+//				.serializeNulls()
+//				.create();
+
+//		Cliente cliente6 = new Cliente("asdasdsada", "12332112311", "81996212351", "guilhermelarre@gmail.com", "email", "R. Pereira Simões", "20/07/1996", "masculino");
+//		Funcionario funcionario = new Funcionario("asdasdsada", "12332112311", "81996212351", "guilhermelarre@gmail.com", "email", "R. Pereira Simões", "20/07/1996", "masculino", Cargo.CAIXA, 1212.12);
+//		
+//		JsonWriter.salvarFuncionarios(Funcionario.getListaFuncionarios());
+		
+//		JsonReader.carregarFuncionarios();
+//		System.out.println(Funcionario.getFuncionarios());
+		
+		
 		
 	}
 }

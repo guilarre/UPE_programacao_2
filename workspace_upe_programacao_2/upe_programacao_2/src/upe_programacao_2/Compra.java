@@ -23,7 +23,7 @@ public class Compra {
 	private Pagamento pagamento = null;
 	private Status status = Status.EM_PROCESSAMENTO;
 	
-	public Compra(int idCliente, int idFuncionario, ArrayList<CompraProduto> listaCompraProdutos, double desconto, Pagamento pagamento) {
+	public Compra(int idCliente, int idFuncionario, ArrayList<CompraProduto> listaCompraProdutos, double desconto, Pagamento pagamento, boolean autoAdd) {
 		idCompra = count.incrementAndGet();
 		this.idCliente = idCliente;
 		this.idFuncionario = idFuncionario;
@@ -42,7 +42,9 @@ public class Compra {
 		Compra.decrementarEstoque(this.listaCompraProdutos);
 		status = Status.SUCESSO;
 		// Salvar compra no histórico
-		Historico.addToHistorico(this);
+		if (autoAdd) {			
+			Historico.addToHistorico(this);
+		}
 	}
 	
 	// Getters/setters
@@ -156,7 +158,7 @@ Selecione o(s) produto(s):
 					produtoSelecionado = Produto.getProdutoById(idProduto);
 					System.out.println(String.format("Produto selecionado:\n\n%s", produtoSelecionado));
 					// Desconto
-					System.out.println("Digite o desconto DO PRODUTO em porcentagem, se aplicável (e.g. 12.5).\nSe não houver desconto, digite 0: ");
+					System.out.println("Digite o desconto DO PRODUTO em porcentagem, se aplicável (e.g. 12,5).\nSe não houver desconto, digite 0: ");
 					desconto = sc.nextDouble();
 					// Qtd comprada
 					System.out.println("Digite a quantidade que será comprada: ");
@@ -171,7 +173,7 @@ Selecione o(s) produto(s):
 					produtoSelecionado = Produto.getProdutoByNome(nomeProduto);
 					System.out.println(String.format("Produto selecionado:\n\n%s", produtoSelecionado));
 					// Desconto
-					System.out.println("Digite o desconto DO PRODUTO em porcentagem, se aplicável (e.g. 12.5).\nSe não houver desconto, digite 0: ");
+					System.out.println("Digite o desconto DO PRODUTO em porcentagem, se aplicável (e.g. 12,5).\nSe não houver desconto, digite 0: ");
 					desconto = sc.nextDouble();
 					// Qtd comprada
 					System.out.println("Digite a quantidade que será comprada: ");
@@ -199,7 +201,7 @@ Selecione o(s) produto(s):
 		}
 		Scanner sc = new Scanner(System.in);
 		// Desconto
-		System.out.println("Digite o desconto DA COMPRA em porcentagem, se aplicável (e.g. 12.5).\nSe não houver desconto, digite 0: ");
+		System.out.println("Digite o desconto DA COMPRA em porcentagem, se aplicável (e.g. 12,5).\nSe não houver desconto, digite 0: ");
 		double desconto = sc.nextDouble();
 		// Pagamento (forma de pagamento)
 		Pagamento pagamento = null;
@@ -236,7 +238,7 @@ Escolha a forma de pagamento:
 				break;
 		}
 		// Criar e retornar objeto Compra
-		Compra compra = new Compra(cliente.getIdCliente(), funcionario.getIdFuncionario(), listaCompraProdutos, desconto, pagamento);
+		Compra compra = new Compra(cliente.getIdCliente(), funcionario.getIdFuncionario(), listaCompraProdutos, desconto, pagamento, true);
 		return compra;
 	}
 	

@@ -1,1 +1,11 @@
-[]
+[
+  {
+    "idProduto": 1,
+    "sku": "1",
+    "nomeProduto": "wsadasd",
+    "descricao": "rgfwrgfwe",
+    "valor": 12.6,
+    "categoria": "CALCA",
+    "qtdEstoque": -1
+  }
+]

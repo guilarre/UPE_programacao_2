@@ -1,0 +1,128 @@
+package upe_programacao_2;
+
+import com.google.gson.TypeAdapter;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
+import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
+import enums.Pagamento;
+import enums.Status;
+
+public class CompraTypeAdapter extends TypeAdapter<Compra> {
+    private static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
+
+    @Override
+    public void write(JsonWriter out, Compra compra) throws IOException {
+        out.beginObject();
+        // Não serializa idCompra (é gerado automaticamente)
+        out.name("idCliente").value(compra.getIdCliente());
+        out.name("idFuncionario").value(compra.getIdFuncionario());
+        out.name("dataHora").value(compra.getObjetoDataHora().format(DATE_FORMAT));
+        out.name("subtotal").value(compra.getSubtotal());
+        out.name("desconto").value(compra.getDesconto());
+        out.name("total").value(compra.getTotal());
+        out.name("pagamento").value(compra.getPagamento().name());
+        out.name("status").value(compra.getStatus().name());
+        
+        // Serializa apenas IDs dos produtos para evitar duplicação
+        out.name("produtos").beginArray();
+        for (Compra.CompraProduto cp : compra.getListaCompraProdutos()) {
+            out.beginObject();
+            out.name("idProduto").value(cp.getProduto().getIdProduto());
+            out.name("quantidade").value(cp.getQtdComprada());
+            out.name("desconto").value(cp.getDesconto());
+            out.endObject();
+        }
+        out.endArray();
+        
+        out.endObject();
+    }
+
+    @Override
+    public Compra read(JsonReader in) throws IOException {
+        in.beginObject();
+        
+        int idCliente = 0;
+        int idFuncionario = 0;
+        LocalDateTime dataHora = null;
+        double subtotal = 0;
+        double desconto = 1;
+        double total = 0;
+        Pagamento pagamento = null;
+        Status status = null;
+        List<Compra.CompraProduto> produtos = new ArrayList<>();
+        
+        while (in.hasNext()) {
+            String fieldName = in.nextName();
+            switch (fieldName) {
+                case "idCliente":
+                    idCliente = in.nextInt();
+                    break;
+                case "idFuncionario":
+                    idFuncionario = in.nextInt();
+                    break;
+                case "dataHora":
+                    dataHora = LocalDateTime.parse(in.nextString(), DATE_FORMAT);
+                    break;
+                case "subtotal":
+                    subtotal = in.nextDouble();
+                    break;
+                case "desconto":
+                    desconto = in.nextDouble();
+                    break;
+                case "total":
+                    total = in.nextDouble();
+                    break;
+                case "pagamento":
+                    pagamento = Pagamento.valueOf(in.nextString());
+                    break;
+                case "status":
+                    status = Status.valueOf(in.nextString());
+                    break;
+                case "produtos":
+                    in.beginArray();
+                    while (in.hasNext()) {
+                        in.beginObject();
+                        int idProduto = 0;
+                        int quantidade = 0;
+                        double descontoProduto = 1;
+                        
+                        while (in.hasNext()) {
+                            String prodField = in.nextName();
+                            switch (prodField) {
+                                case "idProduto":
+                                    idProduto = in.nextInt();
+                                    break;
+                                case "quantidade":
+                                    quantidade = in.nextInt();
+                                    break;
+                                case "desconto":
+                                    descontoProduto = in.nextDouble();
+                                    break;
+                                default:
+                                    in.skipValue();
+                            }
+                        }
+                        // Busca o produto na lista existente
+                        Produto produto = Produto.getProdutoById(idProduto);
+                        if (produto != null) {
+                            produtos.add(new Compra.CompraProduto(produto, quantidade, descontoProduto));
+                        }
+                        in.endObject();
+                    }
+                    in.endArray();
+                    break;
+                default:
+                    in.skipValue(); // Ignora campos desconhecidos (como idCompra)
+            }
+        }
+        in.endObject();
+        
+        // Cria a compra (o id será gerado automaticamente)
+        Compra compra = new Compra(idCliente, idFuncionario, new ArrayList<>(produtos), desconto, pagamento);
+        return compra;
+    }
+}

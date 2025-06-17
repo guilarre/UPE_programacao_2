@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class Main {
 
 	public static void main(String[] args) {
-		// TEST: espaçamento correto na UI
+		// FIX: espaçamento correto na UI
 		// Carregar arquivos em memória
 		try {			
 			JsonReader.carregarClientes();
@@ -622,12 +622,12 @@ Produto modificado com sucesso:
 				// Sair do sistema
 				case 0:
 					// TEST: Salvar tudo em json antes de fechar
-					sc.close();
 					System.out.println("Até logo!");
-					JsonWriter.salvarClientes(Cliente.getListaClientes());
-					JsonWriter.salvarFuncionarios(Funcionario.getListaFuncionarios());
-					JsonWriter.salvarEstoque(Produto.getListaProdutos());
-					JsonWriter.salvarHistorico(Historico.getHistorico());
+					JsonWriter.salvarClientes();
+					JsonWriter.salvarFuncionarios();
+					JsonWriter.salvarEstoque();
+					JsonWriter.salvarHistorico();
+					sc.close();
 					break loopMain;
 				default:
 					System.err.println("ERRO! Opção inválida");

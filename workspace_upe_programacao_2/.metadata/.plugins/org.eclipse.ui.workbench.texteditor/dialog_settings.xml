@@ -4,6 +4,11 @@
 	<section name="java.lang.Class">
 		<item key="replaceBarOpen" value="true"/>
 		<list key="findhistory">
+			<item value="pesquisar "/>
+			<item value="quantidade"/>
+			<item value="Cliente.scanner"/>
+			<item value="Scanner sc = new Scanner(System.in);"/>
+			<item value="Scanner sc "/>
 			<item value="sc.close();"/>
 			<item value="sc.close"/>
 			<item value="sc.next"/>
@@ -14,13 +19,10 @@
 			<item value="gênero"/>
 			<item value="Genero"/>
 			<item value="genero"/>
-			<item value="cargo"/>
-			<item value="Cargo cargo"/>
-			<item value="cliente"/>
-			<item value="remove"/>
-			<item value="getProdutoById"/>
 		</list>
 		<list key="replacehistory">
+			<item value="qtdComprada"/>
+			<item value="Cliente.sc"/>
 			<item value="System.err.println(&quot;ERRO!"/>
 			<item value="Funcionario"/>
 			<item value="Salário"/>
@@ -34,8 +36,6 @@
 			<item value="genero"/>
 			<item value="Genero"/>
 			<item value="Aniversario"/>
-			<item value="aniversario"/>
-			<item value="Endereco"/>
 		</list>
 	</section>
 </section>

@@ -2,15 +2,19 @@ package upe_programacao_2;
 
 import java.io.FileReader;
 import java.io.IOException;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 import com.google.gson.*;
+import com.google.gson.reflect.TypeToken;
 
 public class JsonReader {
 	private static Gson gson = new GsonBuilder()
-			.registerTypeAdapter(LocalDate.class, new LocalDateTypeAdapter())
-			.registerTypeAdapter(LocalDateTime.class, new LocalDateTimeTypeAdapter())
+			.registerTypeAdapter(Cliente.class, new ClienteTypeAdapter())
+			.registerTypeAdapter(Funcionario.class, new FuncionarioTypeAdapter())
+	        .registerTypeAdapter(Produto.class, new ProdutoTypeAdapter())
+			.registerTypeAdapter(Compra.class, new CompraTypeAdapter())
+			.registerTypeAdapter(new TypeToken<ArrayList<Compra>>(){}.getType(), 
+                    new HistoricoTypeAdapter(new CompraTypeAdapter()))
 			.create();
 	
 	// Métodos para carregar objetos em memória
@@ -20,8 +24,7 @@ public class JsonReader {
 			for (Cliente cliente : clientes) {
 				Cliente.addToListaClientes(cliente);
 			}
-		} catch (IOException e) {
-		} catch (JsonIOException e) {
+		} catch (IOException | JsonIOException e) {
 		}
 	}
 	
@@ -31,8 +34,7 @@ public class JsonReader {
 			for (Funcionario funcionario : funcionarios) {
 				Funcionario.addToListaFuncionarios(funcionario);
 			}
-		} catch (IOException e) {
-		} catch (JsonIOException e) {
+		} catch (IOException | JsonIOException e) {
 		}
 	}
 	
@@ -42,8 +44,7 @@ public class JsonReader {
 			for (Compra compra : historico) {
 				Historico.addToHistorico(compra);
 			}
-		} catch (IOException e) {
-		} catch (JsonIOException e) {
+		} catch (IOException | JsonIOException e) {
 		}
 	}
 	
@@ -53,8 +54,7 @@ public class JsonReader {
 			for (Produto produto : estoque) {
 				Produto.addToListaProdutos(produto);
 			}
-		} catch (IOException e) {
-		} catch (JsonIOException e) {
+		} catch (IOException | JsonIOException e) {
 		}
 	}
 }

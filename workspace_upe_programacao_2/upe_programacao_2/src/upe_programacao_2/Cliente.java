@@ -10,10 +10,12 @@ public class Cliente extends Pessoa {
 	private static AtomicInteger count = new AtomicInteger(0);
 	private final int idCliente;
 	
-	public Cliente(String nome, String cpf, String telefone, String email, String preferenciaComunicacao, String endereco, String aniversario, String genero) {
+	public Cliente(String nome, String cpf, String telefone, String email, String preferenciaComunicacao, String endereco, String aniversario, String genero, boolean autoAdd) {
 		super(nome, cpf, telefone, email, preferenciaComunicacao, endereco, aniversario, genero);
 		idCliente = count.incrementAndGet();
-		listaClientes.add(this);
+		if (autoAdd) {
+			listaClientes.add(this);			
+		}
 	}
 	
 	// Getters/setters
@@ -55,7 +57,7 @@ public class Cliente extends Pessoa {
 			System.out.println("Digite o gênero do cliente: ");
 			String genero = sc.nextLine();
 			try {
-				cliente = new Cliente(nome, cpf, telefone, email, preferenciaComunicacao, endereco, aniversario, genero);			
+				cliente = new Cliente(nome, cpf, telefone, email, preferenciaComunicacao, endereco, aniversario, genero, true);			
 			} catch (IllegalArgumentException e) {
 				System.err.println(e.getMessage());
 				return cliente;

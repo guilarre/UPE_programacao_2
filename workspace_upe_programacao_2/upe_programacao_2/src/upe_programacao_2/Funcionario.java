@@ -15,12 +15,14 @@ public class Funcionario extends Pessoa {
 	private Cargo cargo = null;
 	private double salario;
 	
-	public Funcionario(String nome, String cpf, String telefone, String email, String preferenciaComunicacao, String endereco, String aniversario, String genero, Cargo cargo, double salario) {
+	public Funcionario(String nome, String cpf, String telefone, String email, String preferenciaComunicacao, String endereco, String aniversario, String genero, Cargo cargo, double salario, boolean autoAdd) {
 		super(nome, cpf, telefone, email, preferenciaComunicacao, endereco, aniversario, genero);
 		idFuncionario = count.incrementAndGet();
 		this.cargo = cargo;
 		this.salario = salario;
-		listaFuncionarios.add(this);
+		if (autoAdd) {			
+			listaFuncionarios.add(this);
+		}
 	}
 	
 	// Getters/setters
@@ -119,7 +121,7 @@ Escolha o cargo do funcionário:
 		System.out.println("Digite o salário do funcionário (e.g. 1459.90: ");
 		double salario = sc.nextDouble();
 		try {
-			funcionario = new Funcionario(nome, cpf, telefone, email, preferenciaComunicacao, endereco, aniversario, genero, cargo, salario);			
+			funcionario = new Funcionario(nome, cpf, telefone, email, preferenciaComunicacao, endereco, aniversario, genero, cargo, salario, true);			
 		} catch (IllegalArgumentException e) {
 			System.err.println(e.getMessage());
 			return funcionario;
@@ -161,12 +163,10 @@ Escolha o cargo do funcionário:
 			case 1:
 				System.out.println("Digite o id do funcionário: ");
 				int idFuncionario = sc.nextInt();
-				System.out.println(String.format("Funcionário selecionado:\n\n%s", getFuncionarioById(idFuncionario)));
 				return Funcionario.getFuncionarioById(idFuncionario);
 			case 2:
 				System.out.println("Digite o nome do funcionário: ");
 				String nomeFuncionario = sc.nextLine();
-				System.out.println(String.format("Funcionário selecionado:\n\n%s", getFuncionarioByNome(nomeFuncionario)));
 				return Funcionario.getFuncionarioByNome(nomeFuncionario);
 			case 0:
 				System.out.println("Operação cancelada!");

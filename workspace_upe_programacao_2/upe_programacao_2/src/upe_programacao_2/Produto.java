@@ -17,7 +17,7 @@ public class Produto {
 	private Categoria categoria = null;
 	private int qtdEstoque;
 	
-	public Produto(String sku, String nomeProduto, String descricao, double valor, Categoria categoria, int qtdEstoque) {
+	public Produto(String sku, String nomeProduto, String descricao, double valor, Categoria categoria, int qtdEstoque, boolean autoAdd) {
 		idProduto = count.incrementAndGet();
 		this.sku = sku;
 		this.nomeProduto= nomeProduto;
@@ -25,7 +25,9 @@ public class Produto {
 		this.valor = valor;
 		this.categoria = categoria;
 		this.qtdEstoque = qtdEstoque;
-		listaProdutos.add(this);
+		if (autoAdd) {			
+			listaProdutos.add(this);
+		}
 	}
 	
 	// Getters/setters
@@ -139,7 +141,7 @@ Selecione a categoria do produto:
 		}
 		System.out.println("Digite a quantidade em estoque do produto: ");
 		int qtdEstoque = sc.nextInt();
-		produtoNovo = new Produto(sku, nomeProduto, descricao, valor, categoria, qtdEstoque);
+		produtoNovo = new Produto(sku, nomeProduto, descricao, valor, categoria, qtdEstoque, true);
 		System.out.println(String.format("O produto foi adicionado com sucesso!\n\n%s", produtoNovo.toString()));
 		return produtoNovo;
 	}
