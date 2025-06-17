@@ -1,0 +1,35 @@
+[
+  {
+    "idCliente": 1,
+    "nome": "Guilherme Larré",
+    "cpf": "12332112332",
+    "telefone": "81999999999",
+    "email": "guilherme@gmail.com",
+    "preferenciaComunicacao": "Pombo-correio",
+    "endereco": "Rua dos bobos, 0",
+    "aniversario": "20/07/1996",
+    "genero": "Masculino"
+  },
+  {
+    "idCliente": 2,
+    "nome": "Lucas Nascimento",
+    "cpf": "12332112344",
+    "telefone": "81990909090",
+    "email": "lusca@hotmail.com",
+    "preferenciaComunicacao": "Carta de repúdio",
+    "endereco": "Rua dos loucos, 69",
+    "aniversario": "12/12/2012",
+    "genero": "Masculino"
+  },
+  {
+    "idCliente": 3,
+    "nome": "Márcio Ferreira",
+    "cpf": "01234567891",
+    "telefone": "1181818181",
+    "email": "marcio@outlook.com",
+    "preferenciaComunicacao": "Telepatia",
+    "endereco": "Travessa de surubinha, 99",
+    "aniversario": "20/12/2000",
+    "genero": "Masculino"
+  }
+]

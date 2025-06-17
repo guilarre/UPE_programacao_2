@@ -2,8 +2,40 @@
 <section name="Workbench">
 	<item key="hasShownOverlayPopupBefore" value="true"/>
 	<section name="java.lang.Class">
-		<item key="replaceBarOpen" value="false"/>
+		<item key="replaceBarOpen" value="true"/>
 		<list key="findhistory">
+			<item value="Índice: "/>
+			<item value="historico"/>
+			<item value="exibir"/>
+			<item value="remove"/>
+			<item value="Índice: %d\nCompra:\n%s\n\n"/>
+			<item value="Índice:"/>
+			<item value=": "/>
+			<item value="-&gt; "/>
+			<item value="selecion"/>
+			<item value="pesquisar "/>
+			<item value="quantidade"/>
+			<item value="Cliente.scanner"/>
+			<item value="Scanner sc = new Scanner(System.in);"/>
+			<item value="Scanner sc "/>
+			<item value="sc.close();"/>
+		</list>
+		<list key="replacehistory">
+			<item value="qtdComprada"/>
+			<item value="Cliente.sc"/>
+			<item value="System.err.println(&quot;ERRO!"/>
+			<item value="Funcionario"/>
+			<item value="Salário"/>
+			<item value="salário"/>
+			<item value="Salario"/>
+			<item value="salario"/>
+			<item value="cargoNovo"/>
+			<item value="cargo"/>
+			<item value="Cargo"/>
+			<item value="funcionario"/>
+			<item value="genero"/>
+			<item value="Genero"/>
+			<item value="Aniversario"/>
 		</list>
 	</section>
 </section>

@@ -9,4 +9,7 @@ org.eclipse.jdt.core.compiler.codegen.targetPlatform=21
 org.eclipse.jdt.core.compiler.compliance=21
 org.eclipse.jdt.core.compiler.release=enabled
 org.eclipse.jdt.core.compiler.source=21
+org.eclipse.jdt.core.compiler.taskCaseSensitive=enabled
+org.eclipse.jdt.core.compiler.taskPriorities=NORMAL,HIGH,NORMAL,NORMAL
+org.eclipse.jdt.core.compiler.taskTags=TODO,FIX,XXX,TEST
 org.eclipse.jdt.core.userLibrary.gson_lib=<?xml version\="1.0" encoding\="UTF-8"?>\r\n<userlibrary systemlibrary\="false" version\="2">\r\n\t<archive path\="/upe_programacao_2/gson-2.13.1.jar"/>\r\n</userlibrary>\r\n

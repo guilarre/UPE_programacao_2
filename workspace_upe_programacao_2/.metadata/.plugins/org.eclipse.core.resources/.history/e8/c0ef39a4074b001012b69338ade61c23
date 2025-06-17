@@ -1,0 +1,85 @@
+package upe_programacao_2;
+
+import com.google.gson.TypeAdapter;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
+import java.io.IOException;
+import java.util.Scanner;
+
+public class ClienteTypeAdapter extends TypeAdapter<Cliente> {
+
+    @Override
+    public void write(JsonWriter out, Cliente cliente) throws IOException {
+        // Serialização padrão para JSON
+        out.beginObject();
+        out.name("idCliente").value(cliente.getIdCliente());
+        out.name("nome").value(cliente.getNome());
+        out.name("cpf").value(cliente.getCpf());
+        out.name("telefone").value(cliente.getTelefone());
+        out.name("email").value(cliente.getEmail());
+        out.name("preferenciaComunicacao").value(cliente.getPreferenciaComunicacao());
+        out.name("endereco").value(cliente.getEndereco());
+        out.name("aniversario").value(cliente.getAniversario());
+        out.name("genero").value(cliente.getGenero());
+        out.endObject();
+    }
+
+    @Override
+    public Cliente read(JsonReader in) throws IOException {
+        // Desserialização usando getClienteNovo()
+        in.beginObject();
+        
+        // Criamos um Scanner simulado para o método getClienteNovo()
+        StringBuilder inputBuilder = new StringBuilder();
+        
+        while (in.hasNext()) {
+            String fieldName = in.nextName();
+            String fieldValue = in.nextString();
+            
+            // Formatamos os dados como seria digitado pelo usuário
+            switch (fieldName) {
+                case "nome":
+                    inputBuilder.append(fieldValue).append("\n");
+                    break;
+                case "cpf":
+                    inputBuilder.append(fieldValue).append("\n");
+                    break;
+                case "telefone":
+                    inputBuilder.append(fieldValue).append("\n");
+                    break;
+                case "email":
+                    inputBuilder.append(fieldValue).append("\n");
+                    break;
+                case "preferenciaComunicacao":
+                    inputBuilder.append(fieldValue).append("\n");
+                    break;
+                case "endereco":
+                    inputBuilder.append(fieldValue).append("\n");
+                    break;
+                case "aniversario":
+                    inputBuilder.append(fieldValue).append("\n");
+                    break;
+                case "genero":
+                    inputBuilder.append(fieldValue).append("\n");
+                    break;
+                default:
+                    in.skipValue();
+                    break;
+            }
+        }
+        in.endObject();
+        
+        // Preparamos o scanner com os dados do JSON
+        String input = inputBuilder.toString();
+        Scanner scanner = new Scanner(input);
+        
+        // Redirecionamos System.in temporariamente
+        Scanner originalSystemIn = Cliente.sc;
+        try {
+            Cliente.sc = scanner;
+            return Cliente.getClienteNovo();
+        } finally {
+            Cliente.sc = originalSystemIn;
+        }
+    }
+}

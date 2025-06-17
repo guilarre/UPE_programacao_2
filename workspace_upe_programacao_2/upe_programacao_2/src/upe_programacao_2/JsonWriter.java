@@ -1,44 +1,60 @@
 package upe_programacao_2;
+
 import com.google.gson.*;
+import com.google.gson.reflect.TypeToken;
+
+import typeadapter.ClienteTypeAdapter;
+import typeadapter.CompraTypeAdapter;
+import typeadapter.FuncionarioTypeAdapter;
+import typeadapter.HistoricoTypeAdapter;
+import typeadapter.ProdutoTypeAdapter;
+
 import java.io.FileWriter;
 import java.io.IOException;
-import java.time.LocalDate;
-//import java.util.ArrayList;
+import java.util.ArrayList;
 
 public class JsonWriter {
 	// Criando objeto Gson com as opções abaixo
 	private static Gson gson = new GsonBuilder()
 			.setPrettyPrinting()
-			.registerTypeAdapter(LocalDate.class, new LocalDateTypeAdapter())
+			.registerTypeAdapter(Cliente.class, new ClienteTypeAdapter())
+			.registerTypeAdapter(Funcionario.class, new FuncionarioTypeAdapter())
+	        .registerTypeAdapter(Produto.class, new ProdutoTypeAdapter())
+			.registerTypeAdapter(Compra.class, new CompraTypeAdapter())
+			.registerTypeAdapter(new TypeToken<ArrayList<Compra>>(){}.getType(), 
+                    new HistoricoTypeAdapter(new CompraTypeAdapter()))
 			.serializeNulls()
 			.create();
 	
 	// Método geral para salvar no .json
-	public static void salvarEmArquivo(Object lista, String caminhoArquivo) {
+	public static void salvarEmArquivo(ArrayList<?> lista, String caminhoArquivo) {
 		try (FileWriter fw = new FileWriter(caminhoArquivo)) {
 			gson.toJson(lista, fw);
-		} catch (IOException e) {
-			e.printStackTrace();
+		} catch (IOException | JsonIOException e) {
 		}
 	}
 	
 	// Métodos específicos (chamados pelo main)
-	public static void salvarClientes(Object listaClientes) {
+	public static void salvarClientes() {
+		ArrayList<Cliente> listaClientes = Cliente.getListaClientes();
 		String caminhoArquivo = "clientes.json";
 		JsonWriter.salvarEmArquivo(listaClientes, caminhoArquivo);
 	}
 	
-	public static void salvarFuncionarios(Object listaFuncionarios) {
+	public static void salvarFuncionarios() {
+		ArrayList<Funcionario> listaFuncionarios = Funcionario.getListaFuncionarios();
 		String caminhoArquivo = "funcionarios.json";
 		JsonWriter.salvarEmArquivo(listaFuncionarios, caminhoArquivo);
 	}
 	
-	public static void salvarEstoque(Object estoque) {
+	public static void salvarEstoque() {
+		ArrayList<Produto> estoque = Produto.getListaProdutos();
 		String caminhoArquivo = "estoque.json";
 		JsonWriter.salvarEmArquivo(estoque, caminhoArquivo);
 	}
 
-	public static void salvarHistorico(Object historico) {
+	public static void salvarHistorico() {
+		ArrayList<Compra> historico = Historico.getHistorico();
 		String caminhoArquivo = "historico.json";
 		JsonWriter.salvarEmArquivo(historico, caminhoArquivo);
 	}

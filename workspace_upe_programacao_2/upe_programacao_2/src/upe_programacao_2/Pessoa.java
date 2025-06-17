@@ -3,14 +3,14 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-public abstract class Pessoa {
+public abstract class Pessoa implements Validavel {
 	private String nome;
 	private String cpf;
 	private String telefone;
 	private String email;
 	private String preferenciaComunicacao;
 	private String endereco;
-	private LocalDate aniversario;
+	private String aniversario;
 	private String genero;
 	
 	// Construtor parametrizado (força subclasses a implementarem esse construtor)
@@ -22,7 +22,7 @@ public abstract class Pessoa {
 		}
 		this.cpf = cpf;
 		if (validarTelefone(telefone) == false) {
-			throw new IllegalArgumentException("ERRO: Telefone inválido! Escreva o DDD e o número.");
+			throw new IllegalArgumentException("ERRO: Telefone inválido! Escreva o DDD + número (e.g. 00-000000000).");
 		}
 		this.telefone = telefone;
 		if (validarEmail(email) == false) {
@@ -31,13 +31,10 @@ public abstract class Pessoa {
 		this.email = email;
 		this.preferenciaComunicacao = preferenciaComunicacao;
 		this.endereco = endereco;
-		try {
-			String formatterString = "dd/MM/yyyy";
-			DateTimeFormatter formatter = DateTimeFormatter.ofPattern(formatterString);
-			this.aniversario = LocalDate.parse(aniversario, formatter);
-		} catch (DateTimeParseException e) {
+		if (validarAniversario(aniversario) == false) {
 			throw new IllegalArgumentException("ERRO: Aniversário inválido! Usar o formato: 31/12/2020");
 		}
+		this.aniversario = aniversario;
 		this.genero = genero;
 	}
 	
@@ -79,11 +76,12 @@ public abstract class Pessoa {
 		this.endereco = endereco;
 	}
 	public String getAniversario() {
-		String formatterString = "dd/MM/yyyy";
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern(formatterString);
-		return aniversario.format(formatter);
+		return aniversario;
 	}
-	public void setAniversario(LocalDate aniversario) {
+	public void setAniversario(String aniversario) {
+		if (validarAniversario(aniversario) == false) {
+			throw new IllegalArgumentException("ERRO: Aniversário inválido! Usar o formato: 31/12/2020");
+		}
 		this.aniversario = aniversario;
 	}
 	public String getGenero() {
@@ -94,6 +92,7 @@ public abstract class Pessoa {
 	}
 	
 	// Validador básico de CPF (sem validação do DV)
+	@Override
 	public boolean validarCpf(String cpf) {
 		// Retira tudo que não é dígito
 		cpf = cpf.replaceAll("[^0-9]", "");
@@ -104,7 +103,8 @@ public abstract class Pessoa {
         return true;
 	}
 	
-	//Validador de telefone
+	// Validador de telefone
+	@Override
 	public boolean validarTelefone(String telefone) {
 		// Retira tudo que não é dígito
 		telefone = telefone.replaceAll("[^0-9]", "");
@@ -117,6 +117,7 @@ public abstract class Pessoa {
 	}
 	
 	// Validador de email
+	@Override
 	public boolean validarEmail(String email) {
 		// Verifica se é nulo/vazio
 		if (email == null || email.isEmpty()) {
@@ -126,9 +127,24 @@ public abstract class Pessoa {
 		return email.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$");
 	}
 	
+	// Validador de aniversário
+	@Override
+	public boolean validarAniversario(String aniversario) {
+		// Tenta realizar parse para transformar em objeto LocalDate
+		try {
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+			LocalDate.parse(aniversario, formatter);
+			return true;
+		} catch (DateTimeParseException e) {
+			return false;
+		}
+	}
+	
 	// Calculadora de idade
-	public int calcularIdade(LocalDate aniversario) {
-		int anoNascimento = aniversario.getYear();
+	public int calcularIdade(String aniversario) {
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		LocalDate aniversarioData = LocalDate.parse(aniversario, formatter);
+		int anoNascimento = aniversarioData.getYear();
 		return LocalDate.now().getYear() - anoNascimento;
 	}
 	
