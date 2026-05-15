@@ -6,7 +6,7 @@
     "descricao": "Calça mais folgada",
     "valor": 240.0,
     "categoria": "CALCA",
-    "qtdEstoque": 167
+    "qtdEstoque": 166
   },
   {
     "idProduto": 2,
@@ -15,7 +15,7 @@
     "descricao": "Jaqueta jeans azul com bolso",
     "valor": 200.0,
     "categoria": "JAQUETA",
-    "qtdEstoque": 63
+    "qtdEstoque": 62
   },
   {
     "idProduto": 3,
@@ -24,6 +24,6 @@
     "descricao": "Saia jeans longa azul",
     "valor": 80.0,
     "categoria": "SAIA",
-    "qtdEstoque": 372
+    "qtdEstoque": 369
   }
 ]

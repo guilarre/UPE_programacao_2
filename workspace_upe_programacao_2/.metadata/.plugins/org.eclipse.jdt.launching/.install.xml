@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <dirs>
+    <entry loc="/usr/lib/jvm/java-26-openjdk" stamp="1774911959157"/>
+    <entry loc="/usr/lib/jvm/java-21-openjdk" stamp="1769464526468"/>
     <entry loc="C:\Users\UPE SURUBIM\Downloads\eclipse\plugins\org.eclipse.justj.openjdk.hotspot.jre.full.win32.x86_64_21.0.6.v20250130-0529" stamp="1741264304000"/>
+    <entry loc="/usr/lib/jvm/java-11-openjdk" stamp="1769464524507"/>
     <entry loc="C:\Users\UPE SURUBIM\Downloads\eclipse\plugins\org.eclipse.justj.openjdk.hotspot.jre.full.win32.x86_64_21.0.6.v20250130-0529\jre" stamp="1741264304000"/>
     <entry loc="C:\Users\guilh\.p2\pool\plugins\org.eclipse.justj.openjdk.hotspot.jre.full.win32.x86_64_21.0.7.v20250502-0916" stamp="1746995817241"/>
+    <entry loc="/usr/lib/jvm/java-17-openjdk" stamp="1769464525468"/>
+    <entry loc="/usr/lib/eclipse/plugins/org.eclipse.justj.openjdk.hotspot.jre.full.linux.x86_64_21.0.10.v20260205-0638" stamp="1774920632581"/>
     <entry loc="C:\Users\guilh\.p2\pool\plugins\org.eclipse.justj.openjdk.hotspot.jre.full.win32.x86_64_21.0.7.v20250502-0916\jre" stamp="1746995817219"/>
+    <entry loc="/usr/lib/eclipse/plugins/org.eclipse.justj.openjdk.hotspot.jre.full.linux.x86_64_21.0.10.v20260205-0638/jre" stamp="1774920633393"/>
 </dirs>
