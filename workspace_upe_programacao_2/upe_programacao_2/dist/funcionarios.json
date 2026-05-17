@@ -1,1 +1,15 @@
-[]
+[
+  {
+    "idFuncionario": 1,
+    "nome": "lusca",
+    "cpf": "12312312312",
+    "telefone": "81999999999",
+    "email": "asdasd@sdfasdf",
+    "preferenciaComunicacao": "email",
+    "endereco": "asdasdasdasdasd",
+    "aniversario": "12/12/2020",
+    "genero": "m",
+    "cargo": "VENDEDOR",
+    "salario": 12312.1
+  }
+]
